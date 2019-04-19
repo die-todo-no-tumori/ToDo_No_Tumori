@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\TaskBase.cs" />
+    <Compile Include="Assets\Scripts\Hammer.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/jcjmwh80/Documents/GitHub/DIE/ToDo_No_Tumori/ToDoNoTumori/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
