@@ -61,8 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Hammer.cs" />
+    <Compile Include="Assets\Scripts\MainUI.cs" />
     <Compile Include="Assets\Scripts\TaskCreater.cs" />
     <Compile Include="Assets\Scripts\TaskObject.cs" />
+    <Compile Include="Assets\Scripts\TaskSaver.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/jcjmwh80/Documents/GitHub/DIE/ToDo_No_Tumori/ToDoNoTumori/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>

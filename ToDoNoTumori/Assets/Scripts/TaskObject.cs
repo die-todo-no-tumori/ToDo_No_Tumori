@@ -17,6 +17,16 @@ public class Task
     }
 }
 
+[System.Serializable]
+public class TaskRoot
+{
+    [HideInInspector] public List<Task> tasks;
+    public TaskRoot()
+    {
+        tasks = new List<Task>();
+    }
+}
+
 public class TaskObject : MonoBehaviour
 {
     [HideInInspector] public Task task;

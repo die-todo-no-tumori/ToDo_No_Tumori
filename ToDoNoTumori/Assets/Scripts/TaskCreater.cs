@@ -36,18 +36,28 @@ public class TaskCreater : MonoBehaviour
     {
         GameObject taskNameParent = transform.GetChild(0).gameObject;
         string taskName = taskNameParent.transform.GetChild(1).GetComponent<InputField>().text;
+        taskNameParent.transform.GetChild(1).GetComponent<InputField>().text = "";
         GameObject priorityParent = transform.GetChild(1).gameObject;
         int priority = (int)priorityParent.transform.GetChild(1).GetComponent<Slider>().value;
+        priorityParent.transform.GetChild(1).GetComponent<Slider>().value = 1;
         GameObject limitParent = transform.GetChild(2).gameObject;
         string limit = limitParent.transform.GetChild(1).GetComponent<InputField>().text +
             "/" + limitParent.transform.GetChild(3).GetComponent<InputField>().text +
             "/" + limitParent.transform.GetChild(5).GetComponent<InputField>().text +
             " " + limitParent.transform.GetChild(7).GetComponent<InputField>().text +
             ":" + limitParent.transform.GetChild(9).GetComponent<InputField>().text;
+
+        limitParent.transform.GetChild(1).GetComponent<InputField>().text = "";
+        limitParent.transform.GetChild(3).GetComponent<InputField>().text = "";
+        limitParent.transform.GetChild(5).GetComponent<InputField>().text = "";
+        limitParent.transform.GetChild(7).GetComponent<InputField>().text = "";
+        limitParent.transform.GetChild(9).GetComponent<InputField>().text = "";
+
         GameObject taskSpawnPosObje = GameObject.Find("TaskSpawnPosObje");
         Task task = new Task(taskName, priority, limit);
         GameObject taskObje = Instantiate(taskObject, taskSpawnPosObje.transform.position, Quaternion.identity);
         taskObje.GetComponent<TaskObject>().task = task;
+        taskObje.transform.SetParent(GameObject.Find("TaskParent").transform);
         gameObject.SetActive(false);
     }
 }
