@@ -31,11 +31,14 @@ public class TaskObject : MonoBehaviour
     [SerializeField] private AudioClip destroy_sound;
     //音のスピーカー
     [SerializeField] private AudioSource se_player;
+    
 
 
     void Start()
     {
-        destroy_effect.SetActive(false);
+        if(destroy_effect != null)
+            destroy_effect.SetActive(false);
+
     }
 
 
@@ -46,44 +49,43 @@ public class TaskObject : MonoBehaviour
         
     }
 
-    //現状は何日前であるかのみを計算する
-    //また、現在は同じ月でないといけないのが問題点
-    private int GetLimit(TaskData taskData)
-    {
-        string[] time_data = taskData.task_limit.Split(':');
-        int month_limit = int.Parse(time_data[0]);
-        int day_limit = int.Parse(time_data[1]);
+    //日付が変わったかどうかは別のスクリプトで計算させることにしたので、今は不要→コメント化
+    //private int GetLimit(TaskData taskData)
+    //{
+    //    string[] time_data = taskData.task_limit.Split(':');
+    //    int month_limit = int.Parse(time_data[0]);
+    //    int day_limit = int.Parse(time_data[1]);
         
-        int month = System.DateTime.Now.Month;
-        int day = System.DateTime.Now.Day;
+    //    int month = System.DateTime.Now.Month;
+    //    int day = System.DateTime.Now.Day;
 
-        return day_limit - day;// + (month_limit - month) * 
+    //    return day_limit - day;// + (month_limit - month) * 
 
-        //int hour = System.DateTime.Now.Hour;
-        //int minu = System.DateTime.Now.Minute;
-        //int sec = System.DateTime.Now.Second;
-    }
+    //    //int hour = System.DateTime.Now.Hour;
+    //    //int minu = System.DateTime.Now.Minute;
+    //    //int sec = System.DateTime.Now.Second;
+    //}
 
-    //1秒ごとに時間を測って、残り時間により色を変える
-    //日付の差で色を変えるなら、不要なのでは？
-    private IEnumerator ChangeColor()
+    //現在の日付と期限の日付を比較し、
+    public void ChangeColor()
     {
-        while (true)
+        System.DateTime now = System.DateTime.Now; //(System.DateTime.Now.Year, System.DateTime.Now.Month, System.DateTime.Now.Day, 0, 0, 0);
+        System.DateTime limit = System.DateTime.Parse(task_data.task_limit);
+
+        System.TimeSpan timeSpan = limit - now;
+        
+        if(timeSpan.Days == 1)
         {
-            int diff = GetLimit(task_data);
-            if(0 <= diff && diff <= 1)
-            {
-                GetComponent<Renderer>().material.color = Color.red;
-            }else if(2 <= diff && diff <= 3)
-            {
-                GetComponent<Renderer>().material.color = Color.yellow;
-            }
-            else
-            {
-                GetComponent<Renderer>().material.color = Color.blue;
-            }
-            yield return new WaitForSeconds(1);
+            GetComponent<Renderer>().material.color = Color.red;
+        }else if(timeSpan.Days == 2 || timeSpan.Days == 3)
+        {
+            GetComponent<Renderer>().material.color = Color.yellow;
         }
+        else if(timeSpan.Days > 3)
+        {
+            GetComponent<Renderer>().material.color = Color.blue;
+        }
+
     }
 
     //タップされたときにタスクデータを返す
@@ -99,6 +101,13 @@ public class TaskObject : MonoBehaviour
 
     }
 
+    public void OnInstantiate()
+    {
+        ChangeColor();
+    }
+
+
+
     private void OnDisable()
     {
         StartCoroutine(CallOnDisable());
@@ -107,10 +116,13 @@ public class TaskObject : MonoBehaviour
     //破壊されるときにエフェクトと音を鳴らす
     private IEnumerator CallOnDisable()
     {
-        destroy_effect.SetActive(true);
-        ParticleSystem particleSystem = destroy_effect.GetComponent<ParticleSystem>();
-        se_player.PlayOneShot(destroy_sound);
-        while (particleSystem.isPlaying || se_player.isPlaying) yield return null;
+        if(destroy_effect != null)
+        {
+            destroy_effect.SetActive(true);
+            ParticleSystem particleSystem = destroy_effect.GetComponent<ParticleSystem>();
+            se_player.PlayOneShot(destroy_sound);
+            while (particleSystem.isPlaying || se_player.isPlaying) yield return null;
+        }
         yield break;
     }
 }
