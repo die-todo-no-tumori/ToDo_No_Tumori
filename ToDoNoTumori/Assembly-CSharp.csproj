@@ -62,6 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ButtonBase.cs" />
+    <Compile Include="Assets\Scripts\CalcelButton.cs" />
+    <Compile Include="Assets\Scripts\DecideButton.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoader.cs" />
     <Compile Include="Assets\Scripts\TaskObject.cs" />
     <Compile Include="Assets\Scripts\TimeManaer.cs" />
