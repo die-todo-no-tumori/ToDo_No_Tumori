@@ -114,7 +114,7 @@ public class TaskObject : MonoBehaviour
     //破壊されるときにエフェクトと音を鳴らす
     private IEnumerator CallOnDisable()
     {
-        if(destroy_effect != null)
+        if(destroy_effect != null && se_player != null)
         {
             destroy_effect.SetActive(true);
             ParticleSystem particleSystem = destroy_effect.GetComponent<ParticleSystem>();
