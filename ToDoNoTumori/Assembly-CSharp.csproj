@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\SaveAndLoader.cs" />
     <Compile Include="Assets\Scripts\TaskObject.cs" />
     <Compile Include="Assets\Scripts\TimeManaer.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">

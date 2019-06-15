@@ -8,6 +8,10 @@ using UnityEngine;
 public class TaskRoot
 {
     public List<TaskData> task_datas;
+    public TaskRoot()
+    {
+        task_datas = new List<TaskData>();
+    }
 }
 
 
@@ -38,7 +42,7 @@ public class TaskObject : MonoBehaviour
     {
         if(destroy_effect != null)
             destroy_effect.SetActive(false);
-
+        ChangeColor();
     }
 
 
@@ -100,12 +104,6 @@ public class TaskObject : MonoBehaviour
     {
 
     }
-
-    public void OnInstantiate()
-    {
-        ChangeColor();
-    }
-
 
 
     private void OnDisable()
