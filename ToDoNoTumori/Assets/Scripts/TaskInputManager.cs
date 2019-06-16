@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.IO;
 
 public enum TaskCreationPhase
 {
-    Picture = 0,
+    Idle = 0,
+    Picture,
     ImportantLevel,
     Limit,
     Create
@@ -18,10 +20,13 @@ public class TaskInputManager : MonoBehaviour
     private string add_task_limit;
     private int add_task_important_level;
     private bool taked_picture;
+    private bool completed_take_picture;
     [HideInInspector]
     public static bool movePhase;
     [HideInInspector]
     public static TaskCreationPhase taskCreationPhase;
+    //[SerializeField]
+    //private Button retakePictureButton;
 
     [SerializeField]
     private int width;
@@ -51,10 +56,23 @@ public class TaskInputManager : MonoBehaviour
         WebCamDevice userCameraDevice = WebCamTexture.devices[0];
         webCamTexture = new WebCamTexture(userCameraDevice.name, width, height);
         display_take.texture = webCamTexture;
+        display_take.transform.rotation = display_take.transform.rotation * Quaternion.AngleAxis(webCamTexture.videoRotationAngle, Vector3.up);
         webCamTexture.Stop();
         taked_picture = false;
-        taskCreationPhase = TaskCreationPhase.Picture;
+        completed_take_picture = false;
+        taskCreationPhase = TaskCreationPhase.Idle;
         movePhase = false;
+        
+        //写真撮り直しボタンの設定のみここで行う
+        //retakePictureButton.onClick.AddListener(() =>
+        //{
+        //    RestartToTakePicture();
+        //});
+
+        //画像を保存するフォルダの作成
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Images");
+        if (directoryInfo.Exists == false)
+            directoryInfo.Create();
     }
 
     void Update()
@@ -74,6 +92,7 @@ public class TaskInputManager : MonoBehaviour
         movePhase = true;
     }
 
+
     public void CreateTask(bool mode)
     {
         StartCoroutine(CreateTaskCor(mode));
@@ -92,20 +111,21 @@ public class TaskInputManager : MonoBehaviour
     private IEnumerator MakeTask(UnityAction<TaskData> callBack,bool mode)
     {
         TaskData taskData = new TaskData();
-        taskCreationPhase = TaskCreationPhase.Picture;
-
+        taskCreationPhase = TaskCreationPhase.Idle;
+        
+        //Debug.Log("タスク作成開始");
         while (true)
         {
             movePhase = false;
             switch (taskCreationPhase)
             {
                 case TaskCreationPhase.Picture:
-                    Debug.Log("Take Picture");
                     //タスクの画像を撮影
                     if(mode == true)
                     {
-                        webCamTexture.Play();
+                        StartToTakePicture();
                         yield return StartCoroutine(GetCameraTexture(data => add_task_image = data));
+                        display_take.texture = add_task_image;
                     }
                     else
                     {
@@ -135,21 +155,33 @@ public class TaskInputManager : MonoBehaviour
     //カメラで撮影したデータをテクスチャにして返す
     private IEnumerator GetCameraTexture(UnityAction<Texture2D> callBack)
     {
+        GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "撮影";
         //写真が取られるまで待機
         while (taked_picture == false)
         {
+            //Debug.Log("待機");
             yield return null;
+            //Debug.Log(taskCreationPhase);
             if(taskCreationPhase != TaskCreationPhase.Picture)
             {
+                //Debug.Log("出る");
                 callBack(null);
                 yield break;
             }
         }
         PauseToTakePicture();
+        GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "保存中";
+        //display_take.texture = webCamTexture;
         Texture2D texture2D = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.ARGB32, false);
         texture2D.SetPixels(webCamTexture.GetPixels());
         texture2D.Apply();
+        //Debug.Log("撮影完了");
+        byte[] data = texture2D.EncodeToPNG();
+        string dateData = System.DateTime.Now.ToLongDateString() + "," + System.DateTime.Now.ToLongTimeString();
+        File.WriteAllBytes(Application.persistentDataPath + "/Images/" + dateData +".png", data);
+        //Debug.Log("保存");
         yield return new WaitForEndOfFrame();
+        GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "保存完了";
         //カメラを止める
         webCamTexture.Stop();
         callBack(texture2D);
@@ -206,7 +238,7 @@ public class TaskInputManager : MonoBehaviour
     private void CancelToAddTask()
     {
         //RawImageのテクスチャを消す
-        display_take = null;
+        //display_take = null;
         display_choice = null;
         Destroy(add_task_image);
         //期限と重要度を消す
@@ -223,9 +255,17 @@ public class TaskInputManager : MonoBehaviour
     //撮影開始
     public void StartToTakePicture()
     {
-        if (webCamTexture.isPlaying == false)
-            webCamTexture.Play();
+        //if (webCamTexture.isPlaying == false)
+        webCamTexture.Play();
+        display_take.texture = webCamTexture;
         taked_picture = false;
+        completed_take_picture = false;
+    }
+
+    //取り直し
+    public void RestartToTakePicture()
+    {
+        movePhase = true;
     }
 
     public void TakePicture()
@@ -233,12 +273,13 @@ public class TaskInputManager : MonoBehaviour
         taked_picture = true;
     }
 
+    
+
     //撮影一時停止
     public void PauseToTakePicture()
     {
         if (webCamTexture.isPlaying == false) return;
         webCamTexture.Pause();
-
     }
 
     //撮影停止

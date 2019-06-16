@@ -50,35 +50,35 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9222}
-    - Class: 114
-      Script: {instanceID: 9224}
-    - Class: 114
       Script: {instanceID: 9230}
     - Class: 114
-      Script: {instanceID: 9236}
+      Script: {instanceID: 9232}
+    - Class: 114
+      Script: {instanceID: 9238}
     - Class: 114
       Script: {instanceID: 9244}
     - Class: 114
       Script: {instanceID: 9252}
     - Class: 114
-      Script: {instanceID: 9266}
+      Script: {instanceID: 9260}
     - Class: 114
-      Script: {instanceID: 9280}
+      Script: {instanceID: 9274}
     - Class: 114
-      Script: {instanceID: 9282}
+      Script: {instanceID: 9288}
     - Class: 114
-      Script: {instanceID: 9400}
+      Script: {instanceID: 9290}
     - Class: 114
-      Script: {instanceID: 9426}
+      Script: {instanceID: 9410}
     - Class: 114
-      Script: {instanceID: 9634}
+      Script: {instanceID: 9430}
     - Class: 114
-      Script: {instanceID: 10190}
+      Script: {instanceID: 9438}
     - Class: 114
-      Script: {instanceID: 10198}
+      Script: {instanceID: 9468}
     - Class: 114
-      Script: {instanceID: 13496}
+      Script: {instanceID: 9544}
+    - Class: 114
+      Script: {instanceID: 9662}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -500,6 +500,12 @@ ScriptsOnlyBuild:
     className: PositiveButton
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Kakera
+    className: Unimgpicker
+  - hash:
+      serializedVersion: 2
       Hash: 7b5db38e1b8208018149f384f60ab407
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -516,6 +522,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PictureTaker
+  - hash:
+      serializedVersion: 2
+      Hash: 961ccda8e85c906a47bdeecbbcf23f04
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: OpenTakePictureMenuButton
   - hash:
       serializedVersion: 2
       Hash: 88cc9df3c6fc697bfbeacd24c0d6f2d7
@@ -554,6 +566,12 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
+      Hash: e0a48765bd3eb0930bbdd07e4f09c84f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Kakera
+    className: PickerController
+  - hash:
+      serializedVersion: 2
       Hash: 961ccda8e85c906a47bdeecbbcf23f04
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -568,20 +586,8 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
-    namespaceName: Kakera
-    className: Unimgpicker
-  - hash:
-      serializedVersion: 2
-      Hash: e0a48765bd3eb0930bbdd07e4f09c84f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: Kakera
-    className: PickerController
-  - hash:
-      serializedVersion: 2
-      Hash: 961ccda8e85c906a47bdeecbbcf23f04
-    assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: OpenTakePictureMenuButton
+    className: TakePictureCompleter
   platform: 13
   scenePathNames:
   - Assets/Scenes/TaskList.unity
