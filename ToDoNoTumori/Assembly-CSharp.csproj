@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ButtonBase.cs" />
+    <Compile Include="Assets\Scripts\CalenderMaker.cs" />
     <Compile Include="Assets\Scripts\CancelToChangeILButton.cs" />
     <Compile Include="Assets\Scripts\NegativeButton.cs" />
     <Compile Include="Assets\Scripts\OpenTakePictureMenuButton.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\Scripts\SaveAndLoader.cs" />
     <Compile Include="Assets\Scripts\TakePictureCompleter.cs" />
     <Compile Include="Assets\Scripts\TaskInputManager.cs" />
+    <Compile Include="Assets\Scripts\TaskLimitSetter.cs" />
     <Compile Include="Assets\Scripts\TaskObject.cs" />
     <Compile Include="Assets\Scripts\TimeManaer.cs" />
     <Compile Include="Assets\Unimgpicker\Samples\PickerController.cs" />

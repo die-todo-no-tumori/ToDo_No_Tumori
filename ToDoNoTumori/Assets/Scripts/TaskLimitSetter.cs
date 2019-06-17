@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Syatem.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
