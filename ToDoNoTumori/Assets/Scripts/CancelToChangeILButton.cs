@@ -20,14 +20,16 @@ public class CancelToChangeILButton : ButtonBase
             {
                 take_picture_panel.SetActive(true);
                 choice_picture_panel.SetActive(false);
-                taskInputManager.CreateTask(true);
+                taskInputManager.StartToTakePicture();
             }
             else
             {
                 take_picture_panel.SetActive(false);
                 choice_picture_panel.SetActive(true);
-                taskInputManager.CreateTask(false);
+                taskInputManager.StartToTakePicture();
             }
+            taskInputManager.CancelDecideImportantLevel();
+            TaskInputManager.BackToBeforePhase();
             negative_target_object.SetActive(false);
         });
     }

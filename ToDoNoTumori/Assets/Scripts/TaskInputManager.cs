@@ -19,10 +19,11 @@ public class TaskInputManager : MonoBehaviour
     private Texture2D add_task_image;
     private string add_task_name;
     private string add_task_limit;
-    private int add_task_important_level;
+    private int? add_task_important_level;
     private bool taked_picture;
     private bool completed_take_picture;
     private bool decided_important_level;
+    private bool cancel_decided_important_level;
     [HideInInspector]
     public bool picture_mode;
     [HideInInspector]
@@ -75,6 +76,7 @@ public class TaskInputManager : MonoBehaviour
         movePhase = false;
         decided_important_level = false;
         picture_mode = false;
+        cancel_decided_important_level = false;
         
         //画像を保存するフォルダの作成
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Images");
@@ -97,6 +99,8 @@ public class TaskInputManager : MonoBehaviour
     {
         taskCreationPhase--;
         movePhase = true;
+        //Debug.Log("戻る");
+        //Debug.Log(taskCreationPhase);
     }
 
 
@@ -125,13 +129,14 @@ public class TaskInputManager : MonoBehaviour
         while (true)
         {
             movePhase = false;
+            //Debug.Log(taskCreationPhase);
             switch (taskCreationPhase)
             {
                 case TaskCreationPhase.Picture:
                     add_task_name = "";
 
                     //タスクの画像を撮影
-                    if(mode == true)
+                    if(picture_mode == true)
                     {
                         StartToTakePicture();
                         yield return StartCoroutine(GetCameraTexture(data => add_task_image = data));
@@ -146,6 +151,7 @@ public class TaskInputManager : MonoBehaviour
                     //タスクの重要度を決める
                     decided_important_level = false;
                     yield return StartCoroutine(ChangeTaskImportantLevel(data => add_task_important_level = data));
+                    //Debug.Log(add_task_important_level);
                     break;
                 case TaskCreationPhase.Limit:
                     //タスクの期限を決める
@@ -263,7 +269,11 @@ public class TaskInputManager : MonoBehaviour
                     important_level_image_rect.localScale = change_scales[level];
                 }
             }
-
+            if (cancel_decided_important_level == true)
+            {
+                //Debug.Log("キャンセル");
+                yield break;
+            }
 
             yield return null;
         }
@@ -287,6 +297,7 @@ public class TaskInputManager : MonoBehaviour
         //期限と重要度を消す
         add_task_important_level = 0;
         add_task_limit = null;
+        webCamTexture.Stop();
     }
 
     //通知に登録する
@@ -298,11 +309,11 @@ public class TaskInputManager : MonoBehaviour
     //撮影開始
     public void StartToTakePicture()
     {
-        //if (webCamTexture.isPlaying == false)
         webCamTexture.Play();
         display_take.texture = webCamTexture;
         taked_picture = false;
         completed_take_picture = false;
+        //Debug.Log("撮影スタート");
     }
 
     //取り直し
@@ -317,13 +328,17 @@ public class TaskInputManager : MonoBehaviour
         taked_picture = true;
     }
 
-    //重要度決定s
+    //重要度決定
     public void DecideImportantLevel()
     {
         decided_important_level = true;
     }
 
-    
+    //重要度決定キャンセル
+    public void CancelDecideImportantLevel()
+    {
+        cancel_decided_important_level = true;
+    }
 
     //撮影一時停止
     public void PauseToTakePicture()
