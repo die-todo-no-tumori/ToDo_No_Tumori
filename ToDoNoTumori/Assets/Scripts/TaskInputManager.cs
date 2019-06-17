@@ -31,9 +31,12 @@ public class TaskInputManager : MonoBehaviour
     public static TaskCreationPhase taskCreationPhase;
     [SerializeField]
     private int[] important_level_distance;
-    //[SerializeField]
-    //private Button retakePictureButton;
-
+    [SerializeField]
+    private Vector3[] change_scales;
+    [SerializeField]
+    private RectTransform important_level_image_rect;
+    [SerializeField]
+    private Text important_level_text;
     [SerializeField]
     private int width;
     [SerializeField]
@@ -42,6 +45,8 @@ public class TaskInputManager : MonoBehaviour
     private RawImage display_take;
     [SerializeField]
     private RawImage display_choice;
+    [SerializeField]
+    private RawImage display_to_change_task_level;
 
     private WebCamTexture webCamTexture;
 
@@ -226,6 +231,7 @@ public class TaskInputManager : MonoBehaviour
     private IEnumerator ChangeTaskImportantLevel(UnityAction<int> callBack)
     {
         int level = 0;
+        display_to_change_task_level.texture = add_task_image;
         while(decided_important_level == false)
         {
             //2本指で触れているときのみ判定
@@ -253,8 +259,12 @@ public class TaskInputManager : MonoBehaviour
                     {
                         level = 2;
                     }
+                    important_level_text.text = "重要度:" + (level + 1);
+                    important_level_image_rect.localScale = change_scales[level];
                 }
             }
+
+
             yield return null;
         }
         yield return null;
