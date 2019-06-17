@@ -22,8 +22,12 @@ public class NegativeButton : ButtonBase
 
     private void ClosePanel()
     {
-        if (target_object == null)
-            return;
-        target_object.SetActive(false);
+        if (positive_target_object != null)
+            //return;
+            positive_target_object.SetActive(true);
+        if (negative_target_object != null)
+            //return;
+            negative_target_object.SetActive(false);
+
     }
 }

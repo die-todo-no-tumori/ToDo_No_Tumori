@@ -17,14 +17,20 @@ public enum TaskCreationPhase
 public class TaskInputManager : MonoBehaviour
 {
     private Texture2D add_task_image;
+    private string add_task_name;
     private string add_task_limit;
     private int add_task_important_level;
     private bool taked_picture;
     private bool completed_take_picture;
+    private bool decided_important_level;
+    [HideInInspector]
+    public bool picture_mode;
     [HideInInspector]
     public static bool movePhase;
     [HideInInspector]
     public static TaskCreationPhase taskCreationPhase;
+    [SerializeField]
+    private int[] important_level_distance;
     //[SerializeField]
     //private Button retakePictureButton;
 
@@ -62,13 +68,9 @@ public class TaskInputManager : MonoBehaviour
         completed_take_picture = false;
         taskCreationPhase = TaskCreationPhase.Idle;
         movePhase = false;
+        decided_important_level = false;
+        picture_mode = false;
         
-        //写真撮り直しボタンの設定のみここで行う
-        //retakePictureButton.onClick.AddListener(() =>
-        //{
-        //    RestartToTakePicture();
-        //});
-
         //画像を保存するフォルダの作成
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Images");
         if (directoryInfo.Exists == false)
@@ -112,6 +114,7 @@ public class TaskInputManager : MonoBehaviour
     {
         TaskData taskData = new TaskData();
         taskCreationPhase = TaskCreationPhase.Idle;
+        picture_mode = mode;
         
         //Debug.Log("タスク作成開始");
         while (true)
@@ -120,6 +123,8 @@ public class TaskInputManager : MonoBehaviour
             switch (taskCreationPhase)
             {
                 case TaskCreationPhase.Picture:
+                    add_task_name = "";
+
                     //タスクの画像を撮影
                     if(mode == true)
                     {
@@ -134,6 +139,7 @@ public class TaskInputManager : MonoBehaviour
                     break;
                 case TaskCreationPhase.ImportantLevel:
                     //タスクの重要度を決める
+                    decided_important_level = false;
                     yield return StartCoroutine(ChangeTaskImportantLevel(data => add_task_important_level = data));
                     break;
                 case TaskCreationPhase.Limit:
@@ -159,29 +165,23 @@ public class TaskInputManager : MonoBehaviour
         //写真が取られるまで待機
         while (taked_picture == false)
         {
-            //Debug.Log("待機");
             yield return null;
-            //Debug.Log(taskCreationPhase);
             if(taskCreationPhase != TaskCreationPhase.Picture)
             {
-                //Debug.Log("出る");
                 callBack(null);
                 yield break;
             }
         }
         PauseToTakePicture();
-        GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "保存中";
-        //display_take.texture = webCamTexture;
+        //GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "保存中";
         Texture2D texture2D = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.ARGB32, false);
         texture2D.SetPixels(webCamTexture.GetPixels());
         texture2D.Apply();
-        //Debug.Log("撮影完了");
-        byte[] data = texture2D.EncodeToPNG();
-        string dateData = System.DateTime.Now.ToLongDateString() + "," + System.DateTime.Now.ToLongTimeString();
-        File.WriteAllBytes(Application.persistentDataPath + "/Images/" + dateData +".png", data);
-        //Debug.Log("保存");
+        //byte[] data = texture2D.EncodeToPNG();
+        add_task_name = System.DateTime.Now.ToLongDateString() + "," + System.DateTime.Now.ToLongTimeString();
+        //File.WriteAllBytes(Application.persistentDataPath + "/Images/" + dateData +".png", data);
         yield return new WaitForEndOfFrame();
-        GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "保存完了";
+        GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "撮影完了";
         //カメラを止める
         webCamTexture.Stop();
         callBack(texture2D);
@@ -225,7 +225,40 @@ public class TaskInputManager : MonoBehaviour
     //ピンチインとピンチアウトでタスクオブジェクトの重要度を変える
     private IEnumerator ChangeTaskImportantLevel(UnityAction<int> callBack)
     {
+        int level = 0;
+        while(decided_important_level == false)
+        {
+            //2本指で触れているときのみ判定
+            if(Input.touchCount == 2)
+            {
+                Touch[] touches = Input.touches;
+                //タッチの状態により距離を計測
+                if(touches[0].phase == TouchPhase.Began || touches[0].phase == TouchPhase.Moved || touches[0].phase == TouchPhase.Stationary
+                    || touches[1].phase == TouchPhase.Began || touches[1].phase == TouchPhase.Moved || touches[1].phase == TouchPhase.Stationary)
+                {
+                    Vector2 vect = touches[0].position - touches[1].position;
+                    float dist = vect.magnitude;
+                    //重要度１
+                    if(important_level_distance[0] <= dist && dist <= (important_level_distance[0] + important_level_distance[1]) / 2)
+                    {
+                        level = 0;
+                    }
+                    //重要度２
+                    else if ((important_level_distance[0] + important_level_distance[1]) / 2 <= dist && dist <= (important_level_distance[1] + important_level_distance[2]) / 2)
+                    {
+                        level = 1;
+                    }
+                    //重要度３
+                    else if((important_level_distance[1] + important_level_distance[2]) / 2 <= dist && dist <= important_level_distance[2])
+                    {
+                        level = 2;
+                    }
+                }
+            }
+            yield return null;
+        }
         yield return null;
+        callBack(level);
     }
 
     //カレンダーに投げて、タスクの期限を設定する
@@ -268,9 +301,16 @@ public class TaskInputManager : MonoBehaviour
         movePhase = true;
     }
 
+    //撮影
     public void TakePicture()
     {
         taked_picture = true;
+    }
+
+    //重要度決定s
+    public void DecideImportantLevel()
+    {
+        decided_important_level = true;
     }
 
     

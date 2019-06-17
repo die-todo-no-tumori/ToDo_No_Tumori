@@ -23,8 +23,10 @@ public class PositiveButton : ButtonBase
 
     private void OpenPanel()
     {
-        if (target_object == null)
-            return;
-        target_object.SetActive(true);
+        if (positive_target_object != null)
+            //return;
+            positive_target_object.SetActive(true);
+        if (negative_target_object != null)
+            negative_target_object.SetActive(false);
     }
 }

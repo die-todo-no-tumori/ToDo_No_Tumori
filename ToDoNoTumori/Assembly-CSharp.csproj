@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ButtonBase.cs" />
+    <Compile Include="Assets\Scripts\CancelToChangeILButton.cs" />
     <Compile Include="Assets\Scripts\NegativeButton.cs" />
     <Compile Include="Assets\Scripts\OpenTakePictureMenuButton.cs" />
     <Compile Include="Assets\Scripts\PictureTaker.cs" />
