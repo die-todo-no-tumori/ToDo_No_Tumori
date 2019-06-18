@@ -42,10 +42,39 @@ public class CalenderMaker : MonoBehaviour
             }
         }
 
-        int day = DateTime.Now.Day;
-        string date_str = DateTime.Now.DayOfWeek.ToString();
-        int date_index = Array.IndexOf(dayOfweek, date_str);
-        
+        DateTime first_date_time = new DateTime(DateTime.Now.Year,DateTime.Now.AddMonths(1).Month, 1);
+        DateTime last_date_time = new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(1).Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.AddMonths(1).Month));
+
+        //Debug.Log(date.DayOfWeek.ToString());
+
+        string first_date = first_date_time.DayOfWeek.ToString();
+        int first_index = Array.IndexOf(dayOfweek, first_date);
+        //Debug.Log(first_index);
+        int day = 1;
+        int date_index = first_index;
+        int culum = 0;
+        while(day <= last_date_time.Day)
+        {
+            calender_cells[culum, date_index].day = day;
+            calender_cells[culum, date_index].gameObject.GetComponent<MeshRenderer>().material = (Material)Resources.Load("Materials/CC_" + day.ToString("00"));
+            calender_cells[culum, date_index].gameObject.transform.Rotate(0, 180, 0);
+            date_index++;
+            if (date_index == 7)
+            {
+                date_index = 0;
+                culum++;
+            }
+            day++;
+        }
+
+        foreach(CalenderCell calenderCell in calender_cells)
+        {
+            if(calenderCell.day == 0)
+            {
+                calenderCell.gameObject.SetActive(false);
+            }
+        }
+
 
     }
 

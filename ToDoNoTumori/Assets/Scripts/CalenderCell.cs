@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CalenderCell : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public int day;
     [HideInInspector]
     public string date;
