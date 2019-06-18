@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public enum TaskCreationPhase
 {
@@ -16,7 +17,8 @@ public enum TaskCreationPhase
 
 public class TaskInputManager : MonoBehaviour
 {
-    private Texture2D add_task_image;
+    [HideInInspector]
+    public Texture2D add_task_image;
     private string add_task_name;
     private string add_task_limit;
     private int? add_task_important_level;
@@ -24,6 +26,7 @@ public class TaskInputManager : MonoBehaviour
     private bool completed_take_picture;
     private bool decided_important_level;
     private bool cancel_decided_important_level;
+    private bool decide_task_limit;
     [HideInInspector]
     public bool picture_mode;
     [HideInInspector]
@@ -48,12 +51,16 @@ public class TaskInputManager : MonoBehaviour
     private RawImage display_choice;
     [SerializeField]
     private RawImage display_to_change_task_level;
+    [HideInInspector]
+    public Camera main_camera;
 
     private WebCamTexture webCamTexture;
 
 
     IEnumerator Start()
     {
+        main_camera = Camera.main;
+        //yield break;
         if (WebCamTexture.devices.Length == 0)
         {
             yield break;
@@ -82,12 +89,16 @@ public class TaskInputManager : MonoBehaviour
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Images");
         if (directoryInfo.Exists == false)
             directoryInfo.Create();
+        //DontDestroyOnLoad(gameObject);
+        
     }
 
     void Update()
     {
         
     }
+
+    
 
     public static void GoToNextPhase()
     {
@@ -99,8 +110,6 @@ public class TaskInputManager : MonoBehaviour
     {
         taskCreationPhase--;
         movePhase = true;
-        //Debug.Log("戻る");
-        //Debug.Log(taskCreationPhase);
     }
 
 
@@ -125,16 +134,13 @@ public class TaskInputManager : MonoBehaviour
         taskCreationPhase = TaskCreationPhase.Idle;
         picture_mode = mode;
         
-        //Debug.Log("タスク作成開始");
         while (true)
         {
             movePhase = false;
-            //Debug.Log(taskCreationPhase);
             switch (taskCreationPhase)
             {
                 case TaskCreationPhase.Picture:
                     add_task_name = "";
-
                     //タスクの画像を撮影
                     if(picture_mode == true)
                     {
@@ -151,18 +157,18 @@ public class TaskInputManager : MonoBehaviour
                     //タスクの重要度を決める
                     decided_important_level = false;
                     yield return StartCoroutine(ChangeTaskImportantLevel(data => add_task_important_level = data));
-                    //Debug.Log(add_task_important_level);
                     break;
                 case TaskCreationPhase.Limit:
                     //タスクの期限を決める
+                    decide_task_limit = false;
                     yield return StartCoroutine(SetLimitOfTask(data => add_task_limit = data));
                     break;
                 case TaskCreationPhase.Create:
                     //タスクデータを保存する
+                    
                     yield break;
                 default:
                     break;
-
             }
             while (movePhase == false)
                 yield return null;
@@ -284,7 +290,13 @@ public class TaskInputManager : MonoBehaviour
     //カレンダーに投げて、タスクの期限を設定する
     private IEnumerator SetLimitOfTask(UnityAction<string> callBack)
     {
-        yield return null;
+        while (decide_task_limit == false)
+            yield return null;
+
+        if(add_task_limit == "" || add_task_limit == null)
+        {
+            yield break;
+        }
     }
 
     //タスク追加操作をキャンセルする
@@ -338,6 +350,30 @@ public class TaskInputManager : MonoBehaviour
     public void CancelDecideImportantLevel()
     {
         cancel_decided_important_level = true;
+    }
+
+    public void OpenLimitScene(string name)
+    {
+        StartCoroutine(OpenLimitScene());
+    }
+
+    private IEnumerator OpenLimitScene()
+    {
+        main_camera.gameObject.SetActive(false);
+        yield return SceneManager.LoadSceneAsync("Calender", LoadSceneMode.Additive);
+    }
+
+    //タスクの期限決定
+    public void DecideTaskLimit()
+    {
+        decide_task_limit = true;
+    }
+
+    //タスク期限設定
+    public void SetAddTaskLimit(string limit)
+    {
+        add_task_limit = limit;
+        main_camera.gameObject.SetActive(true);
     }
 
     //撮影一時停止
