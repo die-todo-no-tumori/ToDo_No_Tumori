@@ -17,30 +17,76 @@ public class ApplicationUser : MonoBehaviour
     //これでエラーが発生したら、選択したかどうかのフラグをタスクに持たせて破壊する方法に切り替え
     private List<TaskObject> task_list_to_destroy;
     //タスクの詳細を表示する吹き出し
-    //[SerializeField]
-    //private GameObject task_info_bubble;
-    private TaskObject task_object;
     [SerializeField]
     private GameObject detail_popup;
+    private TaskObject task_object;
     [SerializeField]
     private GameObject history_panel;
     [SerializeField]
     private GameObject config_panel;
     [SerializeField]
     private GameObject task_spawn_origin;
+    //タスクオブジェクトをつかむのに必要な時間
+    [SerializeField]
+    private float catch_object_time;
+    //つかんでいるタスクオブジェクト
+    private GameObject catching_object;
+    private bool isCatching;
+    [SerializeField]
+    private LayerMask layerMask;
+    private bool isJudging;
 
     private TaskInputManager taskInputManager;
 
     void Start()
     {
-        taskInputManager = GameObject.Find("TaskInputManager").GetComponent<TaskInputManager>(); 
+        taskInputManager = GameObject.Find("TaskInputManager").GetComponent<TaskInputManager>();
+        isCatching = false;
+        isJudging = false;
     }
 
 
 
     void Update()
     {
-        
+        if(Input.touchCount == 1)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit hit;
+            if(Physics.Raycast(ray,out hit, layerMask))
+            {
+                if(hit.collider.gameObject.tag == "TaskObject")
+                {
+                    if(isJudging == false)
+                    {
+                        isJudging = true;
+                        StartCoroutine(JudgeTapOrCatch(hit.collider.gameObject));
+                    }
+                }
+            }
+        }
+    }
+
+    //画面をタッチしたときに、タップか長押しかを判定する
+    private IEnumerator JudgeTapOrCatch(GameObject obje)
+    {
+        bool isTouching = true;
+        float time = 0;
+        while (isTouching)
+        {
+            time += Time.deltaTime;
+            yield return null;
+            if(time > catch_object_time)
+            {
+                isCatching = true;
+                yield break;
+            }
+            if(Input.touchCount == 0)
+            {
+                isTouching = false;
+                Tap(obje);
+            }
+        }
     }
 
     //オブジェクトをタップしたときに、モードにより違う処理を行う
@@ -48,10 +94,14 @@ public class ApplicationUser : MonoBehaviour
     {
         //通常モード
         //吹き出しを出すだけ
+        //現在、表示可能な内容は、期限・重要度ぐらいだけど、それは一覧でわかることなので、吹き出しは
+        //不要なのでは？
         if(mode == Mode.Normal)
         {
             Vector2 popPos = Camera.main.WorldToViewportPoint(taskObject.transform.position);
             TaskData taskData = taskObject.GetComponent<TaskData>();
+            detail_popup.SetActive(true);
+            detail_popup.GetComponent<PopUpObject>().Show(taskData);
             //タスクオブジェクトの位置に応じて、吹き出しの位置を変える
             if (0 <= popPos.x && popPos.x < 720)
             {
