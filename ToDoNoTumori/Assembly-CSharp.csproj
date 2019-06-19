@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\CalenderCell.cs" />
     <Compile Include="Assets\Scripts\CalenderMaker.cs" />
     <Compile Include="Assets\Scripts\CancelToChangeILButton.cs" />
+    <Compile Include="Assets\Scripts\Config.cs" />
     <Compile Include="Assets\Scripts\NegativeButton.cs" />
     <Compile Include="Assets\Scripts\OpenTakePictureMenuButton.cs" />
     <Compile Include="Assets\Scripts\PictureTaker.cs" />

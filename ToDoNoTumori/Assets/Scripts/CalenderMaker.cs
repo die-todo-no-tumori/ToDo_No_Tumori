@@ -19,12 +19,23 @@ public class CalenderMaker : MonoBehaviour
     private string[] dayOfweek;
     private TaskInputManager taskInputManager;
     private string task_limit;
+    private Texture2D task_image;
+    [SerializeField]
+    private GameObject task_ball;
+    [SerializeField]
+    private GameObject task_spawn_origin;
+    private Vector3 before_touch_pos;
+    private GameObject ball;
 
     void Start()
     {
         CreateCalender();
         //StartCoroutine(CreateCalender());
-        taskInputManager = GameObject.Find("TaskInputManager").GetComponent<TaskInputManager>();
+        //taskInputManager = GameObject.Find("TaskInputManager").GetComponent<TaskInputManager>();
+        //task_image = taskInputManager.add_task_image;
+        if(task_ball != null)
+            ball =  Instantiate(task_ball, task_spawn_origin.transform.position, Quaternion.identity);
+
     }
 
     private void CreateCalender()
@@ -48,7 +59,7 @@ public class CalenderMaker : MonoBehaviour
 
         DateTime first_date_time = new DateTime(DateTime.Now.Year,DateTime.Now.Month, 1);
         DateTime last_date_time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
-
+        //Debug.Log(last_date_time.Day);
         string first_date = first_date_time.DayOfWeek.ToString();
         int first_index = Array.IndexOf(dayOfweek, first_date);
         int day = 1;
@@ -82,6 +93,25 @@ public class CalenderMaker : MonoBehaviour
         
         if (Input.touchCount == 1)
         {
+            if(ball != null)
+            {
+                if(before_touch_pos == null)
+                {
+                    before_touch_pos = Input.GetTouch(0).position;
+                    before_touch_pos.z = ball.transform.position.z;
+                    ball.transform.position = before_touch_pos;
+                }
+                else
+                {
+                    Vector3 touch_pos_vec3 = Input.GetTouch(0).position;
+                    touch_pos_vec3.z = before_touch_pos.z;
+                
+                    Vector3 diff = touch_pos_vec3 - before_touch_pos;
+                    ball.transform.position = ball.transform.position +  diff;
+
+                }
+            }
+
             if(Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
             {
                 Ray ray = target_camera.ScreenPointToRay(Input.GetTouch(0).position);
@@ -99,6 +129,17 @@ public class CalenderMaker : MonoBehaviour
                         popup_pointer_rect.GetChild(0).GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "" + cell.day;
                         popup_pointer_rect.gameObject.SetActive(true);
                         task_limit = DateTime.Now.Month + ":" + cell.day;
+                        foreach(GameObject cc in GameObject.FindGameObjectsWithTag("CalenderCell"))
+                        {
+                            if(cc.GetComponent<CalenderCell>() == cell)
+                            {
+                                cc.GetComponent<MeshRenderer>().material.color = Color.red;
+                            }
+                            else
+                            {
+                                cc.GetComponent<MeshRenderer>().material.color = Color.white;
+                            }
+                        }
                     }
                 }
             }
