@@ -63,11 +63,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ButtonBase.cs" />
-    <Compile Include="Assets\Scripts\CalcelButton.cs" />
-    <Compile Include="Assets\Scripts\DecideButton.cs" />
+    <Compile Include="Assets\Scripts\CalenderCell.cs" />
+    <Compile Include="Assets\Scripts\CalenderMaker.cs" />
+    <Compile Include="Assets\Scripts\CancelToChangeILButton.cs" />
+    <Compile Include="Assets\Scripts\Config.cs" />
+    <Compile Include="Assets\Scripts\NegativeButton.cs" />
+    <Compile Include="Assets\Scripts\OpenTakePictureMenuButton.cs" />
+    <Compile Include="Assets\Scripts\PictureTaker.cs" />
+    <Compile Include="Assets\Scripts\PositiveButton.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoader.cs" />
+    <Compile Include="Assets\Scripts\TakePictureCompleter.cs" />
+    <Compile Include="Assets\Scripts\TaskInputManager.cs" />
     <Compile Include="Assets\Scripts\TaskObject.cs" />
     <Compile Include="Assets\Scripts\TimeManaer.cs" />
+    <Compile Include="Assets\Unimgpicker\Samples\PickerController.cs" />
+    <Compile Include="Assets\Unimgpicker\Scripts\IPicker.cs" />
+    <Compile Include="Assets\Unimgpicker\Scripts\Picker_editor.cs" />
+    <Compile Include="Assets\Unimgpicker\Scripts\PickerAndroid.cs" />
+    <Compile Include="Assets\Unimgpicker\Scripts\PickeriOS.cs" />
+    <Compile Include="Assets\Unimgpicker\Scripts\PickerUnsupported.cs" />
+    <Compile Include="Assets\Unimgpicker\Scripts\Unimgpicker.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/jcjmwh80/Documents/GitHub/DIE/ToDo_No_Tumori/ToDoNoTumori/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
