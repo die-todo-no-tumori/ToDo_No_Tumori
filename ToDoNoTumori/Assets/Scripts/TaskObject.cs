@@ -36,8 +36,6 @@ public class TaskObject : MonoBehaviour
     //音のスピーカー
     [SerializeField] private AudioSource se_player;
     
-
-
     void Start()
     {
         if(destroy_effect != null)
@@ -45,30 +43,10 @@ public class TaskObject : MonoBehaviour
         ChangeColor();
     }
 
-
-
-
     void Update()
     {
         
     }
-
-    //日付が変わったかどうかは別のスクリプトで計算させることにしたので、今は不要→コメント化
-    //private int GetLimit(TaskData taskData)
-    //{
-    //    string[] time_data = taskData.task_limit.Split(':');
-    //    int month_limit = int.Parse(time_data[0]);
-    //    int day_limit = int.Parse(time_data[1]);
-        
-    //    int month = System.DateTime.Now.Month;
-    //    int day = System.DateTime.Now.Day;
-
-    //    return day_limit - day;// + (month_limit - month) * 
-
-    //    //int hour = System.DateTime.Now.Hour;
-    //    //int minu = System.DateTime.Now.Minute;
-    //    //int sec = System.DateTime.Now.Second;
-    //}
 
     //現在の日付と期限の日付を比較し、
     public void ChangeColor()
@@ -95,7 +73,7 @@ public class TaskObject : MonoBehaviour
     //タップされたときにタスクデータを返す
     public TaskData OnTap()
     {
-        return this.task_data;
+        return task_data;
     }
 
     //破壊モードでタップされたときにハイライトする
