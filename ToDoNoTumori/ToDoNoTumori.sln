@@ -1,12 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 16
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatsonUnitySDK", "WatsonUnitySDK.csproj", "{495FD140-4ACE-D3C4-76EE-241400D1DDE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBM.Cloud.SDK", "IBM.Cloud.SDK.csproj", "{6E6434D7-7D83-3899-E88E-F14B427A68C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBM.Watson.Tests", "IBM.Watson.Tests.csproj", "{F7669336-CD67-BFE3-8B43-0EB14FBF50E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBM.Cloud.SDK.Tests", "IBM.Cloud.SDK.Tests.csproj", "{1D5CBF36-625F-FEDC-2160-5F31C4E64625}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{495FD140-4ACE-D3C4-76EE-241400D1DDE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{495FD140-4ACE-D3C4-76EE-241400D1DDE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{495FD140-4ACE-D3C4-76EE-241400D1DDE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{495FD140-4ACE-D3C4-76EE-241400D1DDE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E6434D7-7D83-3899-E88E-F14B427A68C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E6434D7-7D83-3899-E88E-F14B427A68C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E6434D7-7D83-3899-E88E-F14B427A68C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E6434D7-7D83-3899-E88E-F14B427A68C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7669336-CD67-BFE3-8B43-0EB14FBF50E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7669336-CD67-BFE3-8B43-0EB14FBF50E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7669336-CD67-BFE3-8B43-0EB14FBF50E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7669336-CD67-BFE3-8B43-0EB14FBF50E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D5CBF36-625F-FEDC-2160-5F31C4E64625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5CBF36-625F-FEDC-2160-5F31C4E64625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D5CBF36-625F-FEDC-2160-5F31C4E64625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D5CBF36-625F-FEDC-2160-5F31C4E64625}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
