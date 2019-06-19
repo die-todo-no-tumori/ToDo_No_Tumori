@@ -25,9 +25,4 @@ public class OpenTakePictureMenuButton : ButtonBase
             }
         });
     }
-
-    void Update()
-    {
-        
-    }
 }

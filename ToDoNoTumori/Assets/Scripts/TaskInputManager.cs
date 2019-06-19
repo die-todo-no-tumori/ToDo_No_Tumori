@@ -113,22 +113,22 @@ public class TaskInputManager : MonoBehaviour
     }
 
 
-    public void CreateTask(bool mode)
-    {
-        StartCoroutine(CreateTaskCor(mode));
-    }
+    //public void CreateTask(bool mode)
+    //{
+    //    StartCoroutine(CreateTaskCor(mode));
+    //}
 
-    public IEnumerator CreateTaskCor(bool mode)
-    {
-        TaskData taskData = null;
-        yield return StartCoroutine(MakeTask(data => taskData = data,mode));
-    }
+    //public IEnumerator CreateTaskCor(bool mode)
+    //{
+    //    TaskData taskData = null;
+    //    yield return StartCoroutine(MakeTask(data => taskData = data,mode));
+    //}
 
     
 
     //タスクデータを入力し、タスクデータを返す
     //mode : true -> 撮影 false -> カメラロール
-    private IEnumerator MakeTask(UnityAction<TaskData> callBack,bool mode)
+    public IEnumerator MakeTask(UnityAction<TaskData> callBack,bool mode)
     {
         TaskData taskData = new TaskData();
         taskCreationPhase = TaskCreationPhase.Idle;
@@ -165,7 +165,8 @@ public class TaskInputManager : MonoBehaviour
                     break;
                 case TaskCreationPhase.Create:
                     //タスクデータを保存する
-                    
+
+                    callBack(taskData);
                     yield break;
                 default:
                     break;

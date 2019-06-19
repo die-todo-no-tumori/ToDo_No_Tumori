@@ -71,10 +71,10 @@ public class TaskObject : MonoBehaviour
     }
 
     //タップされたときにタスクデータを返す
-    public TaskData OnTap()
-    {
-        return task_data;
-    }
+    //public TaskData OnTap()
+    //{
+    //    return task_data;
+    //}
 
     //破壊モードでタップされたときにハイライトする
     //ハイライトの方法は検討中
