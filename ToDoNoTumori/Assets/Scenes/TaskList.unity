@@ -644,6 +644,7 @@ GameObject:
   - component: {fileID: 270837551}
   - component: {fileID: 270837550}
   - component: {fileID: 270837549}
+  - component: {fileID: 270837552}
   m_Layer: 5
   m_Name: DestroyHistoryOpenButton
   m_TagString: Untagged
@@ -663,12 +664,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1967820706}
-  m_Father: {fileID: 436751524}
-  m_RootOrder: 0
+  m_Father: {fileID: 674219567}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 720, y: 2896}
+  m_AnchoredPosition: {x: 714, y: 2896}
   m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &270837549
@@ -713,7 +714,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 270837550}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 270837552}
+        m_MethodName: ShowPanel
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &270837550
@@ -753,6 +765,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270837547}
   m_CullTransparentMesh: 0
+--- !u!114 &270837552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270837547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b26db8da55fd8af48b901a9b645f5a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  push_sound_name: 
+  target_object: {fileID: 0}
+  positive_target_object: {fileID: 0}
+  negative_target_object: {fileID: 0}
+  historyPanels:
+  - {fileID: 292961910}
+  - {fileID: 436751523}
+  - {fileID: 832316566}
 --- !u!1 &292961910
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,8 +813,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1044240139}
+  m_Children: []
   m_Father: {fileID: 674219567}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1087,10 +1118,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 270837548}
+  m_Children: []
   m_Father: {fileID: 674219567}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1984,18 +2014,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 6
+    m_MaxSize: 181
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\u5165\u529B\u5C65\u6B74"
 --- !u!222 &600799591
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2249,7 +2279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &674219567
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2262,8 +2292,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 292961911}
+  - {fileID: 1044240139}
   - {fileID: 436751524}
+  - {fileID: 270837548}
   - {fileID: 832316567}
+  - {fileID: 1527312983}
   m_Father: {fileID: 1752271735}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2801,10 +2834,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1527312983}
+  m_Children: []
   m_Father: {fileID: 674219567}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3353,6 +3385,7 @@ GameObject:
   - component: {fileID: 1044240142}
   - component: {fileID: 1044240141}
   - component: {fileID: 1044240140}
+  - component: {fileID: 1044240143}
   m_Layer: 5
   m_Name: InputHistoryOpenButton
   m_TagString: Untagged
@@ -3367,17 +3400,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044240138}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 600799589}
-  m_Father: {fileID: 292961911}
-  m_RootOrder: 0
+  m_Father: {fileID: 674219567}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 240, y: 2896}
+  m_AnchoredPosition: {x: 234, y: 2896}
   m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1044240140
@@ -3422,7 +3455,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1044240141}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1044240143}
+        m_MethodName: ShowPanel
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1044240141
@@ -3462,6 +3506,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044240138}
   m_CullTransparentMesh: 0
+--- !u!114 &1044240143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044240138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b26db8da55fd8af48b901a9b645f5a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  push_sound_name: 
+  target_object: {fileID: 0}
+  positive_target_object: {fileID: 0}
+  negative_target_object: {fileID: 0}
+  historyPanels:
+  - {fileID: 292961910}
+  - {fileID: 436751523}
+  - {fileID: 832316566}
 --- !u!1 &1055017372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,6 +3726,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082029461}
   m_CullTransparentMesh: 0
+--- !u!1 &1089246165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089246166}
+  - component: {fileID: 1089246167}
+  m_Layer: 0
+  m_Name: HistoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1089246166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089246165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 642.35376, y: 2138.182, z: -791.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1089246167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089246165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9e991bd44868844ba45fe284ce5d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1092398389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9165897804251177508, guid: e98858d6b5c251e4a95b2fdf3be94431,
@@ -4660,6 +4767,7 @@ GameObject:
   - component: {fileID: 1527312986}
   - component: {fileID: 1527312985}
   - component: {fileID: 1527312984}
+  - component: {fileID: 1527312987}
   m_Layer: 5
   m_Name: TotalHistoryOpenButton
   m_TagString: Untagged
@@ -4679,12 +4787,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2094553153}
-  m_Father: {fileID: 832316567}
-  m_RootOrder: 0
+  m_Father: {fileID: 674219567}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1200, y: 2896}
+  m_AnchoredPosition: {x: 1194, y: 2896}
   m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1527312984
@@ -4729,7 +4837,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1527312985}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1527312987}
+        m_MethodName: ShowPanel
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1527312985
@@ -4769,6 +4888,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527312982}
   m_CullTransparentMesh: 0
+--- !u!114 &1527312987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527312982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b26db8da55fd8af48b901a9b645f5a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  push_sound_name: 
+  target_object: {fileID: 0}
+  positive_target_object: {fileID: 0}
+  negative_target_object: {fileID: 0}
+  historyPanels:
+  - {fileID: 292961910}
+  - {fileID: 436751523}
+  - {fileID: 832316566}
 --- !u!1 &1532273178
 GameObject:
   m_ObjectHideFlags: 0
@@ -6602,18 +6741,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 6
+    m_MaxSize: 69
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\u524A\u9664\u5C65\u6B74"
 --- !u!222 &1967820708
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6839,18 +6978,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 6
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\u7DCF\u5408\u5C65\u6B74"
 --- !u!222 &2094553155
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6871,6 +7010,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ApplicationUser
       objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: history_panel
+      value: 
+      objectReference: {fileID: 674219566}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: config_panel
+      value: 
+      objectReference: {fileID: 1037247309}
     - target: {fileID: 8816140358307209947, guid: 7f4ea4621750d544689b70f8bc1c631f,
         type: 3}
       propertyPath: m_LocalPosition.x

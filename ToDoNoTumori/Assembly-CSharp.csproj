@@ -68,6 +68,9 @@
     <Compile Include="Assets\Scripts\CalenderMaker.cs" />
     <Compile Include="Assets\Scripts\CancelToChangeILButton.cs" />
     <Compile Include="Assets\Scripts\Config.cs" />
+    <Compile Include="Assets\Scripts\HistoryManager.cs" />
+    <Compile Include="Assets\Scripts\HistoryObject.cs" />
+    <Compile Include="Assets\Scripts\HistoryPanelButton.cs" />
     <Compile Include="Assets\Scripts\NegativeButton.cs" />
     <Compile Include="Assets\Scripts\OpenTakePictureMenuButton.cs" />
     <Compile Include="Assets\Scripts\PictureTaker.cs" />
