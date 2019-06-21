@@ -294,10 +294,10 @@ public class TaskInputManager : MonoBehaviour
         while (decide_task_limit == false)
             yield return null;
 
-        if(add_task_limit == "" || add_task_limit == null)
-        {
-            yield break;
-        }
+        //if(add_task_limit == "" || add_task_limit == null)
+        //{
+        //    yield break;
+        //}
     }
 
     //タスク追加操作をキャンセルする
@@ -361,7 +361,8 @@ public class TaskInputManager : MonoBehaviour
     private IEnumerator OpenLimitScene()
     {
         main_camera.gameObject.SetActive(false);
-        yield return SceneManager.LoadSceneAsync("Calender", LoadSceneMode.Additive);
+        yield return null;
+        //yield return SceneManager.LoadSceneAsync("Calender", LoadSceneMode.Additive);
     }
 
     //タスクの期限決定
