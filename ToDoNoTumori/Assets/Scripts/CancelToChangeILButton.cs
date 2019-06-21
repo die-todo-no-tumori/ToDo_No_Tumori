@@ -14,6 +14,7 @@ public class CancelToChangeILButton : ButtonBase
     protected override void Start()
     {
         base.Start();
+        push_sound = (AudioClip)Resources.Load("Audio/tdcr_cancel");
         GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
         {
             if(taskInputManager.picture_mode == true)
