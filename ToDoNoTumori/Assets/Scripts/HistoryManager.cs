@@ -23,7 +23,7 @@ public class HistoryManager : MonoBehaviour
     void Start()
     {
         scrollRect.horizontal = false;
-        for(int i = 0; i < 100; i++)
+        for(int i = 0; i < 50; i++)
         {
             GameObject button = Instantiate(history_object, scrollRect.content.transform);
             Vector2 pos = scrollRect.content.transform.position;
@@ -37,18 +37,19 @@ public class HistoryManager : MonoBehaviour
 
     void Update()
     {
-        if(scrollRect.GetComponent<RectTransform>().localPosition.y <= -40)
+        //Debug.Log(scrollRect.content.GetComponent<RectTransform>().localPosition.y);
+        if (scrollRect.content.GetComponent<RectTransform>().localPosition.y <= -50)
         {
-            Vector2 pos = scrollRect.GetComponent<RectTransform>().localPosition;
-            pos.y = -40;
-            scrollRect.GetComponent<RectTransform>().localPosition = pos;
+            Vector2 pos = scrollRect.content.GetComponent<RectTransform>().localPosition;
+            pos.y = -50;
+            scrollRect.content.GetComponent<RectTransform>().localPosition = pos;
         }
     }
 
     //入力履歴に追加
     public void AddToInputHistory(TaskData taskData)
     {
-        int objectCount = spawn_origin_input_history.transform.GetChildCount();
+        int objectCount = spawn_origin_input_history.transform.childCount;
         GameObject obje = Instantiate(history_object, spawn_origin_input_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_input_history.GetComponent<RectTransform>().position;
@@ -63,7 +64,7 @@ public class HistoryManager : MonoBehaviour
     //破壊履歴に追加
     public void AddToDestroyHistory(TaskData taskData)
     {
-        int objectCount = spawn_origin_destroy_history.transform.GetChildCount();
+        int objectCount = spawn_origin_destroy_history.transform.childCount;
         GameObject obje = Instantiate(history_object, spawn_origin_destroy_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_destroy_history.GetComponent<RectTransform>().position;
@@ -78,7 +79,7 @@ public class HistoryManager : MonoBehaviour
     //総合履歴に追加
     public void AddToTotalHisttory(TaskData taskData)
     {
-        int objectCount = spawn_origin_total_history.transform.GetChildCount();
+        int objectCount = spawn_origin_total_history.transform.childCount;
         GameObject obje = Instantiate(history_object, spawn_origin_total_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_total_history.GetComponent<RectTransform>().position;
