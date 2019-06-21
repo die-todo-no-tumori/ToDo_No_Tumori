@@ -6,16 +6,6 @@ public class HistoryObject : MonoBehaviour
 {
     [HideInInspector]
     public TaskData task_data;
-
-    void Start()
-    {
-        
-    }
-
-
-
-    void Update()
-    {
-        
-    }
+    [HideInInspector]
+    public ApplicationUser application_user;
 }
