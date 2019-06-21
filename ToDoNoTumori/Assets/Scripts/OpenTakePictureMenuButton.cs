@@ -8,6 +8,7 @@ public class OpenTakePictureMenuButton : ButtonBase
     protected override void Start()
     {
         base.Start();
+        push_sound = (AudioClip)Resources.Load("Audio/tdcr_decide");
         isOpen = false;
         GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
         {

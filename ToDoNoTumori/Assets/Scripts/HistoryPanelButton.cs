@@ -10,6 +10,7 @@ public class HistoryPanelButton : ButtonBase
     protected override void Start()
     {
         base.Start();
+        push_sound = (AudioClip)Resources.Load("Audio/tdcr_decide");
     }
 
     public void ShowPanel(int panelIndex)

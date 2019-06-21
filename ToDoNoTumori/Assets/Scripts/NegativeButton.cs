@@ -8,6 +8,7 @@ public class NegativeButton : ButtonBase
     protected override void Start()
     {
         base.Start();
+        push_sound = (AudioClip)Resources.Load("Audio/tdcr_cancel");
         GetComponent<Button>().onClick.AddListener(() =>
         {
             TaskInputManager.GoToNextPhase();
