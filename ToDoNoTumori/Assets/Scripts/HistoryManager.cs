@@ -23,25 +23,33 @@ public class HistoryManager : MonoBehaviour
     void Start()
     {
         scrollRect.horizontal = false;
-        for(int i = 0; i < 50; i++)
+        Vector2 rectPos = scrollRect.content.GetComponent<RectTransform>().localPosition;
+        rectPos.y = -50;
+        scrollRect.content.GetComponent<RectTransform>().localPosition = rectPos;
+        for (int i = 0; i < 51; i++)
         {
             GameObject button = Instantiate(history_object, scrollRect.content.transform);
             Vector2 pos = scrollRect.content.transform.position;
             pos.x = 720;
-            pos.y -= (history_object.GetComponent<RectTransform>().rect.height + 10) * i;// + 10;
+            pos.y -= (history_object.GetComponent<RectTransform>().rect.height) * i;
             button.GetComponent<RectTransform>().position = pos;
         }
     }
 
 
-
     void Update()
     {
-        //Debug.Log(scrollRect.content.GetComponent<RectTransform>().localPosition.y);
         if (scrollRect.content.GetComponent<RectTransform>().localPosition.y <= -50)
         {
             Vector2 pos = scrollRect.content.GetComponent<RectTransform>().localPosition;
             pos.y = -50;
+            scrollRect.content.GetComponent<RectTransform>().localPosition = pos;
+        }
+
+        if (scrollRect.content.GetComponent<RectTransform>().localPosition.y >= 2300)
+        {
+            Vector2 pos = scrollRect.content.GetComponent<RectTransform>().localPosition;
+            pos.y = 2300;
             scrollRect.content.GetComponent<RectTransform>().localPosition = pos;
         }
     }
