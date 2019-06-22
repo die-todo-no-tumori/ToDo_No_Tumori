@@ -9,10 +9,10 @@ public class ButtonBase : MonoBehaviour
     private AudioSource se_player;
     [SerializeField]
     protected GameObject target_object;
-    [SerializeField]
-    protected GameObject positive_target_object;
-    [SerializeField]
-    protected GameObject negative_target_object;
+    //[SerializeField]
+    //protected GameObject positive_target_object;
+    //[SerializeField]
+    //protected GameObject negative_target_object;
 
 
     protected virtual void Start()

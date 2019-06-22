@@ -27,6 +27,7 @@ public class TaskInputManager : MonoBehaviour
     private bool decided_important_level;
     private bool cancel_decided_important_level;
     private bool decide_task_limit;
+    private bool canceled_to_add_task;
     [HideInInspector]
     public bool picture_mode;
     [HideInInspector]
@@ -51,16 +52,20 @@ public class TaskInputManager : MonoBehaviour
     private RawImage display_choice;
     [SerializeField]
     private RawImage display_to_change_task_level;
-    [HideInInspector]
-    public Camera main_camera;
 
     private WebCamTexture webCamTexture;
+
+    //パネル
+    [SerializeField]
+    private GameObject take_picture_panel;
+    [SerializeField]
+    private GameObject choice_picture_panel;
+    [SerializeField]
+    private GameObject important_level_panel;
 
 
     IEnumerator Start()
     {
-        main_camera = Camera.main;
-        //yield break;
         if (WebCamTexture.devices.Length == 0)
         {
             yield break;
@@ -84,47 +89,34 @@ public class TaskInputManager : MonoBehaviour
         decided_important_level = false;
         picture_mode = false;
         cancel_decided_important_level = false;
+        canceled_to_add_task = false;
         
         //画像を保存するフォルダの作成
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Images");
         if (directoryInfo.Exists == false)
             directoryInfo.Create();
-        //DontDestroyOnLoad(gameObject);
+
         
     }
 
     void Update()
     {
-        
+        //Debug.Log(Camera.main.cullingMask);
+
     }
 
-    
-
-    public static void GoToNextPhase()
+    public void GoToNextPhase()
     {
         taskCreationPhase++;
         movePhase = true;
     }
 
-    public static void BackToBeforePhase()
+    public void BackToBeforePhase()
     {
         taskCreationPhase--;
         movePhase = true;
     }
 
-
-    //public void CreateTask(bool mode)
-    //{
-    //    StartCoroutine(CreateTaskCor(mode));
-    //}
-
-    //public IEnumerator CreateTaskCor(bool mode)
-    //{
-    //    TaskData taskData = null;
-    //    yield return StartCoroutine(MakeTask(data => taskData = data,mode));
-    //}
-
-    
 
     //タスクデータを入力し、タスクデータを返す
     //mode : true -> 撮影 false -> カメラロール
@@ -137,6 +129,7 @@ public class TaskInputManager : MonoBehaviour
         while (true)
         {
             movePhase = false;
+            Debug.Log(taskCreationPhase);
             switch (taskCreationPhase)
             {
                 case TaskCreationPhase.Picture:
@@ -173,6 +166,11 @@ public class TaskInputManager : MonoBehaviour
             }
             while (movePhase == false)
                 yield return null;
+            if (canceled_to_add_task)
+            {
+                callBack(null);
+                yield break;
+            }
         }
     }
 
@@ -191,13 +189,10 @@ public class TaskInputManager : MonoBehaviour
             }
         }
         PauseToTakePicture();
-        //GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "保存中";
         Texture2D texture2D = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.ARGB32, false);
         texture2D.SetPixels(webCamTexture.GetPixels());
         texture2D.Apply();
-        //byte[] data = texture2D.EncodeToPNG();
         add_task_name = System.DateTime.Now.ToLongDateString() + "," + System.DateTime.Now.ToLongTimeString();
-        //File.WriteAllBytes(Application.persistentDataPath + "/Images/" + dateData +".png", data);
         yield return new WaitForEndOfFrame();
         GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "撮影完了";
         //カメラを止める
@@ -245,7 +240,8 @@ public class TaskInputManager : MonoBehaviour
     {
         int level = 0;
         display_to_change_task_level.texture = add_task_image;
-        while(decided_important_level == false)
+        important_level_text.text = "重要度:" + (level + 3);
+        while (decided_important_level == false)
         {
             //2本指で触れているときのみ判定
             if(Input.touchCount == 2)
@@ -258,17 +254,17 @@ public class TaskInputManager : MonoBehaviour
                     Vector2 vect = touches[0].position - touches[1].position;
                     float dist = vect.magnitude;
                     //重要度１
-                    if(important_level_distance[0] <= dist && dist <= (important_level_distance[0] + important_level_distance[1]) / 2)
+                    if(important_level_distance[0] <= dist && dist <= important_level_distance[0] + important_level_distance[1])
                     {
                         level = 0;
                     }
                     //重要度２
-                    else if ((important_level_distance[0] + important_level_distance[1]) / 2 <= dist && dist <= (important_level_distance[1] + important_level_distance[2]) / 2)
+                    else if (important_level_distance[1] <= dist && dist <= important_level_distance[2])
                     {
                         level = 1;
                     }
                     //重要度３
-                    else if((important_level_distance[1] + important_level_distance[2]) / 2 <= dist && dist <= important_level_distance[2])
+                    else if(important_level_distance[2]<= dist)
                     {
                         level = 2;
                     }
@@ -278,7 +274,6 @@ public class TaskInputManager : MonoBehaviour
             }
             if (cancel_decided_important_level == true)
             {
-                //Debug.Log("キャンセル");
                 yield break;
             }
 
@@ -291,33 +286,32 @@ public class TaskInputManager : MonoBehaviour
     //カレンダーに投げて、タスクの期限を設定する
     private IEnumerator SetLimitOfTask(UnityAction<string> callBack)
     {
+        Camera.main.cullingMask = 512;
+
         while (decide_task_limit == false)
             yield return null;
 
-        //if(add_task_limit == "" || add_task_limit == null)
-        //{
-        //    yield break;
-        //}
+
+
     }
 
-    //タスク追加操作をキャンセルする
-    private void CancelToAddTask()
+
+    //--------これ以降はフェーズ遷移と画面の切り替え関係のメソッド
+
+    //撮影画面を表示する
+    public void OpenTakePicturePanel()
     {
-        //RawImageのテクスチャを消す
-        //display_take = null;
-        display_choice = null;
-        Destroy(add_task_image);
-        //期限と重要度を消す
-        add_task_important_level = 0;
-        add_task_limit = null;
-        webCamTexture.Stop();
+        take_picture_panel.SetActive(true);
+        GoToNextPhase();
     }
 
-    //通知に登録する
-    private void AddTaskToNotice()
+    //写真選択画面を表示する
+    public void OpenChoicePicturePanel()
     {
-
+        choice_picture_panel.SetActive(true);
+        GoToNextPhase();
     }
+    
 
     //撮影開始
     public void StartToTakePicture()
@@ -341,43 +335,6 @@ public class TaskInputManager : MonoBehaviour
         taked_picture = true;
     }
 
-    //重要度決定
-    public void DecideImportantLevel()
-    {
-        decided_important_level = true;
-    }
-
-    //重要度決定キャンセル
-    public void CancelDecideImportantLevel()
-    {
-        cancel_decided_important_level = true;
-    }
-
-    public void OpenLimitScene(string name)
-    {
-        StartCoroutine(OpenLimitScene());
-    }
-
-    private IEnumerator OpenLimitScene()
-    {
-        main_camera.gameObject.SetActive(false);
-        yield return null;
-        //yield return SceneManager.LoadSceneAsync("Calender", LoadSceneMode.Additive);
-    }
-
-    //タスクの期限決定
-    public void DecideTaskLimit()
-    {
-        decide_task_limit = true;
-    }
-
-    //タスク期限設定
-    public void SetAddTaskLimit(string limit)
-    {
-        add_task_limit = limit;
-        main_camera.gameObject.SetActive(true);
-    }
-
     //撮影一時停止
     public void PauseToTakePicture()
     {
@@ -392,4 +349,93 @@ public class TaskInputManager : MonoBehaviour
             webCamTexture.Stop();
     }
 
+    //重要度設定画面表示
+    public void OpenTaskImportantLevelPanel()
+    {
+        GoToNextPhase();
+        important_level_panel.SetActive(true);
+        cancel_decided_important_level = false;
+    }
+
+
+    //重要度決定
+    public void DecideImportantLevel()
+    {
+        decided_important_level = true;
+    }
+
+    //重要度決定キャンセル
+    public void CancelDecideImportantLevel()
+    {
+        cancel_decided_important_level = true;
+        if (picture_mode == true)
+        {
+            take_picture_panel.SetActive(true);
+            choice_picture_panel.SetActive(false);
+            StartToTakePicture();
+        }
+        else
+        {
+            take_picture_panel.SetActive(false);
+            choice_picture_panel.SetActive(true);
+            StartToTakePicture();
+        }
+        BackToBeforePhase();
+        important_level_panel.SetActive(false);
+    }
+
+    //期限設定
+    public void OpenLimitPanel(string name)
+    {
+        //Camera.main.cullingMask = 
+    }
+
+
+
+    //タスクの期限決定
+    public void DecideTaskLimit()
+    {
+        decide_task_limit = true;
+    }
+
+    //タスク期限設定
+    public void SetAddTaskLimit(string limit)
+    {
+        add_task_limit = limit;
+    }
+
+    //タスク期限設定キャンセル
+    public void CancelToSetLimit()
+    {
+        //期限設定操作キャンセルフラグを立てる
+
+        //フェーズを下げる
+
+        //期限設定パネルをオフ
+
+        //重要度設定パネルをオン
+
+
+    }
+
+    //通知に登録する
+    private void AddTaskToNotice()
+    {
+
+    }
+
+    //タスク追加操作をキャンセルする
+    public void CancelToAddTask()
+    {
+        //RawImageのテクスチャを消す
+        Destroy(add_task_image);
+        //期限と重要度を消す
+        add_task_important_level = 0;
+        add_task_limit = null;
+        webCamTexture.Stop();
+        if (picture_mode == true)
+            take_picture_panel.SetActive(false);
+        else
+            choice_picture_panel.SetActive(false);
+    }
 }

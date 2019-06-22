@@ -201,7 +201,8 @@ public class ApplicationUser : MonoBehaviour
     {
         TaskData taskData = null;
         yield return StartCoroutine(taskInputManager.MakeTask(data => taskData = data,mode));
-        InstantiateTaskObject(taskData);
+        if(taskData != null)
+            InstantiateTaskObject(taskData);
     }
 
 }

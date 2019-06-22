@@ -9,11 +9,11 @@ public class NegativeButton : ButtonBase
     {
         base.Start();
         push_sound = (AudioClip)Resources.Load("Audio/tdcr_cancel");
-        GetComponent<Button>().onClick.AddListener(() =>
-        {
-            TaskInputManager.GoToNextPhase();
-            ClosePanel();
-        });
+        //GetComponent<Button>().onClick.AddListener(() =>
+        //{
+        //    TaskInputManager.GoToNextPhase();
+        //    //ClosePanel();
+        //});
     }
 
     void Update()
@@ -21,14 +21,14 @@ public class NegativeButton : ButtonBase
         
     }
 
-    private void ClosePanel()
-    {
-        if (positive_target_object != null)
-            //return;
-            positive_target_object.SetActive(true);
-        if (negative_target_object != null)
-            //return;
-            negative_target_object.SetActive(false);
+    //private void ClosePanel()
+    //{
+    //    if (positive_target_object != null)
+    //        //return;
+    //        positive_target_object.SetActive(true);
+    //    if (negative_target_object != null)
+    //        //return;
+    //        negative_target_object.SetActive(false);
 
-    }
+    //}
 }
