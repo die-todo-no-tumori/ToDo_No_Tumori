@@ -26,14 +26,14 @@ public class HistoryManager : MonoBehaviour
         Vector2 rectPos = scrollRect.content.GetComponent<RectTransform>().localPosition;
         rectPos.y = -50;
         scrollRect.content.GetComponent<RectTransform>().localPosition = rectPos;
-        for (int i = 0; i < 51; i++)
-        {
-            GameObject button = Instantiate(history_object, scrollRect.content.transform);
-            Vector2 pos = scrollRect.content.transform.position;
-            pos.x = 720;
-            pos.y -= (history_object.GetComponent<RectTransform>().rect.height) * i;
-            button.GetComponent<RectTransform>().position = pos;
-        }
+        //for (int i = 0; i < 51; i++)
+        //{
+        //    GameObject button = Instantiate(history_object, scrollRect.content.transform);
+        //    Vector2 pos = scrollRect.content.transform.position;
+        //    pos.x = 720;
+        //    pos.y -= (history_object.GetComponent<RectTransform>().rect.height) * i;
+        //    button.GetComponent<RectTransform>().position = pos;
+        //}
     }
 
 
@@ -67,6 +67,7 @@ public class HistoryManager : MonoBehaviour
         objeRect.transform.localScale = Vector3.one;
         obje.GetComponent<HistoryObject>().task_data = taskData;
         obje.GetComponent<HistoryObject>().application_user = application_user;
+        obje.transform.GetChild(0).GetComponent<RawImage>().texture = taskData.texture2D;
     }
 
     //破壊履歴に追加

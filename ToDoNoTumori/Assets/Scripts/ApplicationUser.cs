@@ -39,6 +39,8 @@ public class ApplicationUser : MonoBehaviour
     private bool isJudging;
 
     private TaskInputManager taskInputManager;
+    [SerializeField]
+    private HistoryManager history_manager;
 
     void Start()
     {
@@ -195,6 +197,8 @@ public class ApplicationUser : MonoBehaviour
             GameObject taskObject = Instantiate(task_object.gameObject, task_spawn_origin.transform.position, Quaternion.identity);
             taskObject.GetComponent<TaskObject>().task_data = taskData;
             taskObject.transform.GetComponentInChildren<UnityEngine.UI.RawImage>().texture = taskData.texture2D;
+            history_manager.AddToInputHistory(taskData);
+            //history_manager.AddToTotalHisttory(taskData);
         }
     }
 
