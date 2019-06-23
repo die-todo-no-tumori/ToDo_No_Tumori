@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4097782730596263006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4097782730596263000}
+  - component: {fileID: 4097782730596263001}
+  m_Layer: 0
+  m_Name: TaskInputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4097782730596263000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4097782730596263006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 806.2137, y: 540.89746, z: -697.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4097782730596263001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4097782730596263006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d096c4e056db04a811f079be5826a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  add_task_image: {fileID: 0}
+  add_task_limit: 
+  picture_mode: 0
+  important_level_distance: 00000000f4010000e8030000
+  change_scales:
+  - {x: 0.3, y: 0.3, z: 1}
+  - {x: 0.6, y: 0.6, z: 1}
+  - {x: 1, y: 1, z: 1}
+  important_level_image_rect: {fileID: 0}
+  important_level_text: {fileID: 0}
+  width: 1200
+  height: 1200
+  display_take: {fileID: 0}
+  display_choice: {fileID: 0}
+  display_to_change_task_level: {fileID: 0}
+  open_add_menu_button: {fileID: 0}
+  button_parent: {fileID: 0}
+  calender_maker: {fileID: 0}
+  take_picture_panel: {fileID: 0}
+  choice_picture_panel: {fileID: 0}
+  important_level_panel: {fileID: 0}
+  set_task_limit_panel: {fileID: 0}
+  normal_mask:
+    serializedVersion: 2
+    m_Bits: 311
+  task_limit_mask:
+    serializedVersion: 2
+    m_Bits: 512

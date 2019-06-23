@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class CalenderMaker : MonoBehaviour
 {
-    //private GameObject calender_cell;
     [SerializeField]
     private GameObject spawn_origin;
     [SerializeField]
@@ -14,8 +13,9 @@ public class CalenderMaker : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
     private string[] dayOfweek;
+    [SerializeField]
     private TaskInputManager taskInputManager;
-    private string task_limit;
+    //private string task_limit;
     private Texture2D task_image;
     [SerializeField]
     private GameObject task_ball;
@@ -25,24 +25,33 @@ public class CalenderMaker : MonoBehaviour
     private GameObject ball;
     [SerializeField]
     private GameObject[] calender_cell_objects;
+    private DateTime date_time;
 
     void Start()
     {
-        CreateCalender(DateTime.Now);
-        //StartCoroutine(CreateCalender());
-        //taskInputManager = GameObject.Find("TaskInputManager").GetComponent<TaskInputManager>();
-        //task_image = taskInputManager.add_task_image;
+        //CreateCalender(DateTime.Now);
         if(task_ball != null && task_spawn_origin != null)
             ball =  Instantiate(task_ball, task_spawn_origin.transform.position, Quaternion.identity);
-
     }
 
-    public void CreateCalender(DateTime dateTime)
+    public void OpenCalender(DateTime dateTime)
     {
+        spawn_origin.SetActive(true);
+        CreateCalender(dateTime);
+    }
+
+    public void CloseCalener()
+    {
+        spawn_origin.SetActive(false);
+    }
+
+    private void CreateCalender(DateTime dateTime)
+    {
+        date_time = dateTime;
         dayOfweek = new string[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
-        DateTime first_date_time = new DateTime(DateTime.Now.Year,DateTime.Now.Month, 1);
-        DateTime last_date_time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+        DateTime first_date_time = new DateTime(dateTime.Year,dateTime.Month, 1);
+        DateTime last_date_time = new DateTime(dateTime.Year, dateTime.Month, DateTime.DaysInMonth(dateTime.Year, dateTime.Month));
         string first_date = first_date_time.DayOfWeek.ToString();
         int first_index = Array.IndexOf(dayOfweek, first_date);
         int day = 1;
@@ -111,11 +120,8 @@ public class CalenderMaker : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
                 RaycastHit hit;
-                //Debug.Log(Input.GetTouch(0).position);
-                //Debug.DrawRay(ray.origin, ray.direction, Color.red, 10,false);
                 if (Physics.Raycast(ray,out hit,100,layerMask))
                 {
-                    //Debug.Log("ray cast hit");
                     if(hit.collider.gameObject.tag == "CalenderCell")
                     {
                         Vector3 pos = popup_pointer_rect.transform.position;
@@ -126,7 +132,7 @@ public class CalenderMaker : MonoBehaviour
                         CalenderCell cell = hit.collider.GetComponent<CalenderCell>();
                         popup_pointer_rect.GetChild(0).GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "" + cell.day;
                         popup_pointer_rect.gameObject.SetActive(true);
-                        task_limit = DateTime.Now.Month + ":" + cell.day;
+                        taskInputManager.add_task_limit = date_time.Month + ":" + cell.day;
                     }
                 }
             }
@@ -135,18 +141,5 @@ public class CalenderMaker : MonoBehaviour
         {
             popup_pointer_rect.gameObject.SetActive(false);
         }
-    }
-
-    public void CloseScene()
-    {
-        taskInputManager.SetAddTaskLimit(task_limit);
-        //taskInputManager.main_camera.gameObject.SetActive(true);
-
-        StartCoroutine(CloseSceneCor());
-    }
-
-    public IEnumerator CloseSceneCor()
-    {
-        yield return SceneManager.UnloadSceneAsync("TaskList");
     }
 }

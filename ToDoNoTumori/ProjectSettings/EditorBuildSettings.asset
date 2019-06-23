@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TaskList.unity
     guid: fd3184ecb6ad5be45b6369a85d3fc65f
-  - enabled: 1
-    path: Assets/Scenes/Calender.unity
-    guid: 71b35d7e355e5f84bb874c80cbfb6345
   m_configObjects: {}

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using System.IO;
 
 public enum Mode
 {
@@ -19,6 +20,7 @@ public class ApplicationUser : MonoBehaviour
     //タスクの詳細を表示する吹き出し
     [SerializeField]
     private GameObject detail_popup;
+    [SerializeField]
     private TaskObject task_object;
     [SerializeField]
     private GameObject history_panel;
@@ -187,9 +189,13 @@ public class ApplicationUser : MonoBehaviour
     //タスクデータを持たせてタスクオブジェクトを生成する
     public void InstantiateTaskObject(TaskData taskData)
     {
-        GameObject taskObject = Instantiate(task_object.gameObject, task_spawn_origin.transform.position, Quaternion.identity);
-        taskObject.GetComponent<TaskObject>().task_data = taskData;
-        taskObject.GetComponent<TaskObject>().ChangeColor();
+        //Debug.Log("タスクオブジェクト生成");
+        if(task_object != null)
+        {
+            GameObject taskObject = Instantiate(task_object.gameObject, task_spawn_origin.transform.position, Quaternion.identity);
+            taskObject.GetComponent<TaskObject>().task_data = taskData;
+            taskObject.transform.GetComponentInChildren<UnityEngine.UI.RawImage>().texture = taskData.texture2D;
+        }
     }
 
     public void CreateTask(bool mode)

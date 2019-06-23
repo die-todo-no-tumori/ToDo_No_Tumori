@@ -74,7 +74,6 @@
     <Compile Include="Assets\Scripts\InputHstoryObject.cs" />
     <Compile Include="Assets\Scripts\NegativeButton.cs" />
     <Compile Include="Assets\Scripts\OpenTakePictureMenuButton.cs" />
-    <Compile Include="Assets\Scripts\PictureTaker.cs" />
     <Compile Include="Assets\Scripts\PopUpObject.cs" />
     <Compile Include="Assets\Scripts\PositiveButton.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoader.cs" />

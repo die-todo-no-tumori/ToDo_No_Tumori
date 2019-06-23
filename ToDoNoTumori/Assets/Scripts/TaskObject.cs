@@ -23,6 +23,8 @@ public class TaskData
     public string task_limit;
     public byte task_important_level;
     public int task_index;
+    [System.NonSerialized]
+    public Texture2D texture2D;
 }
 
 public class TaskObject : MonoBehaviour
@@ -38,9 +40,9 @@ public class TaskObject : MonoBehaviour
     
     void Start()
     {
-        if(destroy_effect != null)
-            destroy_effect.SetActive(false);
-        ChangeColor();
+        //if(destroy_effect != null)
+        //    destroy_effect.SetActive(false);
+        //ChangeColor();
     }
 
     void Update()
@@ -84,10 +86,10 @@ public class TaskObject : MonoBehaviour
     }
 
 
-    private void OnDisable()
-    {
-        StartCoroutine(CallOnDisable());
-    }
+    //private void OnDisable()
+    //{
+    //    StartCoroutine(CallOnDisable());
+    //}
 
     //破壊されるときにエフェクトと音を鳴らす
     private IEnumerator CallOnDisable()
