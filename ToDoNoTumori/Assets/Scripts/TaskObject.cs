@@ -47,7 +47,9 @@ public class TaskObject : MonoBehaviour
 
     void Update()
     {
-        
+        transform.LookAt(Camera.main.transform);
+        transform.Rotate(0, 180, 0);
+        Debug.Log(transform.position);
     }
 
     //現在の日付と期限の日付を比較し、
@@ -82,9 +84,13 @@ public class TaskObject : MonoBehaviour
     //ハイライトの方法は検討中
     public void OnTapToHighlight()
     {
-
+        GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
     }
 
+    public void OnTapToCancelHighlight()
+    {
+        GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+    }
 
     //private void OnDisable()
     //{

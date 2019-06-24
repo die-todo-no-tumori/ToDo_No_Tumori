@@ -13,10 +13,18 @@ public enum Mode
 
 public class ApplicationUser : MonoBehaviour
 {
+    //破壊モードか通常モードか
     private Mode mode;
     //破壊するタスクリストを入れるリスト
     //これでエラーが発生したら、選択したかどうかのフラグをタスクに持たせて破壊する方法に切り替え
     private List<TaskObject> task_list_to_destroy;
+    //ハンマーボタン
+    [SerializeField]
+    private Button hammer_button;
+    //破壊モードのときと通常モードのときのボタンの画像
+    [SerializeField]
+    private Sprite[] hammer_button_sprites;
+
     //タスクの詳細を表示する吹き出し
     [SerializeField]
     private GameObject detail_popup;
@@ -41,27 +49,58 @@ public class ApplicationUser : MonoBehaviour
     private TaskInputManager taskInputManager;
     [SerializeField]
     private HistoryManager history_manager;
+    [SerializeField]
+    private Color camera_normal_color;
+    [SerializeField]
+    private Color camera_destroy_color;
+    [SerializeField]
+    private Color light_normal_color;
+    [SerializeField]
+    private Color light_destroy_color;
+    [SerializeField]
+    private Light world_light;
 
     void Start()
     {
         taskInputManager = GameObject.Find("TaskInputManager").GetComponent<TaskInputManager>();
         isCatching = false;
         isJudging = false;
+        mode = Mode.Normal;
+        task_list_to_destroy = new List<TaskObject>();
     }
 
 
 
     void Update()
     {
+        if (Input.touchCount == 0)
+            catching_object = null;
+        if(catching_object != null && isCatching)
+        {
+            if(Input.touchCount == 0)
+            {
+                Vector3 posi = catching_object.transform.position;
+                posi.z = task_spawn_origin.transform.position.z;
+                catching_object.transform.position = posi;
+                catching_object = null;
+                isCatching = false;
+                
+            }
+            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            pos.z = task_spawn_origin.transform.position.z - 1;
+            catching_object.transform.position = pos;
+        }
         if(Input.touchCount == 1)
         {
+            if (isCatching)
+                return;
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit hit;
-            if(Physics.Raycast(ray,out hit, layerMask))
+            if(Physics.Raycast(ray,out hit,100, layerMask))
             {
                 if(hit.collider.gameObject.tag == "TaskObject")
                 {
-                    if(isJudging == false)
+                    if (isJudging == false)
                     {
                         isJudging = true;
                         StartCoroutine(JudgeTapOrCatch(hit.collider.gameObject));
@@ -83,11 +122,14 @@ public class ApplicationUser : MonoBehaviour
             if(time > catch_object_time)
             {
                 isCatching = true;
+                isJudging = false;
+                catching_object = obje;
                 yield break;
             }
             if(Input.touchCount == 0)
             {
                 isTouching = false;
+                isJudging = false;
                 Tap(obje);
             }
         }
@@ -103,9 +145,12 @@ public class ApplicationUser : MonoBehaviour
         if(mode == Mode.Normal)
         {
             Vector2 popPos = Camera.main.WorldToViewportPoint(taskObject.transform.position);
-            TaskData taskData = taskObject.GetComponent<TaskData>();
-            detail_popup.SetActive(true);
-            detail_popup.GetComponent<PopUpObject>().Show(taskData);
+            TaskData taskData = taskObject.GetComponent<TaskObject>().task_data;
+            if(detail_popup != null)
+            {
+                detail_popup.SetActive(true);
+                detail_popup.GetComponent<PopUpObject>().Show(taskData);
+            }
             //タスクオブジェクトの位置に応じて、吹き出しの位置を変える
             if (0 <= popPos.x && popPos.x < 720)
             {
@@ -139,18 +184,27 @@ public class ApplicationUser : MonoBehaviour
         }
         //破壊モード
         //タップしたオブジェクトを破壊リストに登録する
+        //さらに、登録したオブジェクトをハイライトする
         else
         {
-            AddToDestroyList(taskObject.GetComponent<TaskObject>());
-            taskObject.GetComponent<TaskObject>().OnTapToHighlight();
+            //破壊リストへ登録されている場合は,リストから削除
+            if (task_list_to_destroy.Contains(taskObject.GetComponent<TaskObject>()))
+            {
+                task_list_to_destroy.Remove(taskObject.GetComponent<TaskObject>());
+                //Debug.Log("remove from destroy list : " + task_list_to_destroy.Count);
+                taskObject.GetComponent<TaskObject>().OnTapToCancelHighlight();
+            }
+            else
+            {
+                //破壊リストへ登録されていない場合は、破壊リストへの登録
+                task_list_to_destroy.Add(taskObject.GetComponent<TaskObject>());
+                //Debug.Log("add to destroy list : " + task_list_to_destroy.Count);
+                taskObject.GetComponent<TaskObject>().OnTapToHighlight();
+            }
+            
         }
     }
 
-    //破壊リストへ登録する
-    private void AddToDestroyList(TaskObject taskObject)
-    {
-        task_list_to_destroy.Add(taskObject);
-    }
 
     //破壊リストに登録されているタスクオブジェクトを破壊する
     private void DestroyTaskObject(List<TaskObject> taskObjects)
@@ -174,19 +228,29 @@ public class ApplicationUser : MonoBehaviour
     }
 
     //モードを移行する
-    public void ChangeToDestroyMode()
+    public void SwitchMode()
     {
         if (mode == Mode.Normal)
+        {
             mode = Mode.Destroy;
+            Camera.main.backgroundColor = camera_destroy_color;
+            world_light.color = light_destroy_color;
+        }
         else
+        {
             mode = Mode.Normal;
+            Camera.main.backgroundColor = camera_normal_color;
+            world_light.color = light_normal_color;
+        }
+        //ハンマー画像の入れ替え
+        hammer_button.image.sprite = hammer_button_sprites[(int)mode];
     }
 
     //タスク追加ボタンを押したときに呼ぶメソッド
-    public void OnClickAddTaskButton()
-    {
+    //public void OnClickAddTaskButton()
+    //{
 
-    }
+    //}
 
     //タスクデータを持たせてタスクオブジェクトを生成する
     public void InstantiateTaskObject(TaskData taskData)
