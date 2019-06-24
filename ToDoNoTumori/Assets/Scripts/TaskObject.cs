@@ -49,7 +49,7 @@ public class TaskObject : MonoBehaviour
     {
         transform.LookAt(Camera.main.transform);
         transform.Rotate(0, 180, 0);
-        Debug.Log(transform.position);
+        //Debug.Log(transform.position);
     }
 
     //現在の日付と期限の日付を比較し、
@@ -98,7 +98,7 @@ public class TaskObject : MonoBehaviour
     //}
 
     //破壊されるときにエフェクトと音を鳴らす
-    private IEnumerator CallOnDisable()
+    public IEnumerator CallOnDisable()
     {
         if(destroy_effect != null && se_player != null)
         {
@@ -107,6 +107,7 @@ public class TaskObject : MonoBehaviour
             se_player.PlayOneShot(destroy_sound);
             while (particleSystem.isPlaying || se_player.isPlaying) yield return null;
         }
-        yield break;
+        Destroy(gameObject);
+        //yield break;
     }
 }

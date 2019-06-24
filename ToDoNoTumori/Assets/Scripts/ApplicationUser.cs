@@ -73,8 +73,6 @@ public class ApplicationUser : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount == 0)
-            catching_object = null;
         if(catching_object != null && isCatching)
         {
             if(Input.touchCount == 0)
@@ -87,13 +85,15 @@ public class ApplicationUser : MonoBehaviour
                 
             }
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            Debug.Log(pos);
             pos.z = task_spawn_origin.transform.position.z - 1;
             catching_object.transform.position = pos;
+            return;
         }
         if(Input.touchCount == 1)
         {
-            if (isCatching)
-                return;
+            //if (isCatching)
+            //    return;
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit hit;
             if(Physics.Raycast(ray,out hit,100, layerMask))
@@ -246,11 +246,6 @@ public class ApplicationUser : MonoBehaviour
         hammer_button.image.sprite = hammer_button_sprites[(int)mode];
     }
 
-    //タスク追加ボタンを押したときに呼ぶメソッド
-    //public void OnClickAddTaskButton()
-    //{
-
-    //}
 
     //タスクデータを持たせてタスクオブジェクトを生成する
     public void InstantiateTaskObject(TaskData taskData)
@@ -262,7 +257,15 @@ public class ApplicationUser : MonoBehaviour
             taskObject.GetComponent<TaskObject>().task_data = taskData;
             taskObject.transform.GetComponentInChildren<UnityEngine.UI.RawImage>().texture = taskData.texture2D;
             history_manager.AddToInputHistory(taskData);
-            //history_manager.AddToTotalHisttory(taskData);
+        }
+    }
+
+    //破壊リストに登録したタスクオジェクトを破壊する
+    public void BreakTaskObjects()
+    {
+        for(int i = 0; i < task_list_to_destroy.Count;)
+        {
+            StartCoroutine(task_list_to_destroy[i].CallOnDisable());
         }
     }
 
