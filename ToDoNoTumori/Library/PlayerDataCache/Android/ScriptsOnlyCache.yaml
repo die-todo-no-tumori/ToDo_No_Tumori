@@ -21,8 +21,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
     - UnityEditor.Graphs.AnimatorControllerTool
-    UnityEditor.TestRunner.dll:
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -58,7 +56,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
-    - Class: 61
+    - Class: 64
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
@@ -147,7 +145,7 @@ ScriptsOnlyBuild:
   scriptHashData:
   - hash:
       serializedVersion: 2
-      Hash: bbd784f1d493d81c7c77009da3167f46
+      Hash: 6f90880644f29cfcd53f0bbca183e3d5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ApplicationUser
@@ -573,7 +571,7 @@ ScriptsOnlyBuild:
     className: Unimgpicker
   - hash:
       serializedVersion: 2
-      Hash: 63f00b28ca505ac255e5c5fd7a6fc4d6
+      Hash: bc9f4902d624b7dd03d71ec49566d92b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TaskInputManager
