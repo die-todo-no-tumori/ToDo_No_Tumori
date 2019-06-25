@@ -79,11 +79,13 @@ public class TaskInputManager : MonoBehaviour
     private RawImage display_to_change_task_level;
     //カメラ（撮影時に使う端末のカメラ）
     private WebCamTexture webCamTexture;
-    //期限設定画面で邪魔になるボタンの親オブジェクト
+    //タスク作成画面で邪魔になるボタンのオブジェクト
     [SerializeField]
     private GameObject open_add_menu_button;
     [SerializeField]
     private GameObject button_parent;
+    [SerializeField]
+    private GameObject hammer_button;
     //期限設定を行うカレンダーの生成スクリプト
     [SerializeField]
     private CalenderMaker calender_maker;
@@ -103,6 +105,14 @@ public class TaskInputManager : MonoBehaviour
     private LayerMask normal_mask;
     [SerializeField]
     private LayerMask task_limit_mask;
+
+    //非表示にしたいボタン
+    [SerializeField]
+    private GameObject home_button;
+    [SerializeField]
+    private GameObject history_button;
+    [SerializeField]
+    private GameObject config_button;
 
 
     IEnumerator Start()
@@ -170,11 +180,17 @@ public class TaskInputManager : MonoBehaviour
         TaskData taskData = null;
         taskCreationPhase = TaskCreationPhase.Idle;
         picture_mode = mode;
+
+        hammer_button.SetActive(false);
+        open_add_menu_button.SetActive(false);
         button_parent.SetActive(false);
+        home_button.SetActive(false);
+        history_button.SetActive(false);
+        config_button.SetActive(false);
         while (true)
         {
             movePhase = false;
-            //Debug.Log(taskCreationPhase);
+            Debug.Log(taskCreationPhase);
             switch (taskCreationPhase)
             {
                 case TaskCreationPhase.Picture:
@@ -206,6 +222,11 @@ public class TaskInputManager : MonoBehaviour
                     yield return StartCoroutine(CreateAndSave(data => taskData = data));
                     callBack(taskData);
                     button_parent.SetActive(true);
+                    open_add_menu_button.SetActive(true);
+                    hammer_button.SetActive(true);
+                    home_button.SetActive(true);
+                    history_button.SetActive(true);
+                    config_button.SetActive(true);
                     yield break;
                 default:
                     break;
@@ -214,6 +235,13 @@ public class TaskInputManager : MonoBehaviour
                 yield return null;
             if (canceled_to_add_task)
             {
+                button_parent.SetActive(true);
+                open_add_menu_button.SetActive(true);
+                hammer_button.SetActive(true);
+                home_button.SetActive(true);
+                history_button.SetActive(true);
+                config_button.SetActive(true);
+                canceled_to_add_task = false;
                 callBack(null);
                 yield break;
             }
@@ -361,9 +389,7 @@ public class TaskInputManager : MonoBehaviour
         TaskData taskData = new TaskData();
         //タスクの画像を保存
         taskData.texture2D = add_task_image;
-#if UNITY_EDITOR
-        //File.WriteAllBytes(@"C:\Users\jcjmwh80\AppData\LocalLow\DIE\ToDoNoTumori\Images\" + add_task_name + ".png", add_task_image.EncodeToPNG());
-#elif UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
         File.WriteAllBytes(Application.persistentDataPath + "/Images/" + add_task_name + ".png", add_task_image.EncodeToPNG());
 #endif
         yield return new WaitForEndOfFrame();
@@ -530,6 +556,8 @@ public class TaskInputManager : MonoBehaviour
         add_task_important_level = 0;
         add_task_limit = null;
         webCamTexture.Stop();
+        canceled_to_add_task = true;
+        BackToBeforePhase();
         if (picture_mode == true)
             take_picture_panel.SetActive(false);
         else

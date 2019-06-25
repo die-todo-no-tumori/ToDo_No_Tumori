@@ -16,8 +16,8 @@ public class Config : MonoBehaviour
     {
         se_slider.onValueChanged.AddListener(value =>
         {
-            se_player.volume = (int)(value / 0.1f) / 10;
-            volume_text.text = "" + (int)se_player.volume * 10;
+            se_player.volume = value;//(int)(value / 0.1f) / 10;
+            volume_text.text = "" + (int)(se_player.volume * 10);
         });
     }
 

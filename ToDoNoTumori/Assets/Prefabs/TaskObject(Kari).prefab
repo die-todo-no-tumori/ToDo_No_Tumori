@@ -102,7 +102,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221210299218796082}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -267,6 +267,12 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 88.4521
       objectReference: {fileID: 0}
+    - target: {fileID: 994912405647109108, guid: 0bbfb8037c360c54e8dc13def3451b02,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bc3cd9ffc61c26c488c1978c7c3ef377,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bbfb8037c360c54e8dc13def3451b02, type: 3}
 --- !u!224 &5259673774658738825 stripped

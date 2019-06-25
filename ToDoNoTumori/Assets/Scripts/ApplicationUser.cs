@@ -28,12 +28,16 @@ public class ApplicationUser : MonoBehaviour
     //タスクの詳細を表示する吹き出し
     [SerializeField]
     private GameObject detail_popup;
+    //生成するタスクオブジェクト
     [SerializeField]
     private TaskObject task_object;
+    //履歴パネル
     [SerializeField]
     private GameObject history_panel;
+    //設定パネル
     [SerializeField]
     private GameObject config_panel;
+    //タスクオブジェクト生成地点
     [SerializeField]
     private GameObject task_spawn_origin;
     //タスクオブジェクトをつかむのに必要な時間
@@ -45,20 +49,33 @@ public class ApplicationUser : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
     private bool isJudging;
+    [SerializeField]
+    private LayerMask move_panel_layer;
 
     private TaskInputManager taskInputManager;
     [SerializeField]
     private HistoryManager history_manager;
+    //通常時のカメラの背景色
     [SerializeField]
     private Color camera_normal_color;
+    //破壊時のカメラの背景色
     [SerializeField]
     private Color camera_destroy_color;
+    //通常時のライトの色
     [SerializeField]
     private Color light_normal_color;
+    //破壊時のライトの色
     [SerializeField]
     private Color light_destroy_color;
+    //ライトオブジェクト
     [SerializeField]
     private Light world_light;
+    [SerializeField]
+    private AudioSource se_player;
+    [SerializeField]
+    private AudioClip positive_sound;
+    [SerializeField]
+    private AudioClip negative_sound;
 
     void Start()
     {
@@ -73,32 +90,41 @@ public class ApplicationUser : MonoBehaviour
 
     void Update()
     {
-        if(catching_object != null && isCatching)
+        //Debug.Log(task_spawn_origin.name);
+        if (catching_object != null && isCatching)
         {
-            if(Input.touchCount == 0)
+            if (Input.touchCount == 0)
             {
                 Vector3 posi = catching_object.transform.position;
                 posi.z = task_spawn_origin.transform.position.z;
                 catching_object.transform.position = posi;
                 catching_object = null;
                 isCatching = false;
-                
+            }else if(Input.touchCount == 1)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                RaycastHit hit;
+                if(Physics.Raycast(ray,out hit,100, move_panel_layer))
+                {
+                    if(hit.collider.gameObject.name == "HitPlane")
+                    {
+                        Vector3 pos = hit.point;
+                        pos.z -= 3;
+                        catching_object.transform.position = pos;
+                        return;
+                    }
+                }
             }
-            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-            Debug.Log(pos);
-            pos.z = task_spawn_origin.transform.position.z - 1;
-            catching_object.transform.position = pos;
-            return;
         }
-        if(Input.touchCount == 1)
+        else if (Input.touchCount == 1)
         {
-            //if (isCatching)
-            //    return;
+            if (isCatching)
+                return;
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit hit;
-            if(Physics.Raycast(ray,out hit,100, layerMask))
+            if (Physics.Raycast(ray, out hit, 100, layerMask))
             {
-                if(hit.collider.gameObject.tag == "TaskObject")
+                if (hit.collider.gameObject.tag == "TaskObject")
                 {
                     if (isJudging == false)
                     {
@@ -215,16 +241,43 @@ public class ApplicationUser : MonoBehaviour
         }
     }
 
-    //履歴画面を表示する
-    public void ShowHistory()
+
+    //ホーム画面を表示する
+    public void ShowHome()
     {
-        history_panel.SetActive(true);
+        history_panel.SetActive(false);
+        config_panel.SetActive(false);
+        se_player.PlayOneShot(positive_sound);
     }
 
-    //設定画面を表示する
+    //履歴画面の表示を切り替える
+    public void ShowHistory()
+    {
+        if (history_panel.activeSelf)
+        {
+            history_panel.SetActive(false);
+            se_player.PlayOneShot(negative_sound);
+        }
+        else
+        {
+            history_panel.SetActive(true);
+            se_player.PlayOneShot(positive_sound);
+        }
+    }
+
+    //設定画面の表示を切り替える
     public void ShowConfig()
     {
-        config_panel.SetActive(true);
+        if (config_panel.activeSelf)
+        {
+            config_panel.SetActive(false);
+            se_player.PlayOneShot(negative_sound);
+        }
+        else
+        {
+            config_panel.SetActive(true);
+            se_player.PlayOneShot(positive_sound);
+        }
     }
 
     //モードを移行する
@@ -250,7 +303,6 @@ public class ApplicationUser : MonoBehaviour
     //タスクデータを持たせてタスクオブジェクトを生成する
     public void InstantiateTaskObject(TaskData taskData)
     {
-        //Debug.Log("タスクオブジェクト生成");
         if(task_object != null)
         {
             GameObject taskObject = Instantiate(task_object.gameObject, task_spawn_origin.transform.position, Quaternion.identity);
