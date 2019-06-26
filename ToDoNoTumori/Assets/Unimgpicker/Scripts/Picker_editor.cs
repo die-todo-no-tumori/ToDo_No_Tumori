@@ -16,7 +16,7 @@ namespace Kakera
 				if (File.Exists(destination))
 					File.Delete(destination);
 				File.Copy(path, destination);
-				Debug.Log ("PickerOSX:" + destination);
+				//Debug.Log ("PickerOSX:" + destination);
 				var receiver = GameObject.Find("Unimgpicker");
 				if (receiver != null)
 				{
