@@ -258,6 +258,7 @@ public class ApplicationUser : MonoBehaviour
         {
             history_panel.SetActive(true);
             se_player.PlayOneShot(positive_sound);
+            history_panel.transform.GetChild(1).GetComponent<Button>().enabled = false;
         }
     }
 
@@ -311,6 +312,7 @@ public class ApplicationUser : MonoBehaviour
             taskObject.GetComponent<TaskObject>().task_data = taskData;
             taskObject.transform.GetComponentInChildren<UnityEngine.UI.RawImage>().texture = taskData.texture2D;
             history_manager.AddToInputHistory(taskData);
+            history_manager.AddToTotalHisttory(taskData);
         }
     }
 
@@ -335,5 +337,4 @@ public class ApplicationUser : MonoBehaviour
         if(taskData != null)
             InstantiateTaskObject(taskData);
     }
-
 }

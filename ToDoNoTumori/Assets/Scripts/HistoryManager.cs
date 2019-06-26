@@ -20,6 +20,7 @@ public class HistoryManager : MonoBehaviour
     private ApplicationUser application_user;
     [SerializeField]
     private ScrollRect scrollRect;
+    private GameObject catching_object;
 
     void Start()
     {
@@ -44,6 +45,16 @@ public class HistoryManager : MonoBehaviour
             Vector2 pos = scrollRect.content.GetComponent<RectTransform>().localPosition;
             pos.y = 2300;
             scrollRect.content.GetComponent<RectTransform>().localPosition = pos;
+        }
+
+        //指が1本触れているとき
+        if(Input.touchCount == 1)
+        {
+            //
+            if(catching_object == null)
+            {
+
+            }
         }
     }
 
@@ -72,10 +83,29 @@ public class HistoryManager : MonoBehaviour
         obje.transform.GetChild(0).GetComponent<RawImage>().texture = taskData.texture2D;
     }
 
+    //入力履歴から削除
+    public void RemoveFromInputHistory(HistoryObject historyObject)
+    {
+        Transform content_rect = spawn_origin_input_history.transform.parent;
+        TaskData targetData = null;
+        foreach(HistoryObject target in content_rect.GetComponentsInChildren<HistoryObject>())
+        {
+            if(target == historyObject)
+            {
+                targetData = target.task_data;
+            }
+        }
+
+
+
+        if(targetData != null)
+            AddToDestroyHistory(targetData);
+    }
+
     //破壊履歴に追加
     public void AddToDestroyHistory(TaskData taskData)
     {
-        int objectCount = spawn_origin_destroy_history.transform.parent.childCount;
+        int objectCount = spawn_origin_destroy_history.transform.parent.childCount - 1;
         //上から何番目なのか
         int horizontal = objectCount % 3;
         //左から何番目なのか
@@ -93,12 +123,29 @@ public class HistoryManager : MonoBehaviour
         objeRect.transform.localScale = Vector3.one;
         obje.GetComponent<HistoryObject>().task_data = taskData;
         obje.GetComponent<HistoryObject>().application_user = application_user;
+        obje.transform.GetChild(0).GetComponent<RawImage>().texture = taskData.texture2D;
+    }
+
+    //破壊履歴から削除
+    public void RemoveFromDestroyHistory(HistoryObject historyObject)
+    {
+        Transform content_rect = spawn_origin_destroy_history.transform.parent;
+        TaskData targetData = null;
+        foreach (HistoryObject target in content_rect.GetComponentsInChildren<HistoryObject>())
+        {
+            if (target == historyObject)
+            {
+                targetData = target.task_data;
+            }
+        }
+        //if (targetData != null)
+        //    AddToDestroyHistory(targetData);
     }
 
     //総合履歴に追加
     public void AddToTotalHisttory(TaskData taskData)
     {
-        int objectCount = spawn_origin_total_history.transform.parent.childCount;
+        int objectCount = spawn_origin_total_history.transform.parent.childCount - 1;
         //上から何番目なのか
         int horizontal = objectCount % 3;
         //左から何番目なのか
@@ -116,5 +163,22 @@ public class HistoryManager : MonoBehaviour
         objeRect.transform.localScale = Vector3.one;
         obje.GetComponent<HistoryObject>().task_data = taskData;
         obje.GetComponent<HistoryObject>().application_user = application_user;
+        obje.transform.GetChild(0).GetComponent<RawImage>().texture = taskData.texture2D;
+    }
+
+    //総合履歴から削除
+    public void RemoveFromTotalHistory(HistoryObject historyObject)
+    {
+        Transform content_rect = spawn_origin_input_history.transform.parent;
+        TaskData targetData = null;
+        foreach (HistoryObject target in content_rect.GetComponentsInChildren<HistoryObject>())
+        {
+            if (target == historyObject)
+            {
+                targetData = target.task_data;
+            }
+        }
+        //if (targetData != null)
+        //    AddToDestroyHistory(targetData);
     }
 }

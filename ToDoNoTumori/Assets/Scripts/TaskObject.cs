@@ -37,12 +37,14 @@ public class TaskObject : MonoBehaviour
     [SerializeField] private AudioClip destroy_sound;
     //音のスピーカー
     [SerializeField] private AudioSource se_player;
+    private HistoryManager history_manager;
     
     void Start()
     {
         //if(destroy_effect != null)
         //    destroy_effect.SetActive(false);
         //ChangeColor();
+        history_manager = GameObject.Find("HistoryManager").GetComponent<HistoryManager>();
     }
 
     void Update()
@@ -100,6 +102,9 @@ public class TaskObject : MonoBehaviour
     //破壊されるときにエフェクトと音を鳴らす
     public IEnumerator CallOnDisable()
     {
+        history_manager.AddToDestroyHistory(task_data);
+
+
         if(destroy_effect != null && se_player != null)
         {
             destroy_effect.SetActive(true);

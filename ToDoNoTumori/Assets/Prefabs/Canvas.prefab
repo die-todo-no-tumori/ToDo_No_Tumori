@@ -757,7 +757,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 2810}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2581522055828525111
@@ -2485,7 +2485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 2810}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8475369264259472968
@@ -2937,6 +2937,9 @@ MonoBehaviour:
   - {fileID: 8475369265474392339}
   - {fileID: 8475369265386693574}
   - {fileID: 8475369266000382963}
+  input_button: {fileID: 0}
+  destroy_button: {fileID: 0}
+  total_button: {fileID: 0}
 --- !u!1 &8475369264302247295
 GameObject:
   m_ObjectHideFlags: 0
@@ -6377,6 +6380,9 @@ MonoBehaviour:
   - {fileID: 8475369265474392339}
   - {fileID: 8475369265386693574}
   - {fileID: 8475369266000382963}
+  input_button: {fileID: 0}
+  destroy_button: {fileID: 0}
+  total_button: {fileID: 0}
 --- !u!1 &8475369265534791131
 GameObject:
   m_ObjectHideFlags: 0
@@ -7510,6 +7516,9 @@ MonoBehaviour:
   - {fileID: 8475369265474392339}
   - {fileID: 8475369265386693574}
   - {fileID: 8475369266000382963}
+  input_button: {fileID: 0}
+  destroy_button: {fileID: 0}
+  total_button: {fileID: 0}
 --- !u!1 &8475369266000382963
 GameObject:
   m_ObjectHideFlags: 0
@@ -8406,7 +8415,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 2810}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8475369266305308161

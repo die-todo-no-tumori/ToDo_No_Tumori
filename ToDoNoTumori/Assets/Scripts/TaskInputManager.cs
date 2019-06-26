@@ -187,10 +187,11 @@ public class TaskInputManager : MonoBehaviour
         home_button.SetActive(false);
         history_button.SetActive(false);
         config_button.SetActive(false);
+        add_task_image = new Texture2D(webCamTexture.width, webCamTexture.height);
         while (true)
         {
             movePhase = false;
-            Debug.Log(taskCreationPhase);
+            //Debug.Log(taskCreationPhase);
             switch (taskCreationPhase)
             {
                 case TaskCreationPhase.Picture:
@@ -205,6 +206,7 @@ public class TaskInputManager : MonoBehaviour
                     else
                     {
                         yield return StartCoroutine(GetCameraRollTexture(data => add_task_image = data));
+                        display_choice.texture = add_task_image;
                     }
                     break;
                 case TaskCreationPhase.ImportantLevel:
@@ -367,11 +369,14 @@ public class TaskInputManager : MonoBehaviour
     {
         Camera.main.cullingMask = task_limit_mask;
         while (decide_task_limit == false)
-            yield return null;
-        if(canceled_to_set_task_limit == true)
         {
-            callBack(null);
-            yield break;
+            yield return null;
+            if(canceled_to_set_task_limit == true)
+            {
+                callBack(null);
+                Camera.main.cullingMask = normal_mask;
+                yield break;
+            }
         }
 
         if(add_task_limit != null && add_task_limit != "")
