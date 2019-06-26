@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class HistoryManager : MonoBehaviour
 {
     [SerializeField]
@@ -26,14 +27,6 @@ public class HistoryManager : MonoBehaviour
         Vector2 rectPos = scrollRect.content.GetComponent<RectTransform>().localPosition;
         rectPos.y = -50;
         scrollRect.content.GetComponent<RectTransform>().localPosition = rectPos;
-        //for (int i = 0; i < 51; i++)
-        //{
-        //    GameObject button = Instantiate(history_object, scrollRect.content.transform);
-        //    Vector2 pos = scrollRect.content.transform.position;
-        //    pos.x = 720;
-        //    pos.y -= (history_object.GetComponent<RectTransform>().rect.height) * i;
-        //    button.GetComponent<RectTransform>().position = pos;
-        //}
     }
 
 
@@ -54,16 +47,25 @@ public class HistoryManager : MonoBehaviour
         }
     }
 
+
     //入力履歴に追加
     public void AddToInputHistory(TaskData taskData)
     {
-        int objectCount = spawn_origin_input_history.transform.childCount;
+        int objectCount = spawn_origin_input_history.transform.parent.childCount - 1;
+        //上から何番目なのか
+        int horizontal = objectCount % 3;
+        //左から何番目なのか
+        int vertical = objectCount / 3;
+        int dist = 520;
+
         GameObject obje = Instantiate(history_object, spawn_origin_input_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_input_history.GetComponent<RectTransform>().position;
-        spawnPos.y -= objeRect.rect.height * objectCount;
+        //spawnPos.y -= objeRect.rect.height * objectCount;
+        spawnPos.x += horizontal * dist;
+        spawnPos.y -= vertical * dist;
         objeRect.position = spawnPos;
-        objeRect.SetParent(spawn_origin_input_history.GetComponent<RectTransform>());
+        objeRect.SetParent(spawn_origin_input_history.GetComponent<RectTransform>().parent);
         objeRect.transform.localScale = Vector3.one;
         obje.GetComponent<HistoryObject>().task_data = taskData;
         obje.GetComponent<HistoryObject>().application_user = application_user;
@@ -73,13 +75,21 @@ public class HistoryManager : MonoBehaviour
     //破壊履歴に追加
     public void AddToDestroyHistory(TaskData taskData)
     {
-        int objectCount = spawn_origin_destroy_history.transform.childCount;
+        int objectCount = spawn_origin_destroy_history.transform.parent.childCount;
+        //上から何番目なのか
+        int horizontal = objectCount % 3;
+        //左から何番目なのか
+        int vertical = objectCount / 3;
+        int dist = 520;
+
         GameObject obje = Instantiate(history_object, spawn_origin_destroy_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_destroy_history.GetComponent<RectTransform>().position;
-        spawnPos.y -= objeRect.rect.height * objectCount;
+        //spawnPos.y -= objeRect.rect.height * objectCount;
+        spawnPos.x += horizontal * dist;
+        spawnPos.y -= vertical * dist;
         objeRect.position = spawnPos;
-        objeRect.SetParent(spawn_origin_destroy_history.GetComponent<RectTransform>());
+        objeRect.SetParent(spawn_origin_destroy_history.GetComponent<RectTransform>().parent);
         objeRect.transform.localScale = Vector3.one;
         obje.GetComponent<HistoryObject>().task_data = taskData;
         obje.GetComponent<HistoryObject>().application_user = application_user;
@@ -88,13 +98,21 @@ public class HistoryManager : MonoBehaviour
     //総合履歴に追加
     public void AddToTotalHisttory(TaskData taskData)
     {
-        int objectCount = spawn_origin_total_history.transform.childCount;
+        int objectCount = spawn_origin_total_history.transform.parent.childCount;
+        //上から何番目なのか
+        int horizontal = objectCount % 3;
+        //左から何番目なのか
+        int vertical = objectCount / 3;
+        int dist = 520;
+
         GameObject obje = Instantiate(history_object, spawn_origin_total_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_total_history.GetComponent<RectTransform>().position;
-        spawnPos.y -= objeRect.rect.height * objectCount;
+        //spawnPos.y -= objeRect.rect.height * objectCount;
+        spawnPos.x += horizontal * dist;
+        spawnPos.y -= vertical * dist;
         objeRect.position = spawnPos;
-        objeRect.SetParent(spawn_origin_total_history.GetComponent<RectTransform>());
+        objeRect.SetParent(spawn_origin_total_history.GetComponent<RectTransform>().parent);
         objeRect.transform.localScale = Vector3.one;
         obje.GetComponent<HistoryObject>().task_data = taskData;
         obje.GetComponent<HistoryObject>().application_user = application_user;

@@ -108,6 +108,5 @@ public class TaskObject : MonoBehaviour
             while (particleSystem.isPlaying || se_player.isPlaying) yield return null;
         }
         Destroy(gameObject);
-        //yield break;
     }
 }

@@ -76,6 +76,12 @@ public class ApplicationUser : MonoBehaviour
     private AudioClip positive_sound;
     [SerializeField]
     private AudioClip negative_sound;
+    [SerializeField]
+    private GameObject task_menu_button;
+    [SerializeField]
+    private GameObject task_butto_parent;
+    [SerializeField]
+    private GameObject break_button;
 
     void Start()
     {
@@ -232,16 +238,6 @@ public class ApplicationUser : MonoBehaviour
     }
 
 
-    //破壊リストに登録されているタスクオブジェクトを破壊する
-    private void DestroyTaskObject(List<TaskObject> taskObjects)
-    {
-        foreach(TaskObject taskObject in taskObjects)
-        {
-            Destroy(taskObject.gameObject);
-        }
-    }
-
-
     //ホーム画面を表示する
     public void ShowHome()
     {
@@ -288,12 +284,18 @@ public class ApplicationUser : MonoBehaviour
             mode = Mode.Destroy;
             Camera.main.backgroundColor = camera_destroy_color;
             world_light.color = light_destroy_color;
+            task_menu_button.SetActive(false);
+            task_butto_parent.SetActive(false);
+            break_button.SetActive(true);
         }
         else
         {
             mode = Mode.Normal;
             Camera.main.backgroundColor = camera_normal_color;
             world_light.color = light_normal_color;
+            task_menu_button.SetActive(true);
+            task_butto_parent.SetActive(true);
+            break_button.SetActive(false);
         }
         //ハンマー画像の入れ替え
         hammer_button.image.sprite = hammer_button_sprites[(int)mode];
@@ -315,7 +317,7 @@ public class ApplicationUser : MonoBehaviour
     //破壊リストに登録したタスクオジェクトを破壊する
     public void BreakTaskObjects()
     {
-        for(int i = 0; i < task_list_to_destroy.Count;)
+        for(int i = 0; i < task_list_to_destroy.Count;i++)
         {
             StartCoroutine(task_list_to_destroy[i].CallOnDisable());
         }
