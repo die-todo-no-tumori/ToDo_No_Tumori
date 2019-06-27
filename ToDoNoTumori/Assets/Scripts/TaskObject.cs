@@ -51,7 +51,7 @@ public class TaskObject : MonoBehaviour
     {
         transform.LookAt(Camera.main.transform);
         transform.Rotate(0, 180, 0);
-        //Debug.Log(transform.position);
+        Debug.Log(transform.position);
     }
 
     //現在の日付と期限の日付を比較し、

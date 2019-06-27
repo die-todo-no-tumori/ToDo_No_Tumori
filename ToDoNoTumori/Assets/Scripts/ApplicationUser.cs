@@ -309,6 +309,7 @@ public class ApplicationUser : MonoBehaviour
         if(task_object != null)
         {
             GameObject taskObject = Instantiate(task_object.gameObject, task_spawn_origin.transform.position, Quaternion.identity);
+            //Debug.Log(taskObject.transform.position);
             taskObject.GetComponent<TaskObject>().task_data = taskData;
             taskObject.transform.GetComponentInChildren<UnityEngine.UI.RawImage>().texture = taskData.texture2D;
             history_manager.AddToInputHistory(taskData);

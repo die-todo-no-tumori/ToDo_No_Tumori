@@ -62,6 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\SAColliderBuilder\Scripts\Internal\SABoneColliderCommon.cs" />
+    <Compile Include="Assets\SAColliderBuilder\Scripts\Internal\SAColliderBuilderCommon.cs" />
+    <Compile Include="Assets\SAColliderBuilder\Scripts\Internal\SAMeshColliderCommon.cs" />
+    <Compile Include="Assets\SAColliderBuilder\Scripts\SABoneCollider.cs" />
+    <Compile Include="Assets\SAColliderBuilder\Scripts\SABoneColliderBuilder.cs" />
+    <Compile Include="Assets\SAColliderBuilder\Scripts\SABoneColliderChild.cs" />
+    <Compile Include="Assets\SAColliderBuilder\Scripts\SAMeshCollider.cs" />
+    <Compile Include="Assets\SAColliderBuilder\Scripts\SAMeshColliderBuilder.cs" />
     <Compile Include="Assets\Scripts\ApplicationUser.cs" />
     <Compile Include="Assets\Scripts\ButtonBase.cs" />
     <Compile Include="Assets\Scripts\CalenderCell.cs" />
@@ -88,6 +96,8 @@
     <Compile Include="Assets\Unimgpicker\Scripts\PickeriOS.cs" />
     <Compile Include="Assets\Unimgpicker\Scripts\PickerUnsupported.cs" />
     <Compile Include="Assets\Unimgpicker\Scripts\Unimgpicker.cs" />
+    <None Include="Assets\SAColliderBuilder\Readme_en.txt" />
+    <None Include="Assets\SAColliderBuilder\Readme_jp.txt" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/jcjmwh80/Documents/GitHub/DIE/ToDo_No_Tumori/ToDoNoTumori/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
