@@ -108,25 +108,16 @@ public class ApplicationUser : MonoBehaviour
                 isCatching = false;
             }else if(Input.touchCount == 1)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                RaycastHit hit;
-                if(Physics.Raycast(ray,out hit,100, move_panel_layer))
-                {
-                    if(hit.collider.gameObject.name == "HitPlane")
-                    {
-                        Vector3 pos = hit.point;
-                        pos.z -= 3;
-                        catching_object.transform.position = pos;
-                        return;
-                    }
-                }
+                Vector3 screen_point = Camera.main.WorldToScreenPoint(catching_object.transform.position);
+                Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screen_point.z);
+                catching_object.transform.position = Camera.main.ScreenToWorldPoint(pos);
             }
         }
         else if (Input.touchCount == 1)
         {
             if (isCatching)
                 return;
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100, layerMask))
             {
@@ -324,6 +315,7 @@ public class ApplicationUser : MonoBehaviour
         {
             StartCoroutine(task_list_to_destroy[i].CallOnDisable());
         }
+        task_list_to_destroy.Clear();
     }
 
     public void CreateTask(bool mode)

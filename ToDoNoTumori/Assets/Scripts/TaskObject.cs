@@ -49,9 +49,8 @@ public class TaskObject : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(Camera.main.transform);
-        transform.Rotate(0, 180, 0);
-        Debug.Log(transform.position);
+        //transform.LookAt(Camera.main.transform);
+        //transform.Rotate(0, 180, 0);
     }
 
     //現在の日付と期限の日付を比較し、
@@ -115,11 +114,18 @@ public class TaskObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.name == "Dodai1")
-        {
-            Debug.Log("hit");
-        }
-    }
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    //if (collision.gameObject.name == "Dodai 1")
+    //    //{
+    //        //Debug.Log("enter");
+    //    //}
+    //}
+    //public void OnCollisionExit(Collision collision)
+    //{
+    //    //if (collision.gameObject.name == "Dodai 1")
+    //    //{
+    //        //Debug.Log("exit");
+    //    //}
+    //}
 }
