@@ -9,15 +9,9 @@ public class CalenderCell : MonoBehaviour
     [HideInInspector]
     public string date;
 
-    void Start()
+    public IEnumerator DestroyCor()
     {
-        
-    }
-
-
-
-    void Update()
-    {
-        
+        yield return null;
+        Destroy(gameObject);
     }
 }

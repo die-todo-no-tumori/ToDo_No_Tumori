@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9e991bd44868844ba45fe284ce5d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  history_object: {fileID: 4793329900119333471, guid: 8def82d26e437624d86869bc89a5c824,
+  history_object: {fileID: 2234352736696849793, guid: 97211c35252a39241b82935bb148109b,
     type: 3}
   spawn_origin_input_history: {fileID: 0}
   spawn_origin_destroy_history: {fileID: 0}

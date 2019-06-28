@@ -60,6 +60,7 @@ MonoBehaviour:
   display_to_change_task_level: {fileID: 0}
   open_add_menu_button: {fileID: 0}
   button_parent: {fileID: 0}
+  hammer_button: {fileID: 0}
   calender_maker: {fileID: 0}
   take_picture_panel: {fileID: 0}
   choice_picture_panel: {fileID: 0}
@@ -71,3 +72,6 @@ MonoBehaviour:
   task_limit_mask:
     serializedVersion: 2
     m_Bits: 512
+  home_button: {fileID: 0}
+  history_button: {fileID: 0}
+  config_button: {fileID: 0}

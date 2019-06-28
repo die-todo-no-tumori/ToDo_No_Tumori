@@ -84,3 +84,4 @@ MonoBehaviour:
   - {fileID: 9101701840782528030, guid: da66014d95a33f74590918707538174f, type: 3}
   - {fileID: 5525275907212227772, guid: 4f60d149455bf1c4ba903fcd7ca4ea6c, type: 3}
   - {fileID: 7909181141197590781, guid: 2079693a1a39d4b4180a58715d0b2646, type: 3}
+  month_text: {fileID: 0}

@@ -519,7 +519,7 @@ public class TaskInputManager : MonoBehaviour
     //期限設定
     public void OpenLimitPanel()
     {
-        calender_maker.OpenCalender(System.DateTime.Now);
+        calender_maker.OpenCalender(System.DateTime.Now,add_task_image);
         set_task_limit_panel.SetActive(true);
     }
 
@@ -527,6 +527,7 @@ public class TaskInputManager : MonoBehaviour
     public void DecideTaskLimit()
     {
         decide_task_limit = true;
+        calender_maker.task_image = null;
         GoToNextPhase();
     }
 

@@ -43,7 +43,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5133e100e4374ab47aef7341eb42b46d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hammer_button: {fileID: 0}
+  hammer_button_sprites:
+  - {fileID: 21300000, guid: 7f5202057b579df498b0513a94b6d616, type: 3}
+  - {fileID: 21300000, guid: 51c7db76e12e4d84092207148d068dab, type: 3}
   detail_popup: {fileID: 0}
+  task_object: {fileID: 8543929521567988167, guid: af6b21720511afb478d693a861a4a50e,
+    type: 3}
   history_panel: {fileID: 0}
   config_panel: {fileID: 0}
   task_spawn_origin: {fileID: 0}
+  catch_object_time: 0.3
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  move_panel_layer:
+    serializedVersion: 2
+    m_Bits: 1024
+  history_manager: {fileID: 0}
+  camera_normal_color: {r: 0.051886797, g: 1, b: 1, a: 0}
+  camera_destroy_color: {r: 0.014017452, g: 0.4245283, b: 0.4245283, a: 0}
+  light_normal_color: {r: 0.79432184, g: 0.9622642, b: 0.9622642, a: 0}
+  light_destroy_color: {r: 0.44700074, g: 0.46226418, b: 0.46226418, a: 0}
+  world_light: {fileID: 0}
+  se_player: {fileID: 0}
+  positive_sound: {fileID: 8300000, guid: d66626041d1174723b07fcbcc61c6268, type: 3}
+  negative_sound: {fileID: 8300000, guid: dd9f3abd899df4f05bd4500e2921249c, type: 3}
+  task_menu_button: {fileID: 0}
+  task_butto_parent: {fileID: 0}
+  break_button: {fileID: 0}

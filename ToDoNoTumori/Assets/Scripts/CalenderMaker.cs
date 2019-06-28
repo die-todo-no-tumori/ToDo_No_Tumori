@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CalenderMaker : MonoBehaviour
 {
@@ -15,27 +15,40 @@ public class CalenderMaker : MonoBehaviour
     private string[] dayOfweek;
     [SerializeField]
     private TaskInputManager taskInputManager;
-    //private string task_limit;
-    private Texture2D task_image;
+    [HideInInspector]
+    public Texture2D task_image;
     [SerializeField]
     private GameObject task_ball;
+    private GameObject ball;
     [SerializeField]
     private GameObject task_spawn_origin;
-    private Vector3 before_touch_pos;
-    private GameObject ball;
     [SerializeField]
     private GameObject[] calender_cell_objects;
     private DateTime date_time;
+    [SerializeField]
+    private Text month_text;
+    private int additional_month;
 
     void Start()
     {
-        //CreateCalender(DateTime.Now);
-        if(task_ball != null && task_spawn_origin != null)
-            ball =  Instantiate(task_ball, task_spawn_origin.transform.position, Quaternion.identity);
+
     }
 
-    public void OpenCalender(DateTime dateTime)
+    //ボタンに貼り付ける
+    public void MoveMonth(int value)
     {
+        additional_month += value;
+        List<CalenderCell> calenderCells = new List<CalenderCell>(spawn_origin.GetComponentsInChildren<CalenderCell>());
+        for(int i = 0; i < calenderCells.Count;i++)
+        {
+            StartCoroutine(calenderCells[i].DestroyCor());
+        }
+        CreateCalender(DateTime.Now.AddMonths(additional_month));
+    }
+
+    public void OpenCalender(DateTime dateTime,Texture2D image)
+    {
+        task_image = image;
         spawn_origin.SetActive(true);
         CreateCalender(dateTime);
     }
@@ -47,6 +60,7 @@ public class CalenderMaker : MonoBehaviour
 
     private void CreateCalender(DateTime dateTime)
     {
+        month_text.text = "" + dateTime.Month + "月";
         date_time = dateTime;
         dayOfweek = new string[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
@@ -97,24 +111,9 @@ public class CalenderMaker : MonoBehaviour
         
         if (Input.touchCount == 1)
         {
-            if(ball != null)
-            {
-                if(before_touch_pos == null)
-                {
-                    before_touch_pos = Input.GetTouch(0).position;
-                    before_touch_pos.z = ball.transform.position.z;
-                    ball.transform.position = before_touch_pos;
-                }
-                else
-                {
-                    Vector3 touch_pos_vec3 = Input.GetTouch(0).position;
-                    touch_pos_vec3.z = before_touch_pos.z;
-                
-                    Vector3 diff = touch_pos_vec3 - before_touch_pos;
-                    ball.transform.position = ball.transform.position +  diff;
 
-                }
-            }
+
+
 
             if(Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
             {
@@ -130,9 +129,26 @@ public class CalenderMaker : MonoBehaviour
                         pos.y = hitPos.y;
                         popup_pointer_rect.transform.position = pos;
                         CalenderCell cell = hit.collider.GetComponent<CalenderCell>();
-                        popup_pointer_rect.GetChild(0).GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "" + cell.day;
-                        popup_pointer_rect.gameObject.SetActive(true);
-                        taskInputManager.add_task_limit = date_time.Month + ":" + cell.day;
+                        
+                        
+
+                        if (cell.day != 0)
+                        {
+                            popup_pointer_rect.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + cell.day;
+                            popup_pointer_rect.gameObject.SetActive(true);
+                            taskInputManager.add_task_limit = date_time.Month + ":" + cell.day;
+                            if (ball == null)
+                            {
+                                ball = Instantiate(task_ball, cell.transform.GetChild(0).position, Quaternion.identity);
+                                ball.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<RawImage>().texture
+                                     = task_image;
+                            }
+                            ball.transform.position = cell.transform.GetChild(0).transform.position;
+                        }
+                        else
+                        {
+                            popup_pointer_rect.gameObject.SetActive(false);
+                        }
                     }
                 }
             }
