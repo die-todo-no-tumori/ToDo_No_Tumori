@@ -72,7 +72,6 @@ public class HistoryManager : MonoBehaviour
         GameObject obje = Instantiate(history_object, spawn_origin_input_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_input_history.GetComponent<RectTransform>().position;
-        //spawnPos.y -= objeRect.rect.height * objectCount;
         spawnPos.x += horizontal * dist;
         spawnPos.y -= vertical * dist;
         objeRect.position = spawnPos;
@@ -115,7 +114,6 @@ public class HistoryManager : MonoBehaviour
         GameObject obje = Instantiate(history_object, spawn_origin_destroy_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_destroy_history.GetComponent<RectTransform>().position;
-        //spawnPos.y -= objeRect.rect.height * objectCount;
         spawnPos.x += horizontal * dist;
         spawnPos.y -= vertical * dist;
         objeRect.position = spawnPos;
@@ -155,7 +153,6 @@ public class HistoryManager : MonoBehaviour
         GameObject obje = Instantiate(history_object, spawn_origin_total_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_total_history.GetComponent<RectTransform>().position;
-        //spawnPos.y -= objeRect.rect.height * objectCount;
         spawnPos.x += horizontal * dist;
         spawnPos.y -= vertical * dist;
         objeRect.position = spawnPos;

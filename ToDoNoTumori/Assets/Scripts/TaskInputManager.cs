@@ -191,7 +191,7 @@ public class TaskInputManager : MonoBehaviour
         while (true)
         {
             movePhase = false;
-            //Debug.Log(taskCreationPhase);
+            Debug.Log(taskCreationPhase);
             switch (taskCreationPhase)
             {
                 case TaskCreationPhase.Picture:
@@ -285,14 +285,18 @@ public class TaskInputManager : MonoBehaviour
         while(choiced_picture == false)
         {
             yield return null;
-            if(taskCreationPhase != TaskCreationPhase.Picture)
-            {
-                callBack(null);
-                yield break;
-            }
+            //if(taskCreationPhase != TaskCreationPhase.Picture)
+            //{
+            //    callBack(null);
+            //    Debug.Log("call break");
+            //    yield break;
+            //}
         }
-        if(display_choice.texture != null)
-            texture2D = ToTexture2D(display_choice.texture);
+        //if(display_choice != null)
+        //{
+        //}
+        texture2D = ToTexture2D(display_choice.texture);
+        Debug.Log(texture2D);
         yield return new WaitForEndOfFrame();
         callBack(texture2D);
         yield break;
