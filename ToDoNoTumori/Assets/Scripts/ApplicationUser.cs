@@ -310,12 +310,18 @@ public class ApplicationUser : MonoBehaviour
         }
     }
 
-    //破壊リストに登録したタスクオジェクトを破壊する
     public void BreakTaskObjects()
+    {
+        StartCoroutine(BreakTaskObjectsCor());
+    }
+
+    //破壊リストに登録したタスクオジェクトを破壊する
+    public IEnumerator BreakTaskObjectsCor()
     {
         for(int i = 0; i < task_list_to_destroy.Count;i++)
         {
             StartCoroutine(task_list_to_destroy[i].CallOnDisable());
+            yield return new WaitForSeconds(0.1f);
         }
         task_list_to_destroy.Clear();
     }

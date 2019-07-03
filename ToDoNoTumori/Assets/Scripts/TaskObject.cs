@@ -40,13 +40,17 @@ public class TaskData
 public class TaskObject : MonoBehaviour
 {
     //タスクデータ
-    [HideInInspector] public TaskData task_data;
+    [HideInInspector]
+    public TaskData task_data;
     //破壊エフェクトのゲームオブジェクト
-    [SerializeField] private GameObject destroy_effect;
+    [SerializeField]
+    private GameObject destroy_effect;
     //破壊サウンド
-    [SerializeField] private AudioClip destroy_sound;
+    [SerializeField]
+    private AudioClip destroy_sound;
     //音のスピーカー
-    [SerializeField] private AudioSource se_player;
+    //[SerializeField]
+    private AudioSource se_player;
     private HistoryManager history_manager;
     
     void Start()
@@ -54,6 +58,7 @@ public class TaskObject : MonoBehaviour
         //if(destroy_effect != null)
         //    destroy_effect.SetActive(false);
         //ChangeColor();
+        se_player = GetComponent<AudioSource>();
         history_manager = GameObject.Find("HistoryManager").GetComponent<HistoryManager>();
     }
 
@@ -120,6 +125,8 @@ public class TaskObject : MonoBehaviour
             destroy_effect.SetActive(true);
             ParticleSystem particleSystem = destroy_effect.GetComponent<ParticleSystem>();
             se_player.PlayOneShot(destroy_sound);
+            if (particleSystem.isPlaying == false)
+                particleSystem.Play();
             while (particleSystem.isPlaying || se_player.isPlaying) yield return null;
         }
         Destroy(gameObject);
