@@ -82,6 +82,8 @@ public class ApplicationUser : MonoBehaviour
     private GameObject task_butto_parent;
     [SerializeField]
     private GameObject break_button;
+    [SerializeField]
+    private CalenderMaker calender_maker;
 
     void Start()
     {
@@ -302,7 +304,7 @@ public class ApplicationUser : MonoBehaviour
             GameObject taskObject = Instantiate(task_object.gameObject, task_spawn_origin.transform.position, Quaternion.identity);
             //Debug.Log(taskObject.transform.position);
             taskObject.GetComponent<TaskObject>().task_data = taskData;
-            taskObject.transform.GetComponentInChildren<UnityEngine.UI.RawImage>().texture = taskData.texture2D;
+            taskObject.transform.GetComponentInChildren<RawImage>().texture = taskData.texture2D;
             history_manager.AddToInputHistory(taskData);
             history_manager.AddToTotalHisttory(taskData);
         }
@@ -329,5 +331,6 @@ public class ApplicationUser : MonoBehaviour
         yield return StartCoroutine(taskInputManager.MakeTask(data => taskData = data,mode));
         if(taskData != null)
             InstantiateTaskObject(taskData);
+        Destroy(calender_maker.ball);
     }
 }

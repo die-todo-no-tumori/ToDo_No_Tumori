@@ -14,6 +14,16 @@ public class TaskRoot
     }
 }
 
+[System.Serializable]
+public class HistoryRoot
+{
+    public List<TaskData> history_datas;
+    public HistoryRoot()
+    {
+
+    }
+}
+
 
 [System.Serializable]
 //タスクデータクラス
@@ -102,6 +112,7 @@ public class TaskObject : MonoBehaviour
     public IEnumerator CallOnDisable()
     {
         history_manager.AddToDestroyHistory(task_data);
+        history_manager.RemoveFromInputHistory(task_data);
 
 
         if(destroy_effect != null && se_player != null)

@@ -25,13 +25,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2706189979935380497}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0.0000000010437}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4123855556024336864}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.5, y: 0.5}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 7321786374110476387}
   - component: {fileID: 8543929521567988167}
   - component: {fileID: 1197345316662425287}
-  - component: {fileID: 2730844202659505878}
+  - component: {fileID: 6205713925182124365}
   m_Layer: 0
   m_Name: Task_Ball
   m_TagString: TaskObject
@@ -377,8 +377,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!64 &2730844202659505878
-MeshCollider:
+--- !u!135 &6205713925182124365
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -387,7 +387,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -2124705421725058983, guid: fd9c27958afd42f4c93839d78221dc46, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.005
+  m_Center: {x: 0, y: -0.0000000027939677, z: -8.1490725e-10}

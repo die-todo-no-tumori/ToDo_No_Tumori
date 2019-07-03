@@ -83,22 +83,21 @@ public class HistoryManager : MonoBehaviour
     }
 
     //入力履歴から削除
-    public void RemoveFromInputHistory(HistoryObject historyObject)
+    public void RemoveFromInputHistory(TaskData taskData)
     {
-        Transform content_rect = spawn_origin_input_history.transform.parent;
+        RectTransform content_rect = spawn_origin_input_history.GetComponent<RectTransform>().parent.GetComponent<RectTransform>();
         TaskData targetData = null;
         foreach(HistoryObject target in content_rect.GetComponentsInChildren<HistoryObject>())
         {
-            if(target == historyObject)
+            if (target.task_data.task_name == taskData.task_name)
             {
                 targetData = target.task_data;
+                Destroy(target.gameObject);
             }
         }
 
-
-
-        if(targetData != null)
-            AddToDestroyHistory(targetData);
+        //if(targetData != null)
+        //    AddToDestroyHistory(targetData);
     }
 
     //破壊履歴に追加

@@ -609,7 +609,7 @@ PrefabInstance:
     - target: {fileID: 3332167283773932735, guid: 3a2ec5165a8460e46897844920a19bf5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.014
+      value: 0.237
       objectReference: {fileID: 0}
     - target: {fileID: 3332167283773932735, guid: 3a2ec5165a8460e46897844920a19bf5,
         type: 3}
@@ -650,6 +650,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3332167283773932735, guid: 3a2ec5165a8460e46897844920a19bf5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 173.58719
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a2ec5165a8460e46897844920a19bf5, type: 3}
@@ -1192,7 +1197,7 @@ PrefabInstance:
         type: 3}
       propertyPath: task_ball
       value: 
-      objectReference: {fileID: 9052485830608964799, guid: af6b21720511afb478d693a861a4a50e,
+      objectReference: {fileID: 2382694874744508470, guid: e597aaac12d77334fb060cff9eaec428,
         type: 3}
     - target: {fileID: 3087212417957122058, guid: 16de79f0295d110498f98c9a40fd0772,
         type: 3}
@@ -2024,6 +2029,11 @@ PrefabInstance:
       propertyPath: break_button
       value: 
       objectReference: {fileID: 8475369265756335974}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: calender_maker
+      value: 
+      objectReference: {fileID: 834163952}
     - target: {fileID: 8816140358307209947, guid: 7f4ea4621750d544689b70f8bc1c631f,
         type: 3}
       propertyPath: m_LocalPosition.x

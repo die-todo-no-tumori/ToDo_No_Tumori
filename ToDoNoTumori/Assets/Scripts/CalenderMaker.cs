@@ -19,7 +19,8 @@ public class CalenderMaker : MonoBehaviour
     public Texture2D task_image;
     [SerializeField]
     private GameObject task_ball;
-    private GameObject ball;
+    [HideInInspector]
+    public GameObject ball;
     [SerializeField]
     private GameObject task_spawn_origin;
     [SerializeField]
@@ -111,10 +112,6 @@ public class CalenderMaker : MonoBehaviour
         
         if (Input.touchCount == 1)
         {
-
-
-
-
             if(Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
@@ -129,8 +126,6 @@ public class CalenderMaker : MonoBehaviour
                         pos.y = hitPos.y;
                         popup_pointer_rect.transform.position = pos;
                         CalenderCell cell = hit.collider.GetComponent<CalenderCell>();
-                        
-                        
 
                         if (cell.day != 0)
                         {
@@ -140,8 +135,6 @@ public class CalenderMaker : MonoBehaviour
                             if (ball == null)
                             {
                                 ball = Instantiate(task_ball, cell.transform.GetChild(0).position, Quaternion.identity);
-                                ball.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<RawImage>().texture
-                                     = task_image;
                             }
                             ball.transform.position = cell.transform.GetChild(0).transform.position;
                         }

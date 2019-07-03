@@ -18,15 +18,7 @@ public class SaveAndLoader : MonoBehaviour
         
     }
 
-    private void OnApplicationQuit()
-    {
-        //タスクデータを収集
-
-        //タスクデータを書き込み
-
-    }
-
-
+    
     //タスクデータの読み込み
     private string ReadTaskData()
     {
@@ -44,8 +36,26 @@ public class SaveAndLoader : MonoBehaviour
             return data;
         }
     }
-    
-    
+
+    //履歴データの読み込み
+    private string ReadHistoryData()
+    {
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Data");
+        if (directoryInfo.Exists == false)
+            return null;
+
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/History.json");
+        if (fileInfo.Exists == false)
+            return null;
+
+        using (StreamReader streamReader = new StreamReader(fileInfo.FullName))
+        {
+            string data = streamReader.ReadToEnd();
+            return data;
+        }
+    }
+
+
     //読み込んだタスクデータをタスククラスに変換
     private TaskRoot ConvertToTaskData(string data)
     {
@@ -53,6 +63,9 @@ public class SaveAndLoader : MonoBehaviour
         task_root = JsonUtility.FromJson<TaskRoot>(data);
         return task_root;
     }
+
+    //読み込んだ履歴データを履歴クラスに変換
+    
 
 
     //タスクデータを持つタスクオブジェクトを生成する

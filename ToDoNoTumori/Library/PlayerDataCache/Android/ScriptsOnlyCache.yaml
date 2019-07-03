@@ -130,6 +130,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
+    - Class: 135
+      Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 213
@@ -145,7 +147,7 @@ ScriptsOnlyBuild:
   scriptHashData:
   - hash:
       serializedVersion: 2
-      Hash: bd401c939fe446f676b210710e8fd3a4
+      Hash: b40b7ea75cb32e3f831049ed8c983d16
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ApplicationUser
@@ -577,7 +579,7 @@ ScriptsOnlyBuild:
     className: TaskInputManager
   - hash:
       serializedVersion: 2
-      Hash: efd4eba1f2ee9189df4c62c426921337
+      Hash: 6c3918245b6d86f7987cddc22916245d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CalenderMaker
