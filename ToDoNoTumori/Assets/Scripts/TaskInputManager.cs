@@ -253,7 +253,7 @@ public class TaskInputManager : MonoBehaviour
     //カメラで撮影したデータをテクスチャにして返す
     private IEnumerator GetCameraTexture(UnityAction<Texture2D> callBack)
     {
-        GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "撮影";
+        //GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "撮影";
         //写真が取られるまで待機
         while (taked_picture == false)
         {
@@ -270,7 +270,7 @@ public class TaskInputManager : MonoBehaviour
         texture2D.Apply();
         add_task_name = System.DateTime.Now.ToLongDateString() + "_" + System.DateTime.Now.ToLongTimeString();
         yield return new WaitForEndOfFrame();
-        GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "撮影完了";
+        //GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "撮影完了";
         //カメラを止める
         webCamTexture.Stop();
         callBack(texture2D);

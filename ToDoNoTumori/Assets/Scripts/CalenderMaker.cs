@@ -50,6 +50,8 @@ public class CalenderMaker : MonoBehaviour
     public void OpenCalender(DateTime dateTime,Texture2D image)
     {
         task_image = image;
+        if (ball != null)
+            Destroy(ball.gameObject);
         spawn_origin.SetActive(true);
         CreateCalender(dateTime);
     }

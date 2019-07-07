@@ -21,8 +21,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
     - UnityEditor.Graphs.AnimatorControllerTool
-    UnityEditor.TestRunner.dll:
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -585,7 +583,7 @@ ScriptsOnlyBuild:
     className: CalenderMaker
   - hash:
       serializedVersion: 2
-      Hash: ecf83aa98e1a4df31ee8968addb68cf9
+      Hash: 05274af05f073cef0c4dc24230c04873
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TaskObject

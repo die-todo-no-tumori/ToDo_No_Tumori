@@ -98,7 +98,7 @@ public class ApplicationUser : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(task_spawn_origin.name);
+        //タスクオブジェクトを動かす
         if (catching_object != null && isCatching)
         {
             if (Input.touchCount == 0)
@@ -115,6 +115,7 @@ public class ApplicationUser : MonoBehaviour
                 catching_object.transform.position = Camera.main.ScreenToWorldPoint(pos);
             }
         }
+        //タスクオブジェクトを持つ
         else if (Input.touchCount == 1)
         {
             if (isCatching)
