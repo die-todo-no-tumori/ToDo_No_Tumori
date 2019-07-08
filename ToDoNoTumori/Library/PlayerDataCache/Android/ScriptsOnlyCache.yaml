@@ -21,6 +21,8 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
     - UnityEditor.Graphs.AnimatorControllerTool
+    UnityEditor.TestRunner.dll:
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -667,7 +669,7 @@ ScriptsOnlyBuild:
     className: HistoryPanelButton
   - hash:
       serializedVersion: 2
-      Hash: fb73723f7e2fcb3362d32cf88a256055
+      Hash: 984ccf5693210039d54b1b77ad02568e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: HistoryManager
