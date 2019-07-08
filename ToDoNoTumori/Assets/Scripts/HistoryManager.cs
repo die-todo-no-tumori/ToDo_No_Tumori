@@ -26,9 +26,12 @@ public class HistoryManager : MonoBehaviour
     private RectTransform total_history_panel_rect;
     private GameObject catching_object;
 
+    private int dist_ver;
+    private int[] dist_hor;
     void Start()
     {
-
+        dist_ver = (Screen.height - 150) / 6;
+        dist_hor = new int[] { 200, Screen.width / 2, Screen.width - 200 };
     }
 
 
@@ -63,14 +66,12 @@ public class HistoryManager : MonoBehaviour
         int vertical = objectCount / 3;
         //左から何番目なのか
         int horizontal = objectCount % 3;
-        int dist = 520;
 
         GameObject obje = Instantiate(history_object, spawn_origin_input_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_input_history.GetComponent<RectTransform>().position;
-        spawnPos.x += horizontal * dist;
-        spawnPos.y -= vertical * dist;
-        Debug.Log(spawnPos);
+        spawnPos.x = dist_hor[horizontal];
+        spawnPos.y -= vertical * dist_ver;
         objeRect.position = spawnPos;
         objeRect.SetParent(input_history_panel_rect);
         objeRect.transform.localScale = Vector3.one;
@@ -115,13 +116,12 @@ public class HistoryManager : MonoBehaviour
         int vertical = objectCount / 3;
         //左から何番目なのか
         int horizontal = objectCount % 3;
-        int dist = 520;
 
         GameObject obje = Instantiate(history_object, spawn_origin_destroy_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_destroy_history.GetComponent<RectTransform>().position;
-        spawnPos.x += horizontal * dist;
-        spawnPos.y -= vertical * dist;
+        spawnPos.x = dist_hor[horizontal];
+        spawnPos.y -= vertical * dist_ver;
         objeRect.position = spawnPos;
         objeRect.SetParent(destroy_history_panel_rect);
         objeRect.transform.localScale = Vector3.one;
@@ -166,13 +166,12 @@ public class HistoryManager : MonoBehaviour
         int vertical = objectCount / 3;
         //左から何番目なのか
         int horizontal = objectCount % 3;
-        int dist = 520;
 
         GameObject obje = Instantiate(history_object, spawn_origin_total_history.GetComponent<RectTransform>().position, Quaternion.identity);
         RectTransform objeRect = obje.GetComponent<RectTransform>();
         Vector2 spawnPos = spawn_origin_total_history.GetComponent<RectTransform>().position;
-        spawnPos.x += horizontal * dist;
-        spawnPos.y -= vertical * dist;
+        spawnPos.x = dist_hor[horizontal];
+        spawnPos.y -= vertical * dist_ver;
         objeRect.position = spawnPos;
         objeRect.SetParent(total_history_panel_rect);
         objeRect.transform.localScale = Vector3.one;
