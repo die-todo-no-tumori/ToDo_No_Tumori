@@ -323,6 +323,7 @@ public class TaskInputManager : MonoBehaviour
     private IEnumerator ChangeTaskImportantLevel(UnityAction<int> callBack)
     {
         int level = 0;
+        important_level_image_rect.localScale = change_scales[level];
         display_to_change_task_level.texture = add_task_image;
         important_level_text.text = "重要度:" + (level + 3);
         while (decided_important_level == false)

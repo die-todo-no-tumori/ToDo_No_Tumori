@@ -73,3 +73,7 @@ MonoBehaviour:
   task_butto_parent: {fileID: 0}
   break_button: {fileID: 0}
   calender_maker: {fileID: 0}
+  task_object_scale_per_important_level:
+  - 0.6
+  - 1
+  - 1.3

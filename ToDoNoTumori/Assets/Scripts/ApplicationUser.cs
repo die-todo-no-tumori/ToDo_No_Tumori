@@ -84,6 +84,8 @@ public class ApplicationUser : MonoBehaviour
     private GameObject break_button;
     [SerializeField]
     private CalenderMaker calender_maker;
+    [SerializeField]
+    private float[] task_object_scale_per_important_level;
 
     void Start()
     {
@@ -303,7 +305,10 @@ public class ApplicationUser : MonoBehaviour
         if(task_object != null)
         {
             GameObject taskObject = Instantiate(task_object.gameObject, task_spawn_origin.transform.position, Quaternion.identity);
-            //Debug.Log(taskObject.transform.position);
+            //重要度に応じてタスクの大きさを変化させる
+            Vector3 scale = taskObject.transform.lossyScale;
+            scale.x *= task_object_scale_per_important_level[taskData.task_important_level];
+            scale.y *= task_object_scale_per_important_level[taskData.task_important_level];
             taskObject.GetComponent<TaskObject>().task_data = taskData;
             taskObject.transform.GetComponentInChildren<RawImage>().texture = taskData.texture2D;
             history_manager.AddToInputHistory(taskData);
