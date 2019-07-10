@@ -103,14 +103,17 @@ public class ApplicationUser : MonoBehaviour
         //タスクオブジェクトを動かす
         if (catching_object != null && isCatching)
         {
+            //指が離されたとき
             if (Input.touchCount == 0)
             {
+                //落とす
                 Vector3 posi = catching_object.transform.position;
                 posi.z = task_spawn_origin.transform.position.z;
                 catching_object.transform.position = posi;
                 catching_object = null;
                 isCatching = false;
-            }else if(Input.touchCount == 1)
+            }//指が触れている間は指の位置に追尾させる
+            else if(Input.touchCount == 1)
             {
                 Vector3 screen_point = Camera.main.WorldToScreenPoint(catching_object.transform.position);
                 Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screen_point.z);
@@ -126,8 +129,10 @@ public class ApplicationUser : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100, layerMask))
             {
+                //タスクオブジェクトに触れた時
                 if (hit.collider.gameObject.tag == "TaskObject")
                 {
+                    //タップか長押しかの判定がされていなければ、判定する
                     if (isJudging == false)
                     {
                         isJudging = true;
@@ -147,6 +152,7 @@ public class ApplicationUser : MonoBehaviour
         {
             time += Time.deltaTime;
             yield return null;
+            //触れている時間が長押しの判定を取る時間を超えたときは、タップ
             if(time > catch_object_time)
             {
                 isCatching = true;
@@ -154,6 +160,7 @@ public class ApplicationUser : MonoBehaviour
                 catching_object = obje;
                 yield break;
             }
+            //設定時間を超えるまでに離されたときは、タップ
             if(Input.touchCount == 0)
             {
                 isTouching = false;
@@ -219,17 +226,14 @@ public class ApplicationUser : MonoBehaviour
             if (task_list_to_destroy.Contains(taskObject.GetComponent<TaskObject>()))
             {
                 task_list_to_destroy.Remove(taskObject.GetComponent<TaskObject>());
-                //Debug.Log("remove from destroy list : " + task_list_to_destroy.Count);
                 taskObject.GetComponent<TaskObject>().OnTapToCancelHighlight();
             }
             else
             {
                 //破壊リストへ登録されていない場合は、破壊リストへの登録
                 task_list_to_destroy.Add(taskObject.GetComponent<TaskObject>());
-                //Debug.Log("add to destroy list : " + task_list_to_destroy.Count);
                 taskObject.GetComponent<TaskObject>().OnTapToHighlight();
             }
-            
         }
     }
 
@@ -316,6 +320,7 @@ public class ApplicationUser : MonoBehaviour
         }
     }
 
+    //タスクオブジェクトの破壊メソッドs
     public void BreakTaskObjects()
     {
         StartCoroutine(BreakTaskObjectsCor());
@@ -332,11 +337,13 @@ public class ApplicationUser : MonoBehaviour
         task_list_to_destroy.Clear();
     }
 
+    //タスク作成メソッド
     public void CreateTask(bool mode)
     {
         StartCoroutine(CreateTaskCor(mode));
     }
 
+    //タスクの作成を行うコルーチンを呼び出すメソッド
     public IEnumerator CreateTaskCor(bool mode)
     {
         TaskData taskData = null;

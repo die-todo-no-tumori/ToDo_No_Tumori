@@ -160,12 +160,14 @@ public class TaskInputManager : MonoBehaviour
 
     }
 
+    //フェーズを一つ進む
     public void GoToNextPhase()
     {
         taskCreationPhase++;
         movePhase = true;
     }
 
+    //フェーズを一つ戻す
     public void BackToBeforePhase()
     {
         taskCreationPhase--;
@@ -177,10 +179,14 @@ public class TaskInputManager : MonoBehaviour
     //mode : true -> 撮影 false -> カメラロール
     public IEnumerator MakeTask(UnityAction<TaskData> callBack,bool mode)
     {
+        //返す予定のタスクデータクラスのインスタンスを用意
         TaskData taskData = null;
+        //タスク作成フェーズを最初の状態にする
         taskCreationPhase = TaskCreationPhase.Idle;
+        //写真を撮影するか選択するかのモードを入れる
         picture_mode = mode;
 
+        //不用なボタンを見えなくする
         hammer_button.SetActive(false);
         open_add_menu_button.SetActive(false);
         button_parent.SetActive(false);
@@ -191,20 +197,24 @@ public class TaskInputManager : MonoBehaviour
         while (true)
         {
             movePhase = false;
-            //Debug.Log(taskCreationPhase);
             switch (taskCreationPhase)
             {
+                //タスクイメージ作成段階
                 case TaskCreationPhase.Picture:
+                    //タスク名（撮影もしくは選択時刻）を初期化
                     add_task_name = "";
                     //タスクの画像を撮影
                     if(picture_mode == true)
                     {
+                        //撮影開始
                         StartToTakePicture();
                         yield return StartCoroutine(GetCameraTexture(data => add_task_image = data));
                         display_take.texture = add_task_image;
                     }
                     else
                     {
+                        //選択開始
+                        StartToChoicePicture();
                         yield return StartCoroutine(GetCameraRollTexture(data => add_task_image = data));
                         display_choice.texture = add_task_image;
                     }
@@ -253,26 +263,31 @@ public class TaskInputManager : MonoBehaviour
     //カメラで撮影したデータをテクスチャにして返す
     private IEnumerator GetCameraTexture(UnityAction<Texture2D> callBack)
     {
-        //GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "撮影";
         //写真が取られるまで待機
         while (taked_picture == false)
         {
             yield return null;
+            //フェーズが変わったら終わり
             if(taskCreationPhase != TaskCreationPhase.Picture)
             {
+                // Debug.Log("撮影キャンセル");
                 callBack(null);
                 yield break;
             }
         }
+        //撮影が完了したらウェブカメラをいったん停止する
         PauseToTakePicture();
+        //撮影データを取り込む
         Texture2D texture2D = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.ARGB32, false);
         texture2D.SetPixels(webCamTexture.GetPixels());
         texture2D.Apply();
+        //タスク名を入力（現在は日付）
         add_task_name = System.DateTime.Now.ToLongDateString() + "_" + System.DateTime.Now.ToLongTimeString();
+        //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
-        //GameObject.Find("TakePictureButton").transform.GetChild(0).GetComponent<Text>().text = "撮影完了";
         //カメラを止める
-        webCamTexture.Stop();
+        StopToTakePicture();
+        //撮影データを返す（コルーチンのコールバック）
         callBack(texture2D);
         yield break;
     }
@@ -282,22 +297,29 @@ public class TaskInputManager : MonoBehaviour
     private IEnumerator GetCameraRollTexture(UnityAction<Texture2D> callBack)
     {
         Texture2D texture2D = null;
+        //画像が選択されるまで待機
         while(choiced_picture == false)
         {
             yield return null;
-            //if(taskCreationPhase != TaskCreationPhase.Picture)
-            //{
-            //    callBack(null);
-            //    Debug.Log("call break");
-            //    yield break;
-            //}
+            if(taskCreationPhase != TaskCreationPhase.Picture)
+            {
+               callBack(null);
+               Debug.Log("画像選択キャンセル");
+               yield break;
+            }
         }
         //if(display_choice != null)
         //{
         //}
-        texture2D = ToTexture2D(display_choice.texture);
-        //Debug.Log(texture2D);
+        Debug.Log("画像選択完了");
+        //選択した画像データを取り込む
+        if(display_choice.texture == null)
+            Debug.Log("画像が選択されていない");
+        texture2D = (Texture2D)display_choice.texture;//ToTexture2D(display_choice.texture);
+        // Debug.Log(texture2D);
+        //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
+        //取り込んだデータを返す
         callBack(texture2D);
         yield break;
     }
@@ -325,7 +347,7 @@ public class TaskInputManager : MonoBehaviour
         int level = 0;
         important_level_image_rect.localScale = change_scales[level];
         display_to_change_task_level.texture = add_task_image;
-        important_level_text.text = "重要度:" + (level + 3);
+        important_level_text.text = "重要度:" + (level + 1);
         while (decided_important_level == false)
         {
             //2本指で触れているときのみ判定
@@ -357,6 +379,7 @@ public class TaskInputManager : MonoBehaviour
                     important_level_image_rect.localScale = change_scales[level];
                 }
             }
+            //重要度が決まるまで待つs
             if (cancel_decided_important_level == true)
             {
                 yield break;
@@ -372,10 +395,13 @@ public class TaskInputManager : MonoBehaviour
     //カレンダーに投げて、タスクの期限を設定する
     private IEnumerator SetLimitOfTask(UnityAction<string> callBack)
     {
+        //カメラの描画対象のレイヤーを、期限設定用に切り替える
         Camera.main.cullingMask = task_limit_mask;
+        //期限設定が完了するまで待機
         while (decide_task_limit == false)
         {
             yield return null;
+            //期限設定がキャンセルされたら、カメラの描画対象を戻して戻る
             if(canceled_to_set_task_limit == true)
             {
                 callBack(null);
@@ -384,6 +410,7 @@ public class TaskInputManager : MonoBehaviour
             }
         }
 
+        //期限設定が完了したらデータを入れて画面を戻す
         if(add_task_limit != null && add_task_limit != "")
         {
             Camera.main.cullingMask = normal_mask;
@@ -429,13 +456,16 @@ public class TaskInputManager : MonoBehaviour
     //撮影開始
     public void StartToTakePicture()
     {
+        //ウェブカメラを作動させる
         webCamTexture.Play();
+        //ウェブカメラに映っているものをRawImageに表示させる
         display_take.texture = webCamTexture;
+        //写真を撮ったかどうかのフラグをオフにする
         taked_picture = false;
-        //completed_take_picture = false;
     }
 
     //取り直し
+    //フェーズのenumの変数の値を変えずにフェーズの移動を許可することで、もう一度写真撮影もしくは選択段階に戻れる
     public void RestartToTakePicture()
     {
         movePhase = true;
@@ -461,6 +491,11 @@ public class TaskInputManager : MonoBehaviour
             webCamTexture.Stop();
     }
 
+    //写真選択を開始する
+    public void StartToChoicePicture(){
+        choiced_picture = false;
+    }
+
     //写真選択画面を表示する
     public void OpenChoicePicturePanel()
     {
@@ -468,9 +503,19 @@ public class TaskInputManager : MonoBehaviour
         GoToNextPhase();
     }
 
+    //写真選択を直す
+    public void RechoicePicture(){
+        movePhase = true;
+        choiced_picture = false;
+    }
+
     //写真選択を完了する
     public void DecideToChoicePicture()
     {
+        if(display_choice.texture == null){
+            Debug.Log("画像が選択されていない");
+            return;
+        }
         choiced_picture = true;
     }
 
@@ -531,6 +576,8 @@ public class TaskInputManager : MonoBehaviour
     //タスクの期限決定
     public void DecideTaskLimit()
     {
+        if(add_task_limit == null || add_task_limit == "")
+            return;
         decide_task_limit = true;
         calender_maker.task_image = null;
         GoToNextPhase();
@@ -561,6 +608,7 @@ public class TaskInputManager : MonoBehaviour
     //タスク追加操作をキャンセルする
     public void CancelToAddTask()
     {
+        // Debug.Log("タスク作成キャンセル");
         //RawImageのテクスチャを消す
         Destroy(add_task_image);
         //期限と重要度を消す

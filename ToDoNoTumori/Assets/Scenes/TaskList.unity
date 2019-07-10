@@ -200,7 +200,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.051886797, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.740566, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1122,6 +1122,11 @@ PrefabInstance:
       propertyPath: target_display
       value: 
       objectReference: {fileID: 1794225654}
+    - target: {fileID: 93397225408396157, guid: 4a0410ef4eff3444ea3688c9ec7ccd3d,
+        type: 3}
+      propertyPath: task_input_manager
+      value: 
+      objectReference: {fileID: 1838060452}
     - target: {fileID: 93397225408396158, guid: 4a0410ef4eff3444ea3688c9ec7ccd3d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1732,6 +1737,11 @@ PrefabInstance:
       objectReference: {fileID: 1755064949}
     - target: {fileID: 8475369266118485710, guid: 40a1e5b067b841749bc4a744913bb113,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369266118485710, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1838060452}
@@ -1745,6 +1755,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1838060452}
+    - target: {fileID: 8475369264285156134, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CancelToAddTask
+      objectReference: {fileID: 0}
     - target: {fileID: 8475369265668493454, guid: 40a1e5b067b841749bc4a744913bb113,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

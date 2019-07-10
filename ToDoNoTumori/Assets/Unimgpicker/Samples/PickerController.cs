@@ -12,6 +12,9 @@ namespace Kakera
         [SerializeField]
         private RawImage target_display;
 
+        [SerializeField]
+        private TaskInputManager task_input_manager;
+
         void Awake()
         {
             imagePicker.Completed += (string path) =>
@@ -40,6 +43,8 @@ namespace Kakera
             {
                 outImage.texture = texture;
             }
+
+            task_input_manager.DecideToChoicePicture();
 
         }
     }

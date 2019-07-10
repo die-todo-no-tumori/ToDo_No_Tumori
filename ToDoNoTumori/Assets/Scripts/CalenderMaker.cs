@@ -35,18 +35,23 @@ public class CalenderMaker : MonoBehaviour
 
     }
 
+    //月を移動するメソッド
     //ボタンに貼り付ける
     public void MoveMonth(int value)
     {
         additional_month += value;
+        //まずはすでにあるカレンダーを破壊
         List<CalenderCell> calenderCells = new List<CalenderCell>(spawn_origin.GetComponentsInChildren<CalenderCell>());
         for(int i = 0; i < calenderCells.Count;i++)
         {
             StartCoroutine(calenderCells[i].DestroyCor());
         }
+        //選択した月のカレンダーを作成する
         CreateCalender(DateTime.Now.AddMonths(additional_month));
     }
 
+    //現在時刻と画像データを受け取り、カレンダーを開くs
+    //期限設定の開始時に呼び出す
     public void OpenCalender(DateTime dateTime,Texture2D image)
     {
         task_image = image;
@@ -56,11 +61,13 @@ public class CalenderMaker : MonoBehaviour
         CreateCalender(dateTime);
     }
 
+    //カレンダーを閉じる
     public void CloseCalener()
     {
         spawn_origin.SetActive(false);
     }
 
+    //カレンダーを作成するメソッド
     private void CreateCalender(DateTime dateTime)
     {
         month_text.text = "" + dateTime.Month + "月";
@@ -111,7 +118,7 @@ public class CalenderMaker : MonoBehaviour
 
     void Update()
     {
-        
+        //振れている指が1本の時
         if (Input.touchCount == 1)
         {
             if(Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
@@ -120,34 +127,44 @@ public class CalenderMaker : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray,out hit,100,layerMask))
                 {
+                    //カレンダーセルに触れたら
                     if(hit.collider.gameObject.tag == "CalenderCell")
                     {
                         Vector3 pos = popup_pointer_rect.transform.position;
                         Vector3 hitPos = Camera.main.WorldToScreenPoint(hit.collider.transform.position);
                         pos.x = hitPos.x;
                         pos.y = hitPos.y;
+                        //カレンダーのセルの位置に、日付の数値を表示するポップアップを出す
                         popup_pointer_rect.transform.position = pos;
+                        //カレンダーセルのクラスを取得する
                         CalenderCell cell = hit.collider.GetComponent<CalenderCell>();
 
+                        //日付が０でない、つまり情報が入っているカレンダーセルのとき
                         if (cell.day != 0)
                         {
+                            //ポップアップの文字を日付の数値に変える
                             popup_pointer_rect.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + cell.day;
                             popup_pointer_rect.gameObject.SetActive(true);
+                            //タスクの期限を設定
                             taskInputManager.add_task_limit = date_time.Month + ":" + cell.day;
+                            //最初にカレンダーに触れた時、カレンダーのボールを生成する
                             if (ball == null)
                             {
                                 ball = Instantiate(task_ball, cell.transform.GetChild(0).position, Quaternion.identity);
                             }
+                            //カレンダーボールの位置をカレンダーのセルの位置にする
                             ball.transform.position = cell.transform.GetChild(0).transform.position;
                         }
                         else
                         {
+                            //日付の数値が0の時は非表示にするs
                             popup_pointer_rect.gameObject.SetActive(false);
                         }
                     }
                 }
             }
         }
+        //指を話したらポップアップを非表示にする
         else if(Input.touchCount == 0)
         {
             popup_pointer_rect.gameObject.SetActive(false);
