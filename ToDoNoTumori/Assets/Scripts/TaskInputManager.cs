@@ -18,7 +18,7 @@ public enum TaskCreationPhase
 public class TaskInputManager : MonoBehaviour
 {
     //保存するタスクの画像イメージ
-    [HideInInspector]
+    // [HideInInspector]
     public Texture2D add_task_image;
     //タスクの名前　名前設定はしないので、画像作成時点の時刻にする
     private string add_task_name;
@@ -218,6 +218,7 @@ public class TaskInputManager : MonoBehaviour
                         StartToChoicePicture();
                         yield return StartCoroutine(GetCameraRollTexture(data => add_task_image = data));
                         display_choice.texture = add_task_image;
+                        // Debug.Log(add_task_image);
                     }
                     break;
                 case TaskCreationPhase.ImportantLevel:
@@ -299,26 +300,22 @@ public class TaskInputManager : MonoBehaviour
     private IEnumerator GetCameraRollTexture(UnityAction<Texture2D> callBack)
     {
         Texture2D texture2D = null;
+        if(add_task_image != null){
+            texture2D = add_task_image;
+            // Debug.Log("タスクイメージのテクスチャを読み込み");
+        }
         //画像が選択されるまで待機
         while(choiced_picture == false)
         {
             yield return null;
             if(taskCreationPhase != TaskCreationPhase.Picture)
             {
-               callBack(null);
-            //    Debug.Log("画像選択キャンセル");
-               yield break;
+                if(add_task_image != null)
+                    callBack(texture2D);
+                yield break;
             }
         }
-        //if(display_choice != null)
-        //{
-        //}
-        // Debug.Log("画像選択完了");
-        //選択した画像データを取り込む
-        // if(display_choice.texture == null)
-        //     Debug.Log("画像が選択されていない");
         texture2D = (Texture2D)display_choice.texture;//ToTexture2D(display_choice.texture);
-        // Debug.Log(texture2D);
         //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
         //取り込んだデータを返す
@@ -439,6 +436,8 @@ public class TaskInputManager : MonoBehaviour
         //タスクの期限を入れる
         taskData.task_limit = add_task_limit;
 
+        //ここでデータをJsonファイルに書き込む（もしくは、生成後のタイミングでJsonファイルに書き込む）
+
         callBack(taskData);
         yield break;
     }
@@ -477,7 +476,6 @@ public class TaskInputManager : MonoBehaviour
     public void TakePicture()
     {
         taked_picture = true;
-        // Debug.Log("撮影");
     }
 
     //撮影一時停止
@@ -490,8 +488,7 @@ public class TaskInputManager : MonoBehaviour
     //撮影停止
     public void StopToTakePicture()
     {
-        // if (webCamTexture.isPlaying)
-            webCamTexture.Stop();
+        webCamTexture.Stop();
     }
 
     //写真選択を開始する
@@ -515,9 +512,7 @@ public class TaskInputManager : MonoBehaviour
     //写真選択を完了する
     public void DecideToChoicePicture()
     {
-        // Debug.Log(display_choice.texture);
         if(display_choice.texture == null){
-            // Debug.Log("画像が選択されていない");
             return;
         }
         choiced_picture = true;
@@ -563,7 +558,6 @@ public class TaskInputManager : MonoBehaviour
         {
             take_picture_panel.SetActive(false);
             choice_picture_panel.SetActive(true);
-            //StartToTakePicture();
             choiced_picture = false;
         }
         BackToBeforePhase();
