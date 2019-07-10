@@ -8,6 +8,14 @@ public class SaveAndLoader : MonoBehaviour
 
     void Start()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        DirectoryInfo directoryInfoImages = new DirectoryInfo(Application.persistentDataPath + "/Images");
+        if(directoryInfoImages.Exists == false)
+            directoryInfoImages.Create();
+        DirectoryInfo directoryInfoDatas = new DirectoryInfo(Application.persistentDataPath + "/Datas");
+        if(directoryInfoDatas.Exists == false)
+            directoryInfoDatas.Create();
+#endif
         //タスクデータを読み込み、クラスを作成
         
         //生成

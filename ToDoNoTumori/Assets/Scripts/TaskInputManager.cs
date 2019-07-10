@@ -315,7 +315,7 @@ public class TaskInputManager : MonoBehaviour
                 yield break;
             }
         }
-        texture2D = (Texture2D)display_choice.texture;//ToTexture2D(display_choice.texture);
+        texture2D = (Texture2D)display_choice.texture;
         //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
         //取り込んだデータを返す
@@ -435,6 +435,8 @@ public class TaskInputManager : MonoBehaviour
         taskData.task_important_level = (byte)add_task_important_level;
         //タスクの期限を入れる
         taskData.task_limit = add_task_limit;
+        //タスク選択のテクスチャを初期化する
+        display_choice.texture = null;
 
         //ここでデータをJsonファイルに書き込む（もしくは、生成後のタイミングでJsonファイルに書き込む）
 
