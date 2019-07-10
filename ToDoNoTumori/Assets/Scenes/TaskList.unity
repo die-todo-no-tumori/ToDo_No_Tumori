@@ -1750,6 +1750,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1838060452}
+    - target: {fileID: 8475369266118485710, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OpenTaskImportantLevelPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369266118485710, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8475369264285156134, guid: 40a1e5b067b841749bc4a744913bb113,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

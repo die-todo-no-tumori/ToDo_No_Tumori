@@ -196,6 +196,7 @@ public class TaskInputManager : MonoBehaviour
         add_task_image = new Texture2D(webCamTexture.width, webCamTexture.height);
         while (true)
         {
+            // Debug.Log(taskCreationPhase);
             movePhase = false;
             switch (taskCreationPhase)
             {
@@ -277,6 +278,7 @@ public class TaskInputManager : MonoBehaviour
         }
         //撮影が完了したらウェブカメラをいったん停止する
         PauseToTakePicture();
+        // Debug.Log("カメラ一時停止" + webCamTexture.isPlaying);
         //撮影データを取り込む
         Texture2D texture2D = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.ARGB32, false);
         texture2D.SetPixels(webCamTexture.GetPixels());
@@ -304,17 +306,17 @@ public class TaskInputManager : MonoBehaviour
             if(taskCreationPhase != TaskCreationPhase.Picture)
             {
                callBack(null);
-               Debug.Log("画像選択キャンセル");
+            //    Debug.Log("画像選択キャンセル");
                yield break;
             }
         }
         //if(display_choice != null)
         //{
         //}
-        Debug.Log("画像選択完了");
+        // Debug.Log("画像選択完了");
         //選択した画像データを取り込む
-        if(display_choice.texture == null)
-            Debug.Log("画像が選択されていない");
+        // if(display_choice.texture == null)
+        //     Debug.Log("画像が選択されていない");
         texture2D = (Texture2D)display_choice.texture;//ToTexture2D(display_choice.texture);
         // Debug.Log(texture2D);
         //処理が終わるまで待つ
@@ -475,6 +477,7 @@ public class TaskInputManager : MonoBehaviour
     public void TakePicture()
     {
         taked_picture = true;
+        // Debug.Log("撮影");
     }
 
     //撮影一時停止
@@ -487,7 +490,7 @@ public class TaskInputManager : MonoBehaviour
     //撮影停止
     public void StopToTakePicture()
     {
-        if (webCamTexture.isPlaying)
+        // if (webCamTexture.isPlaying)
             webCamTexture.Stop();
     }
 
@@ -512,8 +515,9 @@ public class TaskInputManager : MonoBehaviour
     //写真選択を完了する
     public void DecideToChoicePicture()
     {
+        // Debug.Log(display_choice.texture);
         if(display_choice.texture == null){
-            Debug.Log("画像が選択されていない");
+            // Debug.Log("画像が選択されていない");
             return;
         }
         choiced_picture = true;
@@ -571,6 +575,7 @@ public class TaskInputManager : MonoBehaviour
     {
         calender_maker.OpenCalender(System.DateTime.Now,add_task_image);
         set_task_limit_panel.SetActive(true);
+        canceled_to_set_task_limit = false;
     }
 
     //タスクの期限決定
@@ -608,7 +613,6 @@ public class TaskInputManager : MonoBehaviour
     //タスク追加操作をキャンセルする
     public void CancelToAddTask()
     {
-        // Debug.Log("タスク作成キャンセル");
         //RawImageのテクスチャを消す
         Destroy(add_task_image);
         //期限と重要度を消す
