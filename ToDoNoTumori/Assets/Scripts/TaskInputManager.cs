@@ -316,6 +316,8 @@ public class TaskInputManager : MonoBehaviour
             }
         }
         texture2D = (Texture2D)display_choice.texture;
+        //タスク名を入力（現在は日付）
+        add_task_name = System.DateTime.Now.ToLongDateString() + "_" + System.DateTime.Now.ToLongTimeString();
         //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
         //取り込んだデータを返す

@@ -40,25 +40,25 @@ public class SaveAndLoader : MonoBehaviour
             yield return null;
         }
 
-        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/Data.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/Data.json");
         if(fileInfo.Exists == false){
             fileInfo.Create();
             yield return null;
         }
 
-        FileInfo fileInfoInput = new FileInfo(Application.persistentDataPath + "/Data/InputHistory.json");
+        FileInfo fileInfoInput = new FileInfo(Application.persistentDataPath + "/Datas/InputHistory.json");
         if(fileInfoInput.Exists == false){
             fileInfoInput.Create();
             yield return null;
         }
         
-        FileInfo fileInfoDestroy = new FileInfo(Application.persistentDataPath + "/Data/DestroyHistory.json");
+        FileInfo fileInfoDestroy = new FileInfo(Application.persistentDataPath + "/Datas/DestroyHistory.json");
         if(fileInfoDestroy.Exists == false){
             fileInfoDestroy.Create();
             yield return null;
         }
         
-        FileInfo fileInfoTotal = new FileInfo(Application.persistentDataPath + "/Data/TotalHistory.json");
+        FileInfo fileInfoTotal = new FileInfo(Application.persistentDataPath + "/Datas/TotalHistory.json");
         if(fileInfoTotal.Exists == false){
             fileInfoTotal.Create();
             yield return null;
@@ -143,11 +143,11 @@ public class SaveAndLoader : MonoBehaviour
     //タスクデータの読み込み
     private string ReadTaskData()
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Data");
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if(directoryInfo.Exists == false)
             return null;
 
-        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/Data.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/Data.json");
         if (fileInfo.Exists == false)
             return null;
 
@@ -161,11 +161,11 @@ public class SaveAndLoader : MonoBehaviour
     //入力履歴データの読み込み
     private string ReadInputHistoryData()
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Data");
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if (directoryInfo.Exists == false)
             return null;
 
-        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/InputHistory.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/InputHistory.json");
         if (fileInfo.Exists == false)
             return null;
 
@@ -179,11 +179,11 @@ public class SaveAndLoader : MonoBehaviour
     //破壊履歴データの読み込み
     private string ReadDestroyHistoryData()
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Data");
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if (directoryInfo.Exists == false)
             return null;
 
-        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/DetroyHistory.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/DetroyHistory.json");
         if (fileInfo.Exists == false)
             return null;
 
@@ -197,11 +197,11 @@ public class SaveAndLoader : MonoBehaviour
     //総合履歴データの読み込み
     private string ReadTotalHistoryData()
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Data");
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if (directoryInfo.Exists == false)
             return null;
 
-        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/TotalHistory.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/TotalHistory.json");
         if (fileInfo.Exists == false)
             return null;
 
@@ -279,7 +279,8 @@ public class SaveAndLoader : MonoBehaviour
     //タスクデータを書き込み
     private void WriteTaskData(TaskRoot taskRoot)
     {
-        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/Data.json");
+        #if UNITY_ANDROID && !UNITY_EDITOR
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/Data.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
 
@@ -288,12 +289,14 @@ public class SaveAndLoader : MonoBehaviour
         {
             streamWriter.Write(write_data);
         }
+        #endif
     }
 
     //入力履歴データを書き込み
     private void WriteInputHistoryData(TaskRoot taskRoot)
     {
-        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/InputHistory.json");
+        #if UNITY_ANDROID && !UNITY_EDITOR
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/InputHistory.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
 
@@ -302,12 +305,14 @@ public class SaveAndLoader : MonoBehaviour
         {
             streamWriter.Write(write_data);
         }
+        #endif
     }
 
     //破壊履歴データを書き込み
     private void WriteDestroyHistoryData(TaskRoot taskRoot)
     {
-        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/DestroyHistory.json");
+        #if UNITY_ANDROID && !UNITY_EDITOR
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/DestroyHistory.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
 
@@ -316,12 +321,14 @@ public class SaveAndLoader : MonoBehaviour
         {
             streamWriter.Write(write_data);
         }
+        #endif
     }
 
     //総合履歴データを書き込み
     private void WriteTotalHistoryData(TaskRoot taskRoot)
     {
-        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data/TotalHistory.json");
+        #if UNITY_ANDROID && !UNITY_EDITOR
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/TotalHistory.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
 
@@ -330,5 +337,6 @@ public class SaveAndLoader : MonoBehaviour
         {
             streamWriter.Write(write_data);
         }
+        #endif
     }
 }

@@ -178,8 +178,7 @@ public class ApplicationUser : MonoBehaviour
     {
         //通常モード
         //吹き出しを出すだけ
-        //現在、表示可能な内容は、期限・重要度ぐらいだけど、それは一覧でわかることなので、吹き出しは
-        //不要なのでは？
+        //現在、表示可能な内容は、期限の詳細
         if(mode == Mode.Normal)
         {
             Vector2 popPos = Camera.main.WorldToViewportPoint(taskObject.transform.position);
