@@ -12,17 +12,20 @@ public class TaskRoot
     {
         task_datas = new List<TaskData>();
     }
+    // public TaskRoot(TaskData[] taskDatas){
+    //     task_datas = new List<TaskData>(taskDatas);
+    // }
 }
 
-[System.Serializable]
-public class HistoryRoot
-{
-    public List<TaskData> history_datas;
-    public HistoryRoot()
-    {
+// [System.Serializable]
+// public class HistoryRoot
+// {
+//     public List<TaskData> history_datas;
+//     public HistoryRoot()
+//     {
 
-    }
-}
+//     }
+// }
 
 
 [System.Serializable]

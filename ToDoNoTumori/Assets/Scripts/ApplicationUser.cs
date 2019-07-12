@@ -87,6 +87,9 @@ public class ApplicationUser : MonoBehaviour
     [SerializeField]
     private float[] task_object_scale_per_important_level;
 
+    [SerializeField]
+    private SaveAndLoader save_and_loader;
+
     void Start()
     {
         taskInputManager = GameObject.Find("TaskInputManager").GetComponent<TaskInputManager>();
@@ -304,6 +307,7 @@ public class ApplicationUser : MonoBehaviour
 
 
     //タスクデータを持たせてタスクオブジェクトを生成する
+    //このタイミングでデータを保存する
     public void InstantiateTaskObject(TaskData taskData)
     {
         if(task_object != null)
@@ -315,9 +319,9 @@ public class ApplicationUser : MonoBehaviour
             scale.y *= task_object_scale_per_important_level[taskData.task_important_level];
             taskObject.GetComponent<TaskObject>().task_data = taskData;
             taskObject.transform.GetComponentInChildren<RawImage>().texture = taskData.texture2D;
-            history_manager.AddToInputHistory(taskData);
-            history_manager.AddToTotalHisttory(taskData);
         }
+        save_and_loader.SaveDatas();
+
     }
 
     //タスクオブジェクトの破壊メソッドs
@@ -350,6 +354,8 @@ public class ApplicationUser : MonoBehaviour
         yield return StartCoroutine(taskInputManager.MakeTask(data => taskData = data,mode));
         if(taskData != null)
             InstantiateTaskObject(taskData);
+        history_manager.AddToInputHistory(taskData);
+        history_manager.AddToTotalHisttory(taskData);
         Destroy(calender_maker.ball);
     }
 }
