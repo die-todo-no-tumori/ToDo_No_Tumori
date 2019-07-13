@@ -8,6 +8,7 @@ public class PopUpObject : MonoBehaviour
 {
     [SerializeField]
     private Text detail_text;
+
     void Start()
     {
         
@@ -21,7 +22,9 @@ public class PopUpObject : MonoBehaviour
     //吹き出しに内容を表示するメソッド
     public void Show(TaskData taskData)
     {
-        detail_text.text = "" + taskData.task_limit;
+        string[] limitData = taskData.task_limit.Split(':');
+        detail_text.text = "" + limitData[0] + "月" + limitData[1] + "日";
+        // Debug.Log(taskData.task_limit);
         DateTime time = DateTime.Parse(taskData.task_limit);
         TimeSpan span = time - DateTime.Today;
         string message = "" +( span.Days == 0 ? "当日" : "あと" + span.Days + "日");

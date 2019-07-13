@@ -195,13 +195,15 @@ public class ApplicationUser : MonoBehaviour
                 if (0 <= popPos.y && popPos.y < 1480)
                 {
                     //右上に表示
-
+                    popPos.x += detail_popup.GetComponent<RectTransform>().rect.width / 2;
+                    popPos.y += detail_popup.GetComponent<RectTransform>().rect.height / 2;
                 }
                 //画面左上辺りにある場合
                 else if (1480 <= popPos.y && popPos.y <= 2960)
                 {
                     //右下に表示
-
+                    popPos.x += detail_popup.GetComponent<RectTransform>().rect.width / 2;
+                    popPos.y -= detail_popup.GetComponent<RectTransform>().rect.height / 2;
                 }
             }else if(720 <= popPos.x && popPos.x <= 1440)
             {
@@ -209,15 +211,18 @@ public class ApplicationUser : MonoBehaviour
                 if (0 <= popPos.y && popPos.y < 1480)
                 {
                     //左上に表示
-
+                    popPos.x -= detail_popup.GetComponent<RectTransform>().rect.width / 2;
+                    popPos.y += detail_popup.GetComponent<RectTransform>().rect.height / 2;
                 }
                 //画面右上辺りにある場合
                 else if (1480 <= popPos.y && popPos.y <= 2960)
                 {
                     //左下に表示
-
+                    popPos.x -= detail_popup.GetComponent<RectTransform>().rect.width / 2;
+                    popPos.y -= detail_popup.GetComponent<RectTransform>().rect.height / 2;
                 }
             }
+            detail_popup.GetComponent<RectTransform>().localPosition = popPos;
         }
         //破壊モード
         //タップしたオブジェクトを破壊リストに登録する

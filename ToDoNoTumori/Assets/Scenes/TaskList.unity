@@ -1452,6 +1452,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: SaveAndLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
+        type: 3}
+      propertyPath: applicationUser
+      value: 
+      objectReference: {fileID: 906157461}
+    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
+        type: 3}
+      propertyPath: historyManager
+      value: 
+      objectReference: {fileID: 8116266787185260029}
+    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
+        type: 3}
+      propertyPath: task_object_spawn_span
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
+        type: 3}
+      propertyPath: input_history_parent
+      value: 
+      objectReference: {fileID: 8475369265756335977}
+    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
+        type: 3}
+      propertyPath: destroy_history_parent
+      value: 
+      objectReference: {fileID: 8475369265756335976}
+    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
+        type: 3}
+      propertyPath: total_history_parent
+      value: 
+      objectReference: {fileID: 8475369265756335975}
     - target: {fileID: 1125671610565236545, guid: eff894a31b5158c4d9462236a9592dd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1507,36 +1537,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
-        type: 3}
-      propertyPath: applicationUser
-      value: 
-      objectReference: {fileID: 906157461}
-    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
-        type: 3}
-      propertyPath: historyManager
-      value: 
-      objectReference: {fileID: 8116266787185260029}
-    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
-        type: 3}
-      propertyPath: task_object_spawn_span
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
-        type: 3}
-      propertyPath: input_history_parent
-      value: 
-      objectReference: {fileID: 8475369265756335977}
-    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
-        type: 3}
-      propertyPath: destroy_history_parent
-      value: 
-      objectReference: {fileID: 8475369265756335976}
-    - target: {fileID: 4042954409998646091, guid: eff894a31b5158c4d9462236a9592dd9,
-        type: 3}
-      propertyPath: total_history_parent
-      value: 
-      objectReference: {fileID: 8475369265756335975}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eff894a31b5158c4d9462236a9592dd9, type: 3}
 --- !u!1001 &8116266787185260028
@@ -1896,6 +1896,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 834163952}
+    - target: {fileID: 4554556225334380936, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a1e5b067b841749bc4a744913bb113, type: 3}
 --- !u!1 &8475369265756335974 stripped
@@ -1919,6 +1924,12 @@ GameObject:
 --- !u!1 &8475369265756335977 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8475369266264652281, guid: 40a1e5b067b841749bc4a744913bb113,
+    type: 3}
+  m_PrefabInstance: {fileID: 8475369265756335973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8475369265756335978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4554556225334380936, guid: 40a1e5b067b841749bc4a744913bb113,
     type: 3}
   m_PrefabInstance: {fileID: 8475369265756335973}
   m_PrefabAsset: {fileID: 0}
@@ -2005,6 +2016,11 @@ PrefabInstance:
       propertyPath: save_and_loader
       value: 
       objectReference: {fileID: 611677535376530388}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: detail_popup
+      value: 
+      objectReference: {fileID: 8475369265756335978}
     - target: {fileID: 8816140358307209947, guid: 7f4ea4621750d544689b70f8bc1c631f,
         type: 3}
       propertyPath: m_LocalPosition.x
