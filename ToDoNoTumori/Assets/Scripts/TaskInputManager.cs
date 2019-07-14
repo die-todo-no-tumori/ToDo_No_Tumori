@@ -114,6 +114,18 @@ public class TaskInputManager : MonoBehaviour
     [SerializeField]
     private GameObject config_button;
 
+    //撮影に使うデバイスのカメラ
+    private WebCamDevice userCameraDevice;
+
+    //カメラのパーミッションを得ているかどうか
+    private bool isGotCameraPermission;
+
+    //撮影して作成したテクスチャ
+    private Texture2D takedTexture2D;
+
+    //カメラロールから選択したテクスチャ
+    private Texture2D choicedTexture2D;
+
 
     IEnumerator Start()
     {
@@ -123,12 +135,25 @@ public class TaskInputManager : MonoBehaviour
         }
 
         yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
-        if (!Application.HasUserAuthorization(UserAuthorization.WebCam))
+
+        // if(!Application.HasUserAuthorization(UserAuthorization.WebCam)){
+
+
+        // }
+        isGotCameraPermission = false;
+
+
+        if (Application.HasUserAuthorization(UserAuthorization.WebCam) == false)
         {
             yield break;
         }
 
-        WebCamDevice userCameraDevice = WebCamTexture.devices[0];
+        isGotCameraPermission = true;
+        StartSetting();
+    }
+
+    private void StartSetting(){
+        userCameraDevice = WebCamTexture.devices[0];
         webCamTexture = new WebCamTexture(userCameraDevice.name, width, height);
         display_take.texture = webCamTexture;
         display_take.transform.rotation = display_take.transform.rotation * Quaternion.AngleAxis(webCamTexture.videoRotationAngle, Vector3.up);
@@ -141,18 +166,6 @@ public class TaskInputManager : MonoBehaviour
         cancel_decided_important_level = false;
         canceled_to_add_task = false;
         canceled_to_set_task_limit = false;
-
-        //画像を保存するフォルダの作成
-        DirectoryInfo directoryInfo = null;// new DirectoryInfo(Application.persistentDataPath + "/Images");
-#if UNITY_EDITOR
-        directoryInfo = new DirectoryInfo(Application.persistentDataPath + @"\Images");
-#elif UNITY_ANDROID
-        directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Images");
-#endif
-        if (directoryInfo.Exists == false)
-            directoryInfo.Create();
-
-
     }
 
     void Update()
@@ -179,6 +192,10 @@ public class TaskInputManager : MonoBehaviour
     //mode : true -> 撮影 false -> カメラロール
     public IEnumerator MakeTask(UnityAction<TaskData> callBack,bool mode)
     {
+        if(isGotCameraPermission == false){
+            StartSetting();
+        }
+
         //返す予定のタスクデータクラスのインスタンスを用意
         TaskData taskData = null;
         //タスク作成フェーズを最初の状態にする
@@ -281,9 +298,9 @@ public class TaskInputManager : MonoBehaviour
         PauseToTakePicture();
         // Debug.Log("カメラ一時停止" + webCamTexture.isPlaying);
         //撮影データを取り込む
-        Texture2D texture2D = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.ARGB32, false);
-        texture2D.SetPixels(webCamTexture.GetPixels());
-        texture2D.Apply();
+        takedTexture2D = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.ARGB32, false);
+        takedTexture2D.SetPixels(webCamTexture.GetPixels());
+        takedTexture2D.Apply();
         //タスク名を入力（現在は日付）
         add_task_name = System.DateTime.Now.ToLongDateString() + "_" + System.DateTime.Now.ToLongTimeString();
         //処理が終わるまで待つ
@@ -291,7 +308,8 @@ public class TaskInputManager : MonoBehaviour
         //カメラを止める
         StopToTakePicture();
         //撮影データを返す（コルーチンのコールバック）
-        callBack(texture2D);
+        callBack(takedTexture2D);
+
         yield break;
     }
 
@@ -299,9 +317,9 @@ public class TaskInputManager : MonoBehaviour
     //カメラロールから写真データを取得して返す
     private IEnumerator GetCameraRollTexture(UnityAction<Texture2D> callBack)
     {
-        Texture2D texture2D = null;
+        choicedTexture2D = null;
         if(add_task_image != null){
-            texture2D = add_task_image;
+            choicedTexture2D = add_task_image;
             // Debug.Log("タスクイメージのテクスチャを読み込み");
         }
         //画像が選択されるまで待機
@@ -311,17 +329,17 @@ public class TaskInputManager : MonoBehaviour
             if(taskCreationPhase != TaskCreationPhase.Picture)
             {
                 if(add_task_image != null)
-                    callBack(texture2D);
+                    callBack(choicedTexture2D);
                 yield break;
             }
         }
-        texture2D = (Texture2D)display_choice.texture;
+        choicedTexture2D = (Texture2D)display_choice.texture;
         //タスク名を入力（現在は日付）
         add_task_name = System.DateTime.Now.ToLongDateString() + "_" + System.DateTime.Now.ToLongTimeString();
         //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
         //取り込んだデータを返す
-        callBack(texture2D);
+        callBack(choicedTexture2D);
         yield break;
     }
 
@@ -611,8 +629,17 @@ public class TaskInputManager : MonoBehaviour
     //タスク追加操作をキャンセルする
     public void CancelToAddTask()
     {
-        //RawImageのテクスチャを消す
+       StartCoroutine(CancelToAddTaskCor());
+    }  
+
+    private IEnumerator CancelToAddTaskCor(){
+         //RawImageのテクスチャを消す
         Destroy(add_task_image);
+        yield return null;
+        Destroy(takedTexture2D);
+        yield return null;
+        Destroy(choicedTexture2D);
+        yield return null;
         //期限と重要度を消す
         add_task_important_level = 0;
         add_task_limit = null;

@@ -12,6 +12,7 @@ ScriptsOnlyBuild:
     - Kakera.Unimgpicker
     - NegativeButton
     - OpenTakePictureMenuButton
+    - PopUpObject
     - PositiveButton
     - SaveAndLoader
     - TaskInputManager
@@ -115,6 +116,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 9452}
     - Class: 114
       Script: {instanceID: 9460}
+    - Class: 114
+      Script: {instanceID: 9462}
     - Class: 114
       Script: {instanceID: 9464}
     - Class: 114
@@ -594,7 +597,7 @@ ScriptsOnlyBuild:
     className: TaskObject
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 854f25b386ab9f8cbc61c7fe3d489b6c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PopUpObject
@@ -697,4 +700,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/TaskList.unity
-  playerPath: C:/Users/jcjmwh80/Documents/Unity/2D/GrashPatt.apk
+  playerPath: C:/Users/jcjmwh80/Documents/Unity/3D/GrashPatt.apk

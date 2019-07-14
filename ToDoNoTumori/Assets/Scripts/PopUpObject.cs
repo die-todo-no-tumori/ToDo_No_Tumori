@@ -19,6 +19,12 @@ public class PopUpObject : MonoBehaviour
         
     }
 
+    //吹き出しを非表示にするメソッド
+    public void Hide(){
+        detail_text.text = "";
+        gameObject.SetActive(false);
+    }
+
     //吹き出しに内容を表示するメソッド
     public void Show(TaskData taskData)
     {

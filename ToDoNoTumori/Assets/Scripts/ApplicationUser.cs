@@ -267,6 +267,7 @@ public class ApplicationUser : MonoBehaviour
             se_player.PlayOneShot(positive_sound);
             history_panel.transform.GetChild(1).GetComponent<Button>().enabled = false;
         }
+        config_panel.SetActive(false);
     }
 
     //設定画面の表示を切り替える
@@ -282,6 +283,7 @@ public class ApplicationUser : MonoBehaviour
             config_panel.SetActive(true);
             se_player.PlayOneShot(positive_sound);
         }
+        history_panel.SetActive(false);
     }
 
     //モードを移行する
