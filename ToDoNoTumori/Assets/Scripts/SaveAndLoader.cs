@@ -231,7 +231,7 @@ public class SaveAndLoader : MonoBehaviour
         foreach(TaskData taskData in taskRoot.task_datas){
             GameObject taskObject =  applicationUser.InstantiateTaskObject(taskData,taskData.mode);
             byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
-            Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.RGBA32,false);
+            Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
             texture2D.Apply();
             taskObject.transform.GetComponentInChildren<RawImage>().texture = texture2D;
