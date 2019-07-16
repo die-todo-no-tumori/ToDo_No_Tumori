@@ -136,12 +136,7 @@ public class TaskInputManager : MonoBehaviour
 
         yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
 
-        // if(!Application.HasUserAuthorization(UserAuthorization.WebCam)){
-
-
-        // }
         isGotCameraPermission = false;
-
 
         if (Application.HasUserAuthorization(UserAuthorization.WebCam) == false)
         {
@@ -442,12 +437,7 @@ public class TaskInputManager : MonoBehaviour
     private IEnumerator CreateAndSave(UnityAction<TaskData> callBack)
     {
         TaskData taskData = new TaskData();
-        //タスクの画像を保存
         taskData.texture2D = add_task_image;
-// #if UNITY_ANDROID && !UNITY_EDITOR
-//         File.WriteAllBytes(Application.persistentDataPath + "/Images/" + add_task_name + ".png", add_task_image.EncodeToPNG());
-// #endif
-        yield return new WaitForEndOfFrame();
         //タスクの名前を入れる
         taskData.task_name = add_task_name;
         //タスクの重要度を入れる

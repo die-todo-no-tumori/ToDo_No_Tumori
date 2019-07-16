@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.IO;    
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class SaveAndLoader : MonoBehaviour
 {
@@ -227,7 +229,12 @@ public class SaveAndLoader : MonoBehaviour
     private IEnumerator CreateTaskObjects(TaskRoot taskRoot)
     {
         foreach(TaskData taskData in taskRoot.task_datas){
-            applicationUser.InstantiateTaskObject(taskData,taskData.mode);
+            GameObject taskObject =  applicationUser.InstantiateTaskObject(taskData,taskData.mode);
+            byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+            Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.RGBA32,false);
+            texture2D.LoadImage(textureData);
+            texture2D.Apply();
+            taskObject.transform.GetComponentInChildren<RawImage>().texture = texture2D;
             yield return new WaitForSeconds(task_object_spawn_span);
         }
     }
@@ -287,7 +294,7 @@ public class SaveAndLoader : MonoBehaviour
             fileInfo.Create();
         //画像を保存
         foreach(TaskData data in taskRoot.task_datas){
-            
+            File.WriteAllBytes(Application.persistentDataPath + "/Images/" + data.task_name + ".png", data.texture2D.EncodeToPNG());
         }
 
 

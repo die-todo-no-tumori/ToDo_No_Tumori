@@ -314,7 +314,7 @@ public class ApplicationUser : MonoBehaviour
 
     //タスクデータを持たせてタスクオブジェクトを生成する
     //このタイミングでデータを保存する
-    public void InstantiateTaskObject(TaskData taskData, bool mode)
+    public GameObject InstantiateTaskObject(TaskData taskData, bool mode)
     {
         if(task_object != null)
         {
@@ -339,8 +339,11 @@ public class ApplicationUser : MonoBehaviour
                 imageAngle.z = 0;
             }
             taskObject.transform.GetComponentInChildren<RawImage>().GetComponent<RectTransform>().rotation = imageAngle;
+            return taskObject;
         }
-        save_and_loader.SaveDatas();
+        return null;
+
+        // save_and_loader.SaveDatas();
     }
 
     //タスクオブジェクトの破壊メソッドs
@@ -373,6 +376,7 @@ public class ApplicationUser : MonoBehaviour
         yield return StartCoroutine(taskInputManager.MakeTask(data => taskData = data,mode));
         if(taskData != null)
             InstantiateTaskObject(taskData,mode);
+        save_and_loader.SaveDatas();
         history_manager.AddToInputHistory(taskData);
         history_manager.AddToTotalHisttory(taskData);
         Destroy(calender_maker.ball);
