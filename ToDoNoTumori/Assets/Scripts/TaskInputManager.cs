@@ -452,7 +452,7 @@ public class TaskInputManager : MonoBehaviour
         //タスクの名前を入れる
         taskData.task_name = add_task_name;
         //タスクの重要度を入れる
-        taskData.task_important_level = (byte)add_task_important_level;
+        taskData.task_important_level = add_task_important_level;
         //タスクの期限を入れる
         taskData.task_limit = add_task_limit;
         //タスク作成のモードを入れる

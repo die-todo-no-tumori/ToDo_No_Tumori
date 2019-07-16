@@ -34,7 +34,7 @@ public class TaskData
 {
     public string task_name;
     public string task_limit;
-    public byte task_important_level;
+    public int task_important_level;
     // public int task_index;
     public bool mode;
     [System.NonSerialized]
