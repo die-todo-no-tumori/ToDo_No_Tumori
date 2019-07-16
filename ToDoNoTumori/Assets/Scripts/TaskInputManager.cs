@@ -320,7 +320,6 @@ public class TaskInputManager : MonoBehaviour
         choicedTexture2D = null;
         if(add_task_image != null){
             choicedTexture2D = add_task_image;
-            // Debug.Log("タスクイメージのテクスチャを読み込み");
         }
         //画像が選択されるまで待機
         while(choiced_picture == false)
@@ -439,28 +438,26 @@ public class TaskInputManager : MonoBehaviour
         }
     }
 
-    //タスク作成とデータ保存と履歴への登録を行うメソッド
+    //タスク作成を行うメソッド
     private IEnumerator CreateAndSave(UnityAction<TaskData> callBack)
     {
         TaskData taskData = new TaskData();
         //タスクの画像を保存
         taskData.texture2D = add_task_image;
-#if UNITY_ANDROID && !UNITY_EDITOR
-        File.WriteAllBytes(Application.persistentDataPath + "/Images/" + add_task_name + ".png", add_task_image.EncodeToPNG());
-#endif
+// #if UNITY_ANDROID && !UNITY_EDITOR
+//         File.WriteAllBytes(Application.persistentDataPath + "/Images/" + add_task_name + ".png", add_task_image.EncodeToPNG());
+// #endif
         yield return new WaitForEndOfFrame();
         //タスクの名前を入れる
         taskData.task_name = add_task_name;
         //タスクの重要度を入れる
-        taskData.task_important_level = add_task_important_level;
+        taskData.task_important_level = (int)add_task_important_level;
         //タスクの期限を入れる
         taskData.task_limit = add_task_limit;
         //タスク作成のモードを入れる
         taskData.mode = picture_mode;
         //タスク選択のテクスチャを初期化する
         display_choice.texture = null;
-
-        //ここでデータをJsonファイルに書き込む（もしくは、生成後のタイミングでJsonファイルに書き込む）
 
         callBack(taskData);
         yield break;

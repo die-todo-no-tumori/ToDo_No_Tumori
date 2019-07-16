@@ -281,9 +281,15 @@ public class SaveAndLoader : MonoBehaviour
     private void WriteTaskData(TaskRoot taskRoot)
     {
         #if UNITY_ANDROID && !UNITY_EDITOR
+        //データの保存先ファイルが存在するかどうかを確認し、存在しなければ作成
         FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/Data.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
+        //画像を保存
+        foreach(TaskData data in taskRoot.task_datas){
+            
+        }
+
 
         string write_data = JsonUtility.ToJson(taskRoot);
         using(StreamWriter streamWriter = new StreamWriter(fileInfo.FullName))
