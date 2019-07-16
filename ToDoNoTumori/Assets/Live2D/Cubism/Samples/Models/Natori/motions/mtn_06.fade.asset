@@ -4,14 +4,15 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f1ee1adc36a8a04a8d7c42ac5d6bc27, type: 3}
   m_Name: mtn_06.fade
   m_EditorClassIdentifier: 
-  MotionName: mtn_06.motion3.json
+  MotionName: Assets/Live2D/Cubism/Samples/Models/Natori/motions/mtn_06.motion3.json
   FadeInTime: 1
   FadeOutTime: 1
   ParameterIds:
@@ -4140,14 +4141,14 @@ MonoBehaviour:
   - -1
   - -1
   - -1
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
+  - -1
+  - -1
+  - -1
+  - -1
+  - -1
+  - -1
+  - -1
+  - -1
   ParameterFadeOutTimes:
   - -1
   - -1

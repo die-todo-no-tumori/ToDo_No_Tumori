@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403ae2dd693bb1d4b924f6b8d206b053, type: 3}
   m_Name: natori_for_unity.fadeMotionList
   m_EditorClassIdentifier: 
-  MotionInstanceIds: dea1ffffd2a1ffffbea1ffffb2a1ffffaaa1ffffa2a1ffff96a1ffff0e88fffff687ffff
+  MotionInstanceIds: dea1ffffd2a1ffffbea1ffffb2a1ffffaaa1ffffa2a1ffff96a1ffff0e88fffff687ffff3a2d00004e2d0000862d00007a2d0000762d0000322d00009a2d0000622d00009e2d0000
   CubismFadeMotionObjects:
+  - {fileID: 11400000, guid: c452096cd0225114f8feb8996afe8ecb, type: 2}
+  - {fileID: 11400000, guid: 4940fe0f90cd30f46b3829cad6e2f07c, type: 2}
+  - {fileID: 11400000, guid: 8d644cbb18a93094985c271428b69305, type: 2}
+  - {fileID: 11400000, guid: 31f6a784a96e8af4f94b4f1676deeb73, type: 2}
+  - {fileID: 11400000, guid: f5804b7a6181b91479c61ba02811d7cb, type: 2}
+  - {fileID: 11400000, guid: 337ef7e23d913914a83dbd6f34e70a60, type: 2}
+  - {fileID: 11400000, guid: 2faf49268e68b8b47a4aaddcb3c86716, type: 2}
+  - {fileID: 11400000, guid: dc17142408f77e9429470b0bce1af3a0, type: 2}
+  - {fileID: 11400000, guid: 13932ada402863d44ba252564426adb9, type: 2}
   - {fileID: 11400000, guid: c452096cd0225114f8feb8996afe8ecb, type: 2}
   - {fileID: 11400000, guid: 4940fe0f90cd30f46b3829cad6e2f07c, type: 2}
   - {fileID: 11400000, guid: 8d644cbb18a93094985c271428b69305, type: 2}
