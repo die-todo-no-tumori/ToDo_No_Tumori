@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403ae2dd693bb1d4b924f6b8d206b053, type: 3}
   m_Name: Koharu.fadeMotionList
   m_EditorClassIdentifier: 
-  MotionInstanceIds: 562d00008a2d0000722d0000
+  MotionInstanceIds: 562d00008a2d0000722d0000f63100002a32000012320000
   CubismFadeMotionObjects:
+  - {fileID: 11400000, guid: ed06250b0c3345b4eb25e1ef5ad56480, type: 2}
+  - {fileID: 11400000, guid: 065dd8bf86af9be41abbc71b7b7c93b7, type: 2}
+  - {fileID: 11400000, guid: 5c362eb164808534c830705a0b5d45f4, type: 2}
   - {fileID: 11400000, guid: ed06250b0c3345b4eb25e1ef5ad56480, type: 2}
   - {fileID: 11400000, guid: 065dd8bf86af9be41abbc71b7b7c93b7, type: 2}
   - {fileID: 11400000, guid: 5c362eb164808534c830705a0b5d45f4, type: 2}

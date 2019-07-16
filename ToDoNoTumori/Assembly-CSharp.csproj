@@ -196,6 +196,7 @@
     <Compile Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\Motion\CubismMotionPreview.cs" />
     <Compile Include="Assets\Live2D\Cubism\Samples\Raycasting\RaycastHitDisplay.cs" />
     <Compile Include="Assets\Message.cs" />
+    <Compile Include="Assets\XMLAnalyzer.cs" />
     <None Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\MotionFade\Description.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\Masking\Description.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\Animation\Description.txt" />

@@ -31,6 +31,10 @@ public class Message : MonoBehaviour
     //　クリックアイコンの点滅秒数
     [SerializeField]
     private float clickFlashTime = 0.2f;
+    //もらったトークバルーンの属性
+    public string attribute;
+    //もらったトークバルーンのID
+    public string talkID;
     //　1回分のメッセージを表示したかどうか
     private bool isOneMessage = false;
     //　メッセージをすべて表示したかどうか
