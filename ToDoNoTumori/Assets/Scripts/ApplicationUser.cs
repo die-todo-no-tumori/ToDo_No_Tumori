@@ -89,6 +89,8 @@ public class ApplicationUser : MonoBehaviour
 
     [SerializeField]
     private SaveAndLoader save_and_loader;
+    
+    private Vector2 before_finger_pos;
 
     void Start()
     {
@@ -109,7 +111,10 @@ public class ApplicationUser : MonoBehaviour
             //指が離されたとき
             if (Input.touchCount == 0)
             {
-                //落とす
+                //落とすのではなく、飛ばす
+                Vector2 now_finger_pos = Input.mousePosition;
+                Vector2 move_vector = now_finger_pos - before_finger_pos;
+                catching_object.GetComponent<Rigidbody>().AddForce(move_vector,ForceMode.VelocityChange);
                 Vector3 posi = catching_object.transform.position;
                 posi.z = task_spawn_origin.transform.position.z;
                 catching_object.transform.position = posi;
@@ -118,6 +123,9 @@ public class ApplicationUser : MonoBehaviour
             }//指が触れている間は指の位置に追尾させる
             else if(Input.touchCount == 1)
             {
+            	before_finger_pos = Input.mousePosition;
+            	//Vector2 move_vector = now_finger_pos - before_finger_pos;
+            	//catching_object.GetComponent<Rigidbody>().AddForce(move_vector,ForceMode.VelocityChange);
                 Vector3 screen_point = Camera.main.WorldToScreenPoint(catching_object.transform.position);
                 Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screen_point.z);
                 catching_object.transform.position = Camera.main.ScreenToWorldPoint(pos);
@@ -161,6 +169,7 @@ public class ApplicationUser : MonoBehaviour
                 isCatching = true;
                 isJudging = false;
                 catching_object = obje;
+                before_finger_pos = Input.mousePosition;
                 yield break;
             }
             //設定時間を超えるまでに離されたときは、タップ
