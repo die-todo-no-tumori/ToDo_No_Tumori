@@ -27,6 +27,7 @@ public class SaveAndLoader : MonoBehaviour
     IEnumerator Start()
     {
         //保存する場所が存在するか確認
+        //これは実機環境のみで作動
 #if UNITY_ANDROID && !UNITY_EDITOR
         DirectoryInfo directoryInfoImages = new DirectoryInfo(Application.persistentDataPath + "/Images");
         if(directoryInfoImages.Exists == false){
@@ -226,7 +227,7 @@ public class SaveAndLoader : MonoBehaviour
     private IEnumerator CreateTaskObjects(TaskRoot taskRoot)
     {
         foreach(TaskData taskData in taskRoot.task_datas){
-            applicationUser.InstantiateTaskObject(taskData);
+            applicationUser.InstantiateTaskObject(taskData,taskData.mode);
             yield return new WaitForSeconds(task_object_spawn_span);
         }
     }

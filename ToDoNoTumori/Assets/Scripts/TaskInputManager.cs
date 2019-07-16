@@ -455,6 +455,8 @@ public class TaskInputManager : MonoBehaviour
         taskData.task_important_level = (byte)add_task_important_level;
         //タスクの期限を入れる
         taskData.task_limit = add_task_limit;
+        //タスク作成のモードを入れる
+        taskData.mode = picture_mode;
         //タスク選択のテクスチャを初期化する
         display_choice.texture = null;
 

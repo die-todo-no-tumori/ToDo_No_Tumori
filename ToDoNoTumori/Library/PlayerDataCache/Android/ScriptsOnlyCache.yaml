@@ -159,7 +159,7 @@ ScriptsOnlyBuild:
     className: ApplicationUser
   - hash:
       serializedVersion: 2
-      Hash: 5a732358f0b4a0141aa6b303ee11d4c0
+      Hash: b1da247b99a024e326fd48e608b8659b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DestroyHistoryObject
@@ -171,7 +171,7 @@ ScriptsOnlyBuild:
     className: SaveAndLoader
   - hash:
       serializedVersion: 2
-      Hash: 996f061dc8a2243457e1c5404bbf6100
+      Hash: 89f55c0a7ff8cacc5c87ecbf1a2c5065
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: HistoryObject
@@ -591,7 +591,7 @@ ScriptsOnlyBuild:
     className: CalenderMaker
   - hash:
       serializedVersion: 2
-      Hash: 05274af05f073cef0c4dc24230c04873
+      Hash: 491b46dbbebbd34bbfe5f3d4bcb42963
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TaskObject
@@ -621,7 +621,7 @@ ScriptsOnlyBuild:
     className: OpenTakePictureMenuButton
   - hash:
       serializedVersion: 2
-      Hash: 996f061dc8a2243457e1c5404bbf6100
+      Hash: 89f55c0a7ff8cacc5c87ecbf1a2c5065
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: InputHstoryObject
@@ -663,7 +663,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: 996f061dc8a2243457e1c5404bbf6100
+      Hash: 89f55c0a7ff8cacc5c87ecbf1a2c5065
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TotalHistoryObject

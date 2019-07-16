@@ -314,20 +314,33 @@ public class ApplicationUser : MonoBehaviour
 
     //タスクデータを持たせてタスクオブジェクトを生成する
     //このタイミングでデータを保存する
-    public void InstantiateTaskObject(TaskData taskData)
+    public void InstantiateTaskObject(TaskData taskData, bool mode)
     {
         if(task_object != null)
         {
             GameObject taskObject = Instantiate(task_object.gameObject, task_spawn_origin.transform.position, Quaternion.identity);
             //重要度に応じてタスクの大きさを変化させる
-            Vector3 scale = taskObject.transform.lossyScale;
+            Vector3 scale = taskObject.transform.localScale;
             scale.x *= task_object_scale_per_important_level[taskData.task_important_level];
             scale.y *= task_object_scale_per_important_level[taskData.task_important_level];
+            taskObject.transform.localScale = scale;
+            //タスクデータを持たせる
             taskObject.GetComponent<TaskObject>().task_data = taskData;
+            //タスクイメージを表示させる
             taskObject.transform.GetComponentInChildren<RawImage>().texture = taskData.texture2D;
+            //撮影モードと選択モードで、表示させるRawImageの角度を変える
+            Quaternion imageAngle = taskObject.transform.GetComponentInChildren<RawImage>().GetComponent<RectTransform>().rotation;
+            //撮影モードの場合は-90度回転
+            if(mode == true){
+                imageAngle.z = -90;
+            }
+            //選択モードの場合はそのまま
+            else{
+                imageAngle.z = 0;
+            }
+            taskObject.transform.GetComponentInChildren<RawImage>().GetComponent<RectTransform>().rotation = imageAngle;
         }
         save_and_loader.SaveDatas();
-
     }
 
     //タスクオブジェクトの破壊メソッドs
@@ -359,7 +372,7 @@ public class ApplicationUser : MonoBehaviour
         TaskData taskData = null;
         yield return StartCoroutine(taskInputManager.MakeTask(data => taskData = data,mode));
         if(taskData != null)
-            InstantiateTaskObject(taskData);
+            InstantiateTaskObject(taskData,mode);
         history_manager.AddToInputHistory(taskData);
         history_manager.AddToTotalHisttory(taskData);
         Destroy(calender_maker.ball);
