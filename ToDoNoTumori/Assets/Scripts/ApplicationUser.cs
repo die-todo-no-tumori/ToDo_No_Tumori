@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 
 public enum Mode
 {
@@ -338,16 +337,8 @@ public class ApplicationUser : MonoBehaviour
             //タスクイメージを表示させる
             taskObject.transform.GetComponentInChildren<RawImage>().texture = taskData.texture2D;
             //撮影モードと選択モードで、表示させるRawImageの角度を変える
-            Quaternion imageAngle = taskObject.transform.GetComponentInChildren<RawImage>().GetComponent<RectTransform>().rotation;
-            //撮影モードの場合は-90度回転
-            if(mode == true){
-                imageAngle.z = -90;
-            }
-            //選択モードの場合はそのまま
-            else{
-                imageAngle.z = 0;
-            }
-            taskObject.transform.GetComponentInChildren<RawImage>().GetComponent<RectTransform>().rotation = imageAngle;
+            taskObject.transform.GetComponentInChildren<RawImage>().transform.rotation = mode ? Quaternion.Euler(0,0,-90):Quaternion.Euler(0,0,0);
+            // save_and_loader.SaveDatas();
             return taskObject;
         }
         return null;
@@ -383,11 +374,17 @@ public class ApplicationUser : MonoBehaviour
     {
         TaskData taskData = null;
         yield return StartCoroutine(taskInputManager.MakeTask(data => taskData = data,mode));
-        if(taskData != null)
+        if(taskData != null){
             InstantiateTaskObject(taskData,mode);
-        save_and_loader.SaveDatas();
+            save_and_loader.SaveDatas();
+        }
         history_manager.AddToInputHistory(taskData);
         history_manager.AddToTotalHisttory(taskData);
         Destroy(calender_maker.ball);
     }
+
+    //アプリの終了時に念のためにデータを保存
+    // void OnApplicationQuit(){
+    //     save_and_loader.SaveDatas();
+    // }
 }

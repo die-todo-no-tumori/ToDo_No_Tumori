@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System.IO;    
+﻿using System.IO;    
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.Networking;
+using UnityEngine;
 
 public class SaveAndLoader : MonoBehaviour
 {
@@ -66,10 +65,10 @@ public class SaveAndLoader : MonoBehaviour
             fileInfoTotal.Create();
             yield return null;
         }
-#endif
-        yield return null;
         //タスクデータを読み込みとオブジェクトの生成
         LoadDatas();
+#endif
+        yield return null;
 
     }
 
@@ -154,7 +153,7 @@ public class SaveAndLoader : MonoBehaviour
         if (fileInfo.Exists == false)
             return null;
 
-        using(StreamReader streamReader = new StreamReader(fileInfo.FullName))
+        using(StreamReader streamReader = new StreamReader(Application.persistentDataPath + "/Datas/Data.json"))
         {
             string data = streamReader.ReadToEnd();
             return data;
@@ -229,12 +228,12 @@ public class SaveAndLoader : MonoBehaviour
     private IEnumerator CreateTaskObjects(TaskRoot taskRoot)
     {
         foreach(TaskData taskData in taskRoot.task_datas){
-            GameObject taskObject =  applicationUser.InstantiateTaskObject(taskData,taskData.mode);
             byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
             Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
             texture2D.Apply();
-            taskObject.transform.GetComponentInChildren<RawImage>().texture = texture2D;
+            taskData.texture2D = texture2D;
+            GameObject taskObject =  applicationUser.InstantiateTaskObject(taskData,taskData.mode);
             yield return new WaitForSeconds(task_object_spawn_span);
         }
     }
@@ -293,8 +292,11 @@ public class SaveAndLoader : MonoBehaviour
         if (fileInfo.Exists == false)
             fileInfo.Create();
         //画像を保存
-        foreach(TaskData data in taskRoot.task_datas){
-            File.WriteAllBytes(Application.persistentDataPath + "/Images/" + data.task_name + ".png", data.texture2D.EncodeToPNG());
+        // foreach(GameObject tObje in GameObject.FindGameObjectsWithTag("TaskObject")){
+        //     // File.WriteAllBytes(Application.persistentDataPath + "/Images/" + tObje.GetComponent<TaskObject>().task_data.task_name + ".png", tObje.GetComponentInChildren<RawImage>().texture.EncodeToPNG());
+        // }
+        foreach(TaskData tData in taskRoot.task_datas){
+            File.WriteAllBytes(Application.persistentDataPath + "/Images/" + tData.task_name + ".png", tData.texture2D.EncodeToPNG());
         }
 
 

@@ -360,6 +360,7 @@ public class TaskInputManager : MonoBehaviour
         int level = 0;
         important_level_image_rect.localScale = change_scales[level];
         display_to_change_task_level.texture = add_task_image;
+        display_to_change_task_level.transform.rotation = picture_mode ? Quaternion.Euler(0,0,-90):Quaternion.Euler(0,0,0);
         important_level_text.text = "重要度:" + (level + 1);
         while (decided_important_level == false)
         {

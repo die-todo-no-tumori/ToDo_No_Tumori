@@ -1972,6 +1972,11 @@ PrefabInstance:
       objectReference: {fileID: 1329075985}
     - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
         type: 3}
+      propertyPath: detail_popup
+      value: 
+      objectReference: {fileID: 8475369265756335978}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
       propertyPath: history_panel
       value: 
       objectReference: {fileID: 674219566}
@@ -2022,25 +2027,9 @@ PrefabInstance:
       objectReference: {fileID: 834163952}
     - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
         type: 3}
-      propertyPath: hammer_button_sprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 1f4aa49b8d4ea2a439743a1313546a37,
-        type: 3}
-    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
-        type: 3}
-      propertyPath: catch_object_time
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
-        type: 3}
       propertyPath: save_and_loader
       value: 
       objectReference: {fileID: 611677535376530388}
-    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
-        type: 3}
-      propertyPath: detail_popup
-      value: 
-      objectReference: {fileID: 8475369265756335978}
     - target: {fileID: 8816140358307209947, guid: 7f4ea4621750d544689b70f8bc1c631f,
         type: 3}
       propertyPath: m_LocalPosition.x

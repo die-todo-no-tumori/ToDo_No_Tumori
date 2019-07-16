@@ -44,7 +44,7 @@ public class TaskData
 public class TaskObject : MonoBehaviour
 {
     //タスクデータ
-    [HideInInspector]
+    // [HideInInspector]
     public TaskData task_data;
     //破壊エフェクトのゲームオブジェクト
     [SerializeField]
