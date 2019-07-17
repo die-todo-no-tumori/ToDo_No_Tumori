@@ -78,6 +78,12 @@ public class HistoryManager : MonoBehaviour
         obje.GetComponent<HistoryObject>().task_data = taskData;
         obje.GetComponent<HistoryObject>().application_user = application_user;
         obje.transform.GetChild(0).GetComponent<RawImage>().texture = taskData.texture2D;
+        if(taskData.mode == true){
+            obje.transform.GetChild(0).GetComponent<RawImage>().gameObject.transform.rotation = Quaternion.Euler(0,0,-90);
+        }else
+        {
+            obje.transform.GetChild(0).GetComponent<RawImage>().gameObject.transform.rotation = Quaternion.Euler(0,0,0);
+        }
         if(vertical + 1 <= 5)
         {
             
@@ -128,6 +134,12 @@ public class HistoryManager : MonoBehaviour
         obje.GetComponent<HistoryObject>().task_data = taskData;
         obje.GetComponent<HistoryObject>().application_user = application_user;
         obje.transform.GetChild(0).GetComponent<RawImage>().texture = taskData.texture2D;
+        if(taskData.mode == true){
+            obje.transform.GetChild(0).GetComponent<RawImage>().gameObject.transform.rotation = Quaternion.Euler(0,0,-90);
+        }else
+        {
+            obje.transform.GetChild(0).GetComponent<RawImage>().gameObject.transform.rotation = Quaternion.Euler(0,0,0);
+        }
 
         if (vertical + 1 <= 5)
         {
@@ -178,6 +190,12 @@ public class HistoryManager : MonoBehaviour
         obje.GetComponent<HistoryObject>().task_data = taskData;
         obje.GetComponent<HistoryObject>().application_user = application_user;
         obje.transform.GetChild(0).GetComponent<RawImage>().texture = taskData.texture2D;
+        if(taskData.mode == true){
+            obje.transform.GetChild(0).GetComponent<RawImage>().gameObject.transform.rotation = Quaternion.Euler(0,0,-90);
+        }else
+        {
+            obje.transform.GetChild(0).GetComponent<RawImage>().gameObject.transform.rotation = Quaternion.Euler(0,0,0);
+        }
 
         if (vertical + 1 <= 5)
         {

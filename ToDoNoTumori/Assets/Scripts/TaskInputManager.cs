@@ -51,67 +51,75 @@ public class TaskInputManager : MonoBehaviour
     [HideInInspector]
     public static TaskCreationPhase taskCreationPhase;
     //重要度を決めるための指の距離を入れる配列
-    [SerializeField]
+    [SerializeField,Header("重要度の指の間隔")]
     private int[] important_level_distance;
     //重要度を変えたときに変化するタスクの画像の大きさの配列
-    [SerializeField]
+    [SerializeField,Header("重要度ごとの画像の大きさ")]
     private Vector3[] change_scales;
     //重要度設定をするときのタスクの画像を貼り付けるRawImageのRectTransform
-    [SerializeField]
+    [SerializeField,Header("重要度設定時の画像の貼り付け先")]
     private RectTransform important_level_image_rect;
     //重要度を表示するテキスト
-    [SerializeField]
+    [SerializeField,Header("重要度表示テキスト")]
     private Text important_level_text;
     //カメラの幅
-    [SerializeField]
+    [SerializeField,Header("カメラの幅")]
     private int width;
     //カメラの高さ
-    [SerializeField]
+    [SerializeField,Header("カメラの高さ")]
     private int height;
     //画像撮影時にカメラのイメージを入れるRawImage
-    [SerializeField]
+    [SerializeField,Header("撮影用のカメラの画像を入れるイメージ")]
     private RawImage display_take;
     //画像選択時に選択したイメージを入れるRawImage
-    [SerializeField]
+    [SerializeField,Header("選択用の画像を入れるイメージ")]
     private RawImage display_choice;
     //重要度設定時にイメージを入れるRawImage
-    [SerializeField]
+    [SerializeField,Header("重要度設定時に画像を入れるイメージ")]
     private RawImage display_to_change_task_level;
+    [SerializeField,Header("重要度設定時に操作を連想させるイメージのレクト")]
+    private RectTransform control_image_rect_to_set_important_level;
+    [SerializeField,Header("連想イメージのスケールの変化割合")]
+    private float scale_change_rate;
+    [SerializeField,Header("重要度設定の操作連想イメージの最小サイズと最大サイズ")]
+    private Vector3[] control_image_size;
+    //重要度設定イメージが操作されたかどうか
+    private bool is_controlled;
     //カメラ（撮影時に使う端末のカメラ）
     private WebCamTexture webCamTexture;
     //タスク作成画面で邪魔になるボタンのオブジェクト
-    [SerializeField]
+    [SerializeField,Header("追加メニューを表示するボタン")]
     private GameObject open_add_menu_button;
-    [SerializeField]
+    [SerializeField,Header("ボタンの親オブジェクト")]
     private GameObject button_parent;
-    [SerializeField]
+    [SerializeField,Header("ハンマーボタン")]
     private GameObject hammer_button;
-    //期限設定を行うカレンダーの生成スクリプト
-    [SerializeField]
+    //期限設定を行うためのカレンダーの生成スクリプト
+    [SerializeField,Header("カレンダーメーカー")]
     private CalenderMaker calender_maker;
 
     //パネル
-    [SerializeField]
+    [SerializeField,Header("撮影パネル")]
     private GameObject take_picture_panel;
-    [SerializeField]
+    [SerializeField,Header("選択パネル")]
     private GameObject choice_picture_panel;
-    [SerializeField]
+    [SerializeField,Header("重要度設定パネル")]
     private GameObject important_level_panel;
-    [SerializeField]
+    [SerializeField,Header("期限設定パネル")]
     private GameObject set_task_limit_panel;
 
     //カメラのレイヤーマスク
-    [SerializeField]
+    [SerializeField,Header("カレンダーのマスク")]
     private LayerMask normal_mask;
-    [SerializeField]
+    [SerializeField,Header("期限設定マスク")]
     private LayerMask task_limit_mask;
 
     //非表示にしたいボタン
-    [SerializeField]
+    [SerializeField,Header("ホームボタン")]
     private GameObject home_button;
-    [SerializeField]
+    [SerializeField,Header("履歴画面表示ボタン")]
     private GameObject history_button;
-    [SerializeField]
+    [SerializeField,Header("設定画面表示ボタン")]
     private GameObject config_button;
 
     //撮影に使うデバイスのカメラ
@@ -297,7 +305,7 @@ public class TaskInputManager : MonoBehaviour
         takedTexture2D.SetPixels(webCamTexture.GetPixels());
         takedTexture2D.Apply();
         //タスク名を入力（現在は日付）
-        add_task_name = System.DateTime.Now.ToLongDateString() + "_" + System.DateTime.Now.ToLongTimeString();
+        add_task_name = System.DateTime.Now.ToString();
         //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
         //カメラを止める
@@ -329,7 +337,7 @@ public class TaskInputManager : MonoBehaviour
         }
         choicedTexture2D = (Texture2D)display_choice.texture;
         //タスク名を入力（現在は日付）
-        add_task_name = System.DateTime.Now.ToLongDateString() + "_" + System.DateTime.Now.ToLongTimeString();
+        add_task_name = System.DateTime.Now.ToString();
         //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
         //取り込んだデータを返す
@@ -362,11 +370,17 @@ public class TaskInputManager : MonoBehaviour
         display_to_change_task_level.texture = add_task_image;
         display_to_change_task_level.transform.rotation = picture_mode ? Quaternion.Euler(0,0,-90):Quaternion.Euler(0,0,0);
         important_level_text.text = "重要度:" + (level + 1);
+        StartCoroutine(PintiImageControlCor());
         while (decided_important_level == false)
         {
             //2本指で触れているときのみ判定
             if(Input.touchCount == 2)
             {
+                //まだ触れていなかった場合
+                if(is_controlled == false){
+                    //大きさ変更のコルーチンを止める
+                    StopChangePintiImageScale();
+                }
                 Touch[] touches = Input.touches;
                 //タッチの状態により距離を計測
                 if(touches[0].phase == TouchPhase.Began || touches[0].phase == TouchPhase.Moved || touches[0].phase == TouchPhase.Stationary
@@ -404,6 +418,40 @@ public class TaskInputManager : MonoBehaviour
         yield return null;
         callBack(level);
         yield break;
+    }
+
+    private void StopChangePintiImageScale(){
+        is_controlled = true;
+    }
+
+    //ピンチインとピンチアウトの操作を連想させる動きを行う
+    private IEnumerator PintiImageControlCor(){
+        int move_mode = 1;
+        control_image_rect_to_set_important_level.gameObject.SetActive(true);
+        is_controlled = false;
+        while(is_controlled == false){
+            //拡大モード
+            if(move_mode == 1){
+                Vector2 image_scale = control_image_rect_to_set_important_level.localScale;
+                image_scale.x += scale_change_rate * Time.deltaTime;
+                control_image_rect_to_set_important_level.localScale = image_scale;
+                //大きさが一定値を超えたらモード変更
+                if(control_image_rect_to_set_important_level.localScale.magnitude >= control_image_size[1].magnitude)
+                    move_mode = 1 - move_mode;
+            }
+            //縮小モード
+            else
+            {
+                Vector2 image_scale = control_image_rect_to_set_important_level.localScale;
+                image_scale.x -= scale_change_rate * Time.deltaTime;
+                control_image_rect_to_set_important_level.localScale = image_scale;
+                //大きさが一定値を超えたらモード変更
+                if(control_image_rect_to_set_important_level.localScale.magnitude <= control_image_size[0].magnitude)
+                    move_mode = 1 - move_mode;
+            }
+            yield return null;
+        }
+        control_image_rect_to_set_important_level.gameObject.SetActive(false);
     }
 
     //カレンダーに投げて、タスクの期限を設定する
@@ -488,6 +536,10 @@ public class TaskInputManager : MonoBehaviour
     public void TakePicture()
     {
         taked_picture = true;
+        #if UNITY_ANDROID
+            AndroidJavaObject androidJavaObject = new AndroidJavaObject("android.media.MediaActionSound");
+            androidJavaObject.Call("play",androidJavaObject.GetStatic<int>("SHUTTER_CLICK"));
+        #endif
     }
 
     //撮影一時停止
@@ -560,6 +612,7 @@ public class TaskInputManager : MonoBehaviour
     public void CancelDecideImportantLevel()
     {
         cancel_decided_important_level = true;
+        StopChangePintiImageScale();
         if (picture_mode == true)
         {
             take_picture_panel.SetActive(true);

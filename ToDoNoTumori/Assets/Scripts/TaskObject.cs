@@ -56,6 +56,12 @@ public class TaskObject : MonoBehaviour
     //[SerializeField]
     private AudioSource se_player;
     private HistoryManager history_manager;
+    [SerializeField]
+    private Material color_blue;
+    [SerializeField]
+    private Material color_yellow;
+    [SerializeField]
+    private Material color_red;
     
     void Start()
     {
@@ -76,20 +82,23 @@ public class TaskObject : MonoBehaviour
     public void ChangeColor()
     {
         System.DateTime now = System.DateTime.Now; //(System.DateTime.Now.Year, System.DateTime.Now.Month, System.DateTime.Now.Day, 0, 0, 0);
-        System.DateTime limit = System.DateTime.Parse(task_data.task_limit);
+        System.DateTime nowFixed = System.DateTime.Parse("" + now.Year + "/" + now.Month + "/" + now.Day + " 00:00:00");
+        System.DateTime limit = System.DateTime.Parse(task_data.task_limit.Split('_')[0]);
 
-        System.TimeSpan timeSpan = limit - now;
+        System.TimeSpan timeSpan = limit - nowFixed;
+        Debug.Log(timeSpan.TotalDays);
         
-        if(timeSpan.Days == 1)
+        if(0 <= timeSpan.TotalDays && timeSpan.TotalDays <= 1)
         {
-            GetComponent<Renderer>().material.color = Color.red;
-        }else if(timeSpan.Days == 2 || timeSpan.Days == 3)
-        {
-            GetComponent<Renderer>().material.color = Color.yellow;
+            GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().materials[1];
         }
-        else if(timeSpan.Days > 3)
+        else if(1 < timeSpan.TotalDays && timeSpan.TotalDays <= 3)
         {
-            GetComponent<Renderer>().material.color = Color.blue;
+            GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().materials[2];
+        }
+        else if(timeSpan.TotalDays > 3)
+        {
+            GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().materials[3];
         }
 
     }

@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2706189979935380497}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0000000010437}
+  m_LocalPosition: {x: 0, y: 0, z: -2.3768e-11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4123855556024336864}
@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.5, y: 0.5}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.4, y: 0.4}
+  m_SizeDelta: {x: 0.8, y: 0.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5081116688463569384
 CanvasRenderer:
@@ -108,8 +108,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.0000000074506}
+  m_SizeDelta: {x: 0.8, y: 0.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6960076492477565451
 CanvasRenderer:
@@ -323,6 +323,9 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -6478536213147159724, guid: fd9c27958afd42f4c93839d78221dc46, type: 3}
+  - {fileID: 2100000, guid: 094baf12ee84c82498b47f871b5dfacc, type: 2}
+  - {fileID: 2100000, guid: a3118eea682742442a053ddeddf7c668, type: 2}
+  - {fileID: 2100000, guid: 24726e26f62110642bbfe314a5c93ee1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -361,6 +364,9 @@ MonoBehaviour:
     mode: 0
   destroy_effect: {fileID: 0}
   destroy_sound: {fileID: 0}
+  color_blue: {fileID: 2100000, guid: 24726e26f62110642bbfe314a5c93ee1, type: 2}
+  color_yellow: {fileID: 2100000, guid: a3118eea682742442a053ddeddf7c668, type: 2}
+  color_red: {fileID: 2100000, guid: 094baf12ee84c82498b47f871b5dfacc, type: 2}
 --- !u!54 &1197345316662425287
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -384,7 +390,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9052485830608964799}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6f9acbe8ac302464b87d196f86d96904, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

@@ -75,6 +75,8 @@ public class ApplicationUser : MonoBehaviour
     private AudioClip positive_sound;
     [SerializeField,Header("キャンセル音")]
     private AudioClip negative_sound;
+    [SerializeField,Header("タスクタップ音")]
+    private AudioClip task_tap_sound;
     [SerializeField]
     private GameObject task_menu_button;
     [SerializeField]
@@ -91,6 +93,8 @@ public class ApplicationUser : MonoBehaviour
     private float flick_power;
     
     private Vector2 before_finger_pos;
+    private Vector2 before_before_finger_pos;
+    private Rigidbody catching_object_rigid;
 
     void Start()
     {
@@ -105,30 +109,76 @@ public class ApplicationUser : MonoBehaviour
 
     void Update()
     {
+
         //タスクオブジェクトを動かす
         if (catching_object != null && isCatching)
         {
             //指が離されたとき
-            if (Input.touchCount == 0)
+            // if (Input.touchCount == 0)
+            // {
+            //     // //落とすのではなく、飛ばす
+            //     // // Vector2 now_finger_pos = before_finger_pos;
+            //     // Vector2 move_vector = now_finger_pos - before_finger_pos;
+            //     // // Debug.Log(move_vector);
+            //     // catching_object_rigid.AddForce(move_vector * flick_power,ForceMode.VelocityChange);
+            //     // //Vector3 posi = catching_object.transform.position;
+            //     // //posi.z = task_spawn_origin.transform.position.z;
+            //     // //catching_object.transform.position = posi;
+            //     // catching_object_rigid.useGravity = true;
+            //     // catching_object_rigid = null;
+            //     // catching_object = null;
+            //     // isCatching = false;
+            // }//指が触れている間は指の位置に追尾させる
+            if(Input.touchCount == 1)
             {
-                //落とすのではなく、飛ばす
-                Vector2 now_finger_pos = Input.mousePosition;
-                Vector2 move_vector = now_finger_pos - before_finger_pos;
-                catching_object.GetComponent<Rigidbody>().AddForce(move_vector * flick_power,ForceMode.VelocityChange);
-                //Vector3 posi = catching_object.transform.position;
-                //posi.z = task_spawn_origin.transform.position.z;
-                //catching_object.transform.position = posi;
-                catching_object = null;
-                isCatching = false;
-            }//指が触れている間は指の位置に追尾させる
-            else if(Input.touchCount == 1)
-            {
-            	before_finger_pos = Input.mousePosition;
-            	//Vector2 move_vector = now_finger_pos - before_finger_pos;
-            	//catching_object.GetComponent<Rigidbody>().AddForce(move_vector,ForceMode.VelocityChange);
-                Vector3 screen_point = Camera.main.WorldToScreenPoint(catching_object.transform.position);
-                Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screen_point.z);
-                catching_object.transform.position = Camera.main.ScreenToWorldPoint(pos);
+                Touch touch = Input.GetTouch(0);
+                //触れている間
+                // if(Input.GetKey(KeyCode.Mouse0)){
+                //     if(270 <= touch.position.x && touch.position.x <= 1150)
+                //         before_finger_pos = touch.position;
+                //     //Vector2 move_vector = now_finger_pos - before_finger_pos;
+                //     //catching_object.GetComponent<Rigidbody>().AddForce(move_vector,ForceMode.VelocityChange);
+                //     Vector3 screen_point = Camera.main.WorldToScreenPoint(catching_object.transform.position);
+                //     Vector3 pos = new Vector3(before_finger_pos.x, before_finger_pos.y, screen_point.z);
+                //     // catching_object.GetComponent<Rigidbody>().position = Camera.main.ScreenToWorldPoint(pos);
+                //     catching_object_rigid.position = Camera.main.ScreenToWorldPoint(pos);
+                //     // catching_object.transform.position = Camera.main.ScreenToWorldPoint(pos);
+                // }
+                // else if(Input.GetKeyUp(KeyCode.Mouse0)){
+                //     Vector2 direct = (Vector2)Input.mousePosition - before_finger_pos;
+                //     direct.Normalize();
+                //     catching_object_rigid.AddForce(direct * flick_power,ForceMode.VelocityChange);
+                //     catching_object_rigid.useGravity = true;
+                //     catching_object_rigid = null;
+                //     catching_object = null;
+                //     isCatching = false;
+                // }
+
+                if(touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary){
+                    if(270 <= touch.position.x && touch.position.x <= 1150){
+                        if(before_finger_pos == Vector2.zero){
+                            before_finger_pos = touch.position;
+                        }else
+                        {
+                            before_before_finger_pos = before_finger_pos;
+                            before_finger_pos = touch.position;
+                        }
+                    }
+                    Vector3 screen_point = Camera.main.WorldToScreenPoint(catching_object.transform.position);
+                    Vector3 pos = new Vector3(before_finger_pos.x, before_finger_pos.y, screen_point.z);
+                    catching_object_rigid.position = Camera.main.ScreenToWorldPoint(pos);
+                }
+                //離された瞬間
+                else if(touch.phase == TouchPhase.Ended){
+                    Vector2 direct = before_finger_pos - before_before_finger_pos;
+                    catching_object_rigid.AddForce(direct * flick_power,ForceMode.VelocityChange);
+                    catching_object_rigid.useGravity = true;
+                    catching_object_rigid = null;
+                    catching_object = null;
+                    isCatching = false;
+                    before_before_finger_pos = Vector2.zero;
+                    before_finger_pos = Vector2.zero;
+                }
             }
         }
         //タスクオブジェクトを持つ
@@ -143,11 +193,16 @@ public class ApplicationUser : MonoBehaviour
                 //タスクオブジェクトに触れた時
                 if (hit.collider.gameObject.tag == "TaskObject")
                 {
-                    //タップか長押しかの判定がされていなければ、判定する
-                    if (isJudging == false)
+                    if(mode == Mode.Normal){
+                        //タップか長押しかの判定がされていなければ、判定する
+                        if (isJudging == false)
+                        {
+                            isJudging = true;
+                            StartCoroutine(JudgeTapOrCatch(hit.collider.gameObject));
+                        }
+                    }else
                     {
-                        isJudging = true;
-                        StartCoroutine(JudgeTapOrCatch(hit.collider.gameObject));
+                        Tap(hit.collider.gameObject);
                     }
                 }
             }
@@ -170,6 +225,8 @@ public class ApplicationUser : MonoBehaviour
                 isJudging = false;
                 catching_object = obje;
                 before_finger_pos = Input.mousePosition;
+                catching_object_rigid = obje.GetComponent<Rigidbody>();
+                catching_object_rigid.useGravity = false;
                 yield break;
             }
             //設定時間を超えるまでに離されたときは、タップ
@@ -190,6 +247,7 @@ public class ApplicationUser : MonoBehaviour
         //現在、表示可能な内容は、期限の詳細
         if(mode == Mode.Normal)
         {
+            se_player.PlayOneShot(task_tap_sound);
             Vector2 popPos = Camera.main.WorldToViewportPoint(taskObject.transform.position);
             Debug.Log(popPos);
             TaskData taskData = taskObject.GetComponent<TaskObject>().task_data;
@@ -340,6 +398,8 @@ public class ApplicationUser : MonoBehaviour
             taskObject.transform.GetComponentInChildren<RawImage>().texture = taskData.texture2D;
             //撮影モードと選択モードで、表示させるRawImageの角度を変える
             taskObject.transform.GetComponentInChildren<RawImage>().transform.rotation = mode ? Quaternion.Euler(0,0,-90):Quaternion.Euler(0,0,0);
+            //色を変える
+            taskObject.GetComponent<TaskObject>().ChangeColor();
             // save_and_loader.SaveDatas();
             return taskObject;
         }
@@ -363,6 +423,7 @@ public class ApplicationUser : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         task_list_to_destroy.Clear();
+        save_and_loader.SaveDatas();
     }
 
     //タスク作成メソッド
@@ -382,6 +443,6 @@ public class ApplicationUser : MonoBehaviour
             history_manager.AddToTotalHisttory(taskData);
             save_and_loader.SaveDatas();
         }
-        Destroy(calender_maker.ball);
+        calender_maker.CloseCalener();
     }
 }

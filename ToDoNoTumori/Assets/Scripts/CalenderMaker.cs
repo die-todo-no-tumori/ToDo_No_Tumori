@@ -29,10 +29,16 @@ public class CalenderMaker : MonoBehaviour
     [SerializeField]
     private Text month_text;
     private int additional_month;
+    [SerializeField,Header("SEプレイヤー")]
+    private AudioSource se_player_in_application_user;
+    [SerializeField,Header("カレンダーオブジェクトを動かしたときの音")]
+    private AudioClip caleder_sound;
+    //カレンダーオブジェクトの以前の位置
+    private Vector3 calender_object_pos_before;
 
     void Start()
     {
-
+        calender_object_pos_before = Vector3.zero;
     }
 
     //月を移動するメソッド
@@ -65,6 +71,7 @@ public class CalenderMaker : MonoBehaviour
     public void CloseCalener()
     {
         spawn_origin.SetActive(false);
+        Destroy(ball);
     }
 
     //カレンダーを作成するメソッド
@@ -146,7 +153,7 @@ public class CalenderMaker : MonoBehaviour
                             popup_pointer_rect.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + cell.day;
                             popup_pointer_rect.gameObject.SetActive(true);
                             //タスクの期限を設定
-                            taskInputManager.add_task_limit = date_time.Month + ":" + cell.day;
+                            taskInputManager.add_task_limit = date_time.Year + "/" +  date_time.Month + "/" + cell.day;
                             //最初にカレンダーに触れた時、カレンダーのボールを生成する
                             if (ball == null)
                             {
@@ -154,6 +161,17 @@ public class CalenderMaker : MonoBehaviour
                             }
                             //カレンダーボールの位置をカレンダーのセルの位置にする
                             ball.transform.position = cell.transform.GetChild(0).transform.position;
+                            //カレンダーオブジェクトが移動したときのみ、移動音を再生
+                            if(calender_object_pos_before == Vector3.zero){
+                                calender_object_pos_before = cell.transform.GetChild(0).transform.position;
+                            }else
+                            {
+                                if(calender_object_pos_before != cell.transform.GetChild(0).transform.position){
+                                    calender_object_pos_before = cell.transform.GetChild(0).transform.position;
+                                    se_player_in_application_user.PlayOneShot(caleder_sound);
+                                }
+                            }
+
                         }
                         else
                         {

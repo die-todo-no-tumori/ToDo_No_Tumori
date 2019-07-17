@@ -58,6 +58,11 @@ MonoBehaviour:
   display_take: {fileID: 0}
   display_choice: {fileID: 0}
   display_to_change_task_level: {fileID: 0}
+  control_image_rect_to_set_important_level: {fileID: 0}
+  scale_change_rate: 0
+  control_image_size:
+  - {x: 0.5, y: 0.5, z: 1}
+  - {x: 1, y: 1, z: 1}
   open_add_menu_button: {fileID: 0}
   button_parent: {fileID: 0}
   hammer_button: {fileID: 0}

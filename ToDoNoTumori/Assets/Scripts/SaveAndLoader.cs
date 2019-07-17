@@ -131,10 +131,10 @@ public class SaveAndLoader : MonoBehaviour
         CreateDestroyHistoryObjects(destory_history_root);
 
         //総合履歴
-        string TotalHistoryDataStr = ReadTotalHistoryData();
-        if(TotalHistoryDataStr == null)
+        string totalHistoryDataStr = ReadTotalHistoryData();
+        if(totalHistoryDataStr == null)
             return false;
-        total_history_root = ConvertToTaskData(TotalHistoryDataStr);
+        total_history_root = ConvertToTaskData(totalHistoryDataStr);
         CreateTotalHistoryObjects(total_history_root);
 
         return true;
@@ -302,18 +302,16 @@ public class SaveAndLoader : MonoBehaviour
     private void WriteTaskData(TaskRoot taskRoot)
     {
         #if UNITY_ANDROID && !UNITY_EDITOR
+
         //データの保存先ファイルが存在するかどうかを確認し、存在しなければ作成
         FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/Data.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
+
         //画像を保存
-        // foreach(GameObject tObje in GameObject.FindGameObjectsWithTag("TaskObject")){
-        //     // File.WriteAllBytes(Application.persistentDataPath + "/Images/" + tObje.GetComponent<TaskObject>().task_data.task_name + ".png", tObje.GetComponentInChildren<RawImage>().texture.EncodeToPNG());
-        // }
         foreach(TaskData tData in taskRoot.task_datas){
             File.WriteAllBytes(Application.persistentDataPath + "/Images/" + tData.task_name + ".png", tData.texture2D.EncodeToPNG());
         }
-
 
         string write_data = JsonUtility.ToJson(taskRoot);
         using(StreamWriter streamWriter = new StreamWriter(fileInfo.FullName))

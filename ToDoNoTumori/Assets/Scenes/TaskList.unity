@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &57919277 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3621524699312384100, guid: 40a1e5b067b841749bc4a744913bb113,
+    type: 3}
+  m_PrefabInstance: {fileID: 8475369265756335973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &262223944 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8475369266264652280, guid: 40a1e5b067b841749bc4a744913bb113,
@@ -1234,6 +1240,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2382694874744508470, guid: e597aaac12d77334fb060cff9eaec428,
         type: 3}
+    - target: {fileID: 3087212417957122059, guid: 16de79f0295d110498f98c9a40fd0772,
+        type: 3}
+      propertyPath: se_player_in_application_user
+      value: 
+      objectReference: {fileID: 465941353}
+    - target: {fileID: 3087212417957122059, guid: 16de79f0295d110498f98c9a40fd0772,
+        type: 3}
+      propertyPath: caleder_sound
+      value: 
+      objectReference: {fileID: 8300000, guid: e3b79641f6be54e3d9197dffd2c3b1cc, type: 3}
     - target: {fileID: 3087212417957122058, guid: 16de79f0295d110498f98c9a40fd0772,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1383,6 +1399,26 @@ PrefabInstance:
       propertyPath: config_button
       value: 
       objectReference: {fileID: 618248025}
+    - target: {fileID: 4097782730596263001, guid: 424c6e3cfaaf7df4ab5a6fa1ef5ebf52,
+        type: 3}
+      propertyPath: control_image_rect_to_set_important_level
+      value: 
+      objectReference: {fileID: 57919277}
+    - target: {fileID: 4097782730596263001, guid: 424c6e3cfaaf7df4ab5a6fa1ef5ebf52,
+        type: 3}
+      propertyPath: scale_change_rate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4097782730596263001, guid: 424c6e3cfaaf7df4ab5a6fa1ef5ebf52,
+        type: 3}
+      propertyPath: control_image_size.Array.data[1].x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4097782730596263001, guid: 424c6e3cfaaf7df4ab5a6fa1ef5ebf52,
+        type: 3}
+      propertyPath: control_image_size.Array.data[1].y
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4097782730596263000, guid: 424c6e3cfaaf7df4ab5a6fa1ef5ebf52,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1672,6 +1708,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8475369264604659966, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1329075985, guid: 40a1e5b067b841749bc4a744913bb113, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1921,6 +1962,31 @@ PrefabInstance:
       propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8475369265831829971, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369265831829971, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369264661728548, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369264661728548, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369264661728548, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a1e5b067b841749bc4a744913bb113, type: 3}
 --- !u!1 &8475369265756335974 stripped
@@ -2030,6 +2096,16 @@ PrefabInstance:
       propertyPath: save_and_loader
       value: 
       objectReference: {fileID: 611677535376530388}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: catch_object_time
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: flick_power
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 8816140358307209947, guid: 7f4ea4621750d544689b70f8bc1c631f,
         type: 3}
       propertyPath: m_LocalPosition.x
