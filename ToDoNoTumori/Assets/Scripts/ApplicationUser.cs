@@ -18,34 +18,34 @@ public class ApplicationUser : MonoBehaviour
     //これでエラーが発生したら、選択したかどうかのフラグをタスクに持たせて破壊する方法に切り替え
     private List<TaskObject> task_list_to_destroy;
     //ハンマーボタン
-    [SerializeField]
+    [SerializeField,Header("ハンマーボタン")]
     private Button hammer_button;
     //破壊モードのときと通常モードのときのボタンの画像
-    [SerializeField]
+    [SerializeField,Header("ハンマー画像")]
     private Sprite[] hammer_button_sprites;
 
     //タスクの詳細を表示する吹き出し
-    [SerializeField]
+    [SerializeField,Header("ポップアップボタンオブジェクト")]
     private GameObject detail_popup;
     //生成するタスクオブジェクト
-    [SerializeField]
+    [SerializeField,Header("生成するタスクオブジェクト")]
     private TaskObject task_object;
     //履歴パネル
-    [SerializeField]
+    [SerializeField,Header("履歴パネル")]
     private GameObject history_panel;
     //設定パネル
-    [SerializeField]
+    [SerializeField,Header("設定パネル")]
     private GameObject config_panel;
     //タスクオブジェクト生成地点
-    [SerializeField]
+    [SerializeField,Header("タスク生成地点")]
     private GameObject task_spawn_origin;
     //タスクオブジェクトをつかむのに必要な時間
-    [SerializeField]
+    [SerializeField,Header("つかむのにかかる時間")]
     private float catch_object_time;
     //つかんでいるタスクオブジェクト
     private GameObject catching_object;
     private bool isCatching;
-    [SerializeField]
+    [SerializeField,Header("RayCastのマスク")]
     private LayerMask layerMask;
     private bool isJudging;
     [SerializeField]
@@ -55,31 +55,31 @@ public class ApplicationUser : MonoBehaviour
     [SerializeField]
     private HistoryManager history_manager;
     //通常時のカメラの背景色
-    [SerializeField]
+    [SerializeField,Header("カメラ背景色(ノーマル)")]
     private Color camera_normal_color;
     //破壊時のカメラの背景色
-    [SerializeField]
+    [SerializeField,Header("カメラ背景色(破壊時)")]
     private Color camera_destroy_color;
     //通常時のライトの色
-    [SerializeField]
+    [SerializeField,Header("ライトの色(ノーマル)")]
     private Color light_normal_color;
     //破壊時のライトの色
-    [SerializeField]
+    [SerializeField,Header("ライトの色(破壊時)")]
     private Color light_destroy_color;
     //ライトオブジェクト
-    [SerializeField]
+    [SerializeField,Header("ライトオブジェクト")]
     private Light world_light;
-    [SerializeField]
+    [SerializeField,Header("SEプレイヤー")]
     private AudioSource se_player;
-    [SerializeField]
+    [SerializeField,Header("決定音")]
     private AudioClip positive_sound;
-    [SerializeField]
+    [SerializeField,Header("キャンセル音")]
     private AudioClip negative_sound;
     [SerializeField]
     private GameObject task_menu_button;
     [SerializeField]
     private GameObject task_butto_parent;
-    [SerializeField]
+    [SerializeField,Header("破壊ボタン")]
     private GameObject break_button;
     [SerializeField]
     private CalenderMaker calender_maker;
@@ -87,7 +87,7 @@ public class ApplicationUser : MonoBehaviour
     private float[] task_object_scale_per_important_level;
     [SerializeField]
     private SaveAndLoader save_and_loader;
-    [SerializeField]
+    [SerializeField,Header("タスクオブジェクトを飛ばす力")]
     private float flick_power;
     
     private Vector2 before_finger_pos;
@@ -191,6 +191,7 @@ public class ApplicationUser : MonoBehaviour
         if(mode == Mode.Normal)
         {
             Vector2 popPos = Camera.main.WorldToViewportPoint(taskObject.transform.position);
+            Debug.Log(popPos);
             TaskData taskData = taskObject.GetComponent<TaskObject>().task_data;
             if(detail_popup != null)
             {
@@ -377,15 +378,10 @@ public class ApplicationUser : MonoBehaviour
         yield return StartCoroutine(taskInputManager.MakeTask(data => taskData = data,mode));
         if(taskData != null){
             InstantiateTaskObject(taskData,mode);
+            history_manager.AddToInputHistory(taskData);
+            history_manager.AddToTotalHisttory(taskData);
             save_and_loader.SaveDatas();
         }
-        history_manager.AddToInputHistory(taskData);
-        history_manager.AddToTotalHisttory(taskData);
         Destroy(calender_maker.ball);
     }
-
-    //アプリの終了時に念のためにデータを保存
-    // void OnApplicationQuit(){
-    //     save_and_loader.SaveDatas();
-    // }
 }

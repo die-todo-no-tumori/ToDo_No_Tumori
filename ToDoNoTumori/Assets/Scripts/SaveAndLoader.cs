@@ -1,6 +1,5 @@
 ﻿using System.IO;    
 using System.Collections;
-using UnityEngine.UI;
 using UnityEngine;
 
 public class SaveAndLoader : MonoBehaviour
@@ -234,6 +233,7 @@ public class SaveAndLoader : MonoBehaviour
             texture2D.Apply();
             taskData.texture2D = texture2D;
             GameObject taskObject =  applicationUser.InstantiateTaskObject(taskData,taskData.mode);
+            // Destroy(texture2D);
             yield return new WaitForSeconds(task_object_spawn_span);
         }
     }
@@ -242,6 +242,11 @@ public class SaveAndLoader : MonoBehaviour
     //生成メソッドはHistoryManagerクラスのものを利用
     private void CreateInputHistoryObjects(TaskRoot taskRoot){
         foreach(TaskData taskData in taskRoot.task_datas){
+            byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+            Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
+            texture2D.LoadImage(textureData);
+            texture2D.Apply();
+            taskData.texture2D = texture2D;
             historyManager.AddToInputHistory(taskData);
         }
     }
@@ -249,14 +254,24 @@ public class SaveAndLoader : MonoBehaviour
     //破壊履歴オブジェクトを生成する
     private void CreateDestroyHistoryObjects(TaskRoot taskRoot){
         foreach(TaskData taskData in taskRoot.task_datas){
-            historyManager.AddToInputHistory(taskData);
+            byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+            Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
+            texture2D.LoadImage(textureData);
+            texture2D.Apply();
+            taskData.texture2D = texture2D;
+            historyManager.AddToDestroyHistory(taskData);
         }
     }
 
     //総合履歴オブジェクトを生成する
     private void CreateTotalHistoryObjects(TaskRoot taskRoot){
         foreach(TaskData taskData in taskRoot.task_datas){
-            historyManager.AddToInputHistory(taskData);
+            byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+            Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
+            texture2D.LoadImage(textureData);
+            texture2D.Apply();
+            taskData.texture2D = texture2D;
+            historyManager.AddToTotalHisttory(taskData);
         }
     }
 
