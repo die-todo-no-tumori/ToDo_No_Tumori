@@ -85,9 +85,10 @@ public class ApplicationUser : MonoBehaviour
     private CalenderMaker calender_maker;
     [SerializeField]
     private float[] task_object_scale_per_important_level;
-
     [SerializeField]
     private SaveAndLoader save_and_loader;
+    [SerializeField]
+    private float flick_power;
     
     private Vector2 before_finger_pos;
 
@@ -113,10 +114,10 @@ public class ApplicationUser : MonoBehaviour
                 //落とすのではなく、飛ばす
                 Vector2 now_finger_pos = Input.mousePosition;
                 Vector2 move_vector = now_finger_pos - before_finger_pos;
-                catching_object.GetComponent<Rigidbody>().AddForce(move_vector,ForceMode.VelocityChange);
-                Vector3 posi = catching_object.transform.position;
-                posi.z = task_spawn_origin.transform.position.z;
-                catching_object.transform.position = posi;
+                catching_object.GetComponent<Rigidbody>().AddForce(move_vector * flick_power,ForceMode.VelocityChange);
+                //Vector3 posi = catching_object.transform.position;
+                //posi.z = task_spawn_origin.transform.position.z;
+                //catching_object.transform.position = posi;
                 catching_object = null;
                 isCatching = false;
             }//指が触れている間は指の位置に追尾させる
