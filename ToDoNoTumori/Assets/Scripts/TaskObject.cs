@@ -65,18 +65,15 @@ public class TaskObject : MonoBehaviour
     
     void Start()
     {
-        //if(destroy_effect != null)
-        //    destroy_effect.SetActive(false);
-        //ChangeColor();
         se_player = GetComponent<AudioSource>();
         history_manager = GameObject.Find("HistoryManager").GetComponent<HistoryManager>();
     }
 
     void Update()
     {
-        //transform.LookAt(Camera.main.transform);
-        //transform.Rotate(0, 180, 0);
+
     }
+
 
     //現在の日付と期限の日付を比較し、
     public void ChangeColor()
@@ -86,34 +83,28 @@ public class TaskObject : MonoBehaviour
         System.DateTime limit = System.DateTime.Parse(task_data.task_limit.Split('_')[0]);
 
         System.TimeSpan timeSpan = limit - nowFixed;
-        Debug.Log(timeSpan.TotalDays);
-        
+
         if(0 <= timeSpan.TotalDays && timeSpan.TotalDays <= 1)
         {
-            GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().materials[1];
+            GetComponent<Renderer>().sharedMaterial = color_red;
         }
         else if(1 < timeSpan.TotalDays && timeSpan.TotalDays <= 3)
         {
-            GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().materials[2];
+            GetComponent<Renderer>().sharedMaterial = color_yellow;
         }
         else if(timeSpan.TotalDays > 3)
         {
-            GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().materials[3];
+            GetComponent<Renderer>().sharedMaterial = color_blue;
         }
 
     }
 
-    //タップされたときにタスクデータを返す
-    //public TaskData OnTap()
-    //{
-    //    return task_data;
-    //}
 
     //破壊モードでタップされたときにハイライトする
     //ハイライトの方法は検討中
     public void OnTapToHighlight()
     {
-        GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+        GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
     }
 
     public void OnTapToCancelHighlight()
@@ -121,17 +112,11 @@ public class TaskObject : MonoBehaviour
         GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
     }
 
-    //private void OnDisable()
-    //{
-    //    StartCoroutine(CallOnDisable());
-    //}
-
     //破壊されるときにエフェクトと音を鳴らす
     public IEnumerator CallOnDisable()
     {
         history_manager.AddToDestroyHistory(task_data);
         history_manager.RemoveFromInputHistory(task_data);
-
 
         if(destroy_effect != null && se_player != null)
         {
@@ -144,19 +129,4 @@ public class TaskObject : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
-    //public void OnCollisionEnter(Collision collision)
-    //{
-    //    //if (collision.gameObject.name == "Dodai 1")
-    //    //{
-    //        //Debug.Log("enter");
-    //    //}
-    //}
-    //public void OnCollisionExit(Collision collision)
-    //{
-    //    //if (collision.gameObject.name == "Dodai 1")
-    //    //{
-    //        //Debug.Log("exit");
-    //    //}
-    //}
 }
