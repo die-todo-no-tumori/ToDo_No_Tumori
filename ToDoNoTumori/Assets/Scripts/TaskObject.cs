@@ -104,12 +104,12 @@ public class TaskObject : MonoBehaviour
     //ハイライトの方法は検討中
     public void OnTapToHighlight()
     {
-        GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+        GetComponent<Renderer>().sharedMaterial.EnableKeyword("_EMISSION");
     }
 
     public void OnTapToCancelHighlight()
     {
-        GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+        GetComponent<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
     }
 
     //破壊されるときにエフェクトと音を鳴らす

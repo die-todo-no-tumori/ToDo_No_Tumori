@@ -70,7 +70,12 @@ public class CalenderMaker : MonoBehaviour
     //カレンダーを閉じる
     public void CloseCalener()
     {
-        spawn_origin.SetActive(false);
+        List<CalenderCell> calenderCells = new List<CalenderCell>(spawn_origin.GetComponentsInChildren<CalenderCell>());
+        for(int i = 0; i < calenderCells.Count;i++)
+        {
+            StartCoroutine(calenderCells[i].DestroyCor());
+        }
+        // spawn_origin.SetActive(false);
         Destroy(ball);
     }
 

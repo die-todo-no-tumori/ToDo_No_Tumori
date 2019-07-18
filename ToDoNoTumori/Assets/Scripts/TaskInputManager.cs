@@ -644,6 +644,7 @@ public class TaskInputManager : MonoBehaviour
             return;
         decide_task_limit = true;
         calender_maker.task_image = null;
+        calender_maker.CloseCalener();
         GoToNextPhase();
     }
 

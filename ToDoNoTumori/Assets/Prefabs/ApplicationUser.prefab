@@ -53,7 +53,7 @@ MonoBehaviour:
   history_panel: {fileID: 0}
   config_panel: {fileID: 0}
   task_spawn_origin: {fileID: 0}
-  catch_object_time: 0.05
+  catch_object_time: 0.35
   layerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -79,4 +79,4 @@ MonoBehaviour:
   - 1
   - 1.3
   save_and_loader: {fileID: 0}
-  flick_power: 10
+  flick_power: 0.05

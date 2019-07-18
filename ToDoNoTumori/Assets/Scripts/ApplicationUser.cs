@@ -110,50 +110,13 @@ public class ApplicationUser : MonoBehaviour
     void Update()
     {
 
+
         //タスクオブジェクトを動かす
         if (catching_object != null && isCatching)
         {
-            //指が離されたとき
-            // if (Input.touchCount == 0)
-            // {
-            //     // //落とすのではなく、飛ばす
-            //     // // Vector2 now_finger_pos = before_finger_pos;
-            //     // Vector2 move_vector = now_finger_pos - before_finger_pos;
-            //     // // Debug.Log(move_vector);
-            //     // catching_object_rigid.AddForce(move_vector * flick_power,ForceMode.VelocityChange);
-            //     // //Vector3 posi = catching_object.transform.position;
-            //     // //posi.z = task_spawn_origin.transform.position.z;
-            //     // //catching_object.transform.position = posi;
-            //     // catching_object_rigid.useGravity = true;
-            //     // catching_object_rigid = null;
-            //     // catching_object = null;
-            //     // isCatching = false;
-            // }//指が触れている間は指の位置に追尾させる
             if(Input.touchCount == 1)
             {
                 Touch touch = Input.GetTouch(0);
-                //触れている間
-                // if(Input.GetKey(KeyCode.Mouse0)){
-                //     if(270 <= touch.position.x && touch.position.x <= 1150)
-                //         before_finger_pos = touch.position;
-                //     //Vector2 move_vector = now_finger_pos - before_finger_pos;
-                //     //catching_object.GetComponent<Rigidbody>().AddForce(move_vector,ForceMode.VelocityChange);
-                //     Vector3 screen_point = Camera.main.WorldToScreenPoint(catching_object.transform.position);
-                //     Vector3 pos = new Vector3(before_finger_pos.x, before_finger_pos.y, screen_point.z);
-                //     // catching_object.GetComponent<Rigidbody>().position = Camera.main.ScreenToWorldPoint(pos);
-                //     catching_object_rigid.position = Camera.main.ScreenToWorldPoint(pos);
-                //     // catching_object.transform.position = Camera.main.ScreenToWorldPoint(pos);
-                // }
-                // else if(Input.GetKeyUp(KeyCode.Mouse0)){
-                //     Vector2 direct = (Vector2)Input.mousePosition - before_finger_pos;
-                //     direct.Normalize();
-                //     catching_object_rigid.AddForce(direct * flick_power,ForceMode.VelocityChange);
-                //     catching_object_rigid.useGravity = true;
-                //     catching_object_rigid = null;
-                //     catching_object = null;
-                //     isCatching = false;
-                // }
-
                 if(touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary){
                     if(270 <= touch.position.x && touch.position.x <= 1150){
                         if(before_finger_pos == Vector2.zero){
@@ -333,7 +296,11 @@ public class ApplicationUser : MonoBehaviour
         {
             history_panel.SetActive(true);
             se_player.PlayOneShot(positive_sound);
+            history_panel.transform.GetChild(0).gameObject.SetActive(true);
             history_panel.transform.GetChild(1).GetComponent<Button>().enabled = false;
+            history_panel.transform.GetChild(2).gameObject.SetActive(false);
+            history_panel.transform.GetChild(4).gameObject.SetActive(false);
+            
         }
         config_panel.SetActive(false);
     }
@@ -419,7 +386,7 @@ public class ApplicationUser : MonoBehaviour
     {
         for(int i = 0; i < task_list_to_destroy.Count;i++)
         {
-            StartCoroutine(task_list_to_destroy[i].CallOnDisable());
+            yield return StartCoroutine(task_list_to_destroy[i].CallOnDisable());
             yield return new WaitForSeconds(0.1f);
         }
         task_list_to_destroy.Clear();
@@ -443,6 +410,5 @@ public class ApplicationUser : MonoBehaviour
             history_manager.AddToTotalHisttory(taskData);
             save_and_loader.SaveDatas();
         }
-        calender_maker.CloseCalener();
     }
 }

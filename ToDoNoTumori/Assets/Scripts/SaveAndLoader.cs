@@ -1,9 +1,7 @@
 ﻿using System.IO;    
 using System.Collections;
 using UnityEngine;
-#if UNITY_ANDROID
 using Unity.Notifications.Android;
-#end if
 
 public class SaveAndLoader : MonoBehaviour
 {
@@ -41,8 +39,6 @@ public class SaveAndLoader : MonoBehaviour
 		//通知のチャンネルを作成して通知センターに登録
 		CreateNotificationChannel();
 
-		AddNotification(null);
-		
 
 		//保存する場所が存在するか確認
         //これは実機環境のみで作動
@@ -92,7 +88,8 @@ public class SaveAndLoader : MonoBehaviour
     {
         
     }
-    
+
+    //通知のチャンネル登録メソッド    
     private void CreateNotificationChannel()
     {
 		AndroidNotificationChannel channel = new AndroidNotificationChannel
@@ -106,12 +103,13 @@ public class SaveAndLoader : MonoBehaviour
 		AndroidNotificationCenter.RegisterNotificationChannel(channel);
 	}
 	
+    //通知情報を登録するメソッド
 	public void AddNotification(TaskData taskData)
 	{
 		AndroidNotification notification = new AndroidNotification{
 			Title = "期限の近いタスクがあります！",
 			Text = "今すぐパッとGraspしましょう}",
-			FireTime = System.DateTime.Now.AddSeconds(10);
+			FireTime = System.DateTime.Now.AddSeconds(10)
 		};
 		
 		AndroidNotificationCenter.SendNotification (notification , notification_channel_id);
