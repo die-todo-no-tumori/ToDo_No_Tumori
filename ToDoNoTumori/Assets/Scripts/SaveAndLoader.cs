@@ -1,6 +1,9 @@
 ﻿using System.IO;    
 using System.Collections;
 using UnityEngine;
+#if UNITY_ANDROID
+using Unity.Notifications.Android;
+#end if
 
 public class SaveAndLoader : MonoBehaviour
 {
@@ -22,13 +25,27 @@ public class SaveAndLoader : MonoBehaviour
     private HistoryManager historyManager;
     [SerializeField]
     private float task_object_spawn_span;
+    
+    //[SerializeField]
+    private string notification_channel_id;
+    private string notification_channel_name;
 
 
     IEnumerator Start()
     {
-        //保存する場所が存在するか確認
-        //これは実機環境のみで作動
+    	notification_channel_id = "GrasPattChannel";
+    	notification_channel_name = "GrasPatt";
+        
 #if UNITY_ANDROID && !UNITY_EDITOR
+
+		//通知のチャンネルを作成して通知センターに登録
+		CreateNotificationChannel();
+
+		AddNotification(null);
+		
+
+		//保存する場所が存在するか確認
+        //これは実機環境のみで作動
         DirectoryInfo directoryInfoImages = new DirectoryInfo(Application.persistentDataPath + "/Images");
         if(directoryInfoImages.Exists == false){
             directoryInfoImages.Create();
@@ -75,6 +92,30 @@ public class SaveAndLoader : MonoBehaviour
     {
         
     }
+    
+    private void CreateNotificationChannel()
+    {
+		AndroidNotificationChannel channel = new AndroidNotificationChannel
+		{
+			Id = notification_channel_id,
+			Name = notification_channel_name,
+			Importance = Importance.High,
+			Description = "GrasPattの通知"
+		};
+		
+		AndroidNotificationCenter.RegisterNotificationChannel(channel);
+	}
+	
+	public void AddNotification(TaskData taskData)
+	{
+		AndroidNotification notification = new AndroidNotification{
+			Title = "期限の近いタスクがあります！",
+			Text = "今すぐパッとGraspしましょう}",
+			FireTime = System.DateTime.Now.AddSeconds(10);
+		};
+		
+		AndroidNotificationCenter.SendNotification (notification , notification_channel_id);
+	}
 
     //セーブ
     public void SaveDatas(){
