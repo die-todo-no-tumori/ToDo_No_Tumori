@@ -212,8 +212,9 @@ public class ApplicationUser : MonoBehaviour
         if(mode == Mode.Normal)
         {
             se_player.PlayOneShot(task_tap_sound);
-            Vector2 popPos = Camera.main.WorldToViewportPoint(taskObject.transform.position);
+            Vector2 popPos = Camera.main.WorldToScreenPoint(taskObject.transform.position);
             TaskData taskData = taskObject.GetComponent<TaskObject>().task_data;
+            int fix = 100;
             if(detail_popup != null)
             {
                 detail_popup.SetActive(true);
@@ -226,15 +227,15 @@ public class ApplicationUser : MonoBehaviour
                 if (0 <= popPos.y && popPos.y < 1480)
                 {
                     //右上に表示
-                    popPos.x += detail_popup.GetComponent<RectTransform>().rect.width / 2;
-                    popPos.y += detail_popup.GetComponent<RectTransform>().rect.height / 2;
+                    popPos.x += detail_popup.GetComponent<RectTransform>().rect.width / 2 + fix;
+                    popPos.y += detail_popup.GetComponent<RectTransform>().rect.height / 2 + fix;
                 }
                 //画面左上辺りにある場合
                 else if (1480 <= popPos.y && popPos.y <= 2960)
                 {
                     //右下に表示
-                    popPos.x += detail_popup.GetComponent<RectTransform>().rect.width / 2;
-                    popPos.y -= detail_popup.GetComponent<RectTransform>().rect.height / 2;
+                    popPos.x += detail_popup.GetComponent<RectTransform>().rect.width / 2 + fix;
+                    popPos.y -= detail_popup.GetComponent<RectTransform>().rect.height / 2 + fix;
                 }
             }else if(720 <= popPos.x && popPos.x <= 1440)
             {
@@ -242,18 +243,18 @@ public class ApplicationUser : MonoBehaviour
                 if (0 <= popPos.y && popPos.y < 1480)
                 {
                     //左上に表示
-                    popPos.x -= detail_popup.GetComponent<RectTransform>().rect.width / 2;
-                    popPos.y += detail_popup.GetComponent<RectTransform>().rect.height / 2;
+                    popPos.x -= detail_popup.GetComponent<RectTransform>().rect.width / 2 + fix;
+                    popPos.y += detail_popup.GetComponent<RectTransform>().rect.height / 2 + fix;
                 }
                 //画面右上辺りにある場合
                 else if (1480 <= popPos.y && popPos.y <= 2960)
                 {
                     //左下に表示
-                    popPos.x -= detail_popup.GetComponent<RectTransform>().rect.width / 2;
-                    popPos.y -= detail_popup.GetComponent<RectTransform>().rect.height / 2;
+                    popPos.x -= detail_popup.GetComponent<RectTransform>().rect.width / 2 + fix;
+                    popPos.y -= detail_popup.GetComponent<RectTransform>().rect.height / 2 + fix;
                 }
             }
-            detail_popup.GetComponent<RectTransform>().localPosition = popPos;
+            detail_popup.GetComponent<RectTransform>().position = popPos;
         }
         //破壊モード
         //タップしたオブジェクトを破壊リストに登録する
@@ -371,8 +372,6 @@ public class ApplicationUser : MonoBehaviour
             return taskObject;
         }
         return null;
-
-        // save_and_loader.SaveDatas();
     }
 
     //タスクオブジェクトの破壊メソッドs
@@ -387,7 +386,6 @@ public class ApplicationUser : MonoBehaviour
         for(int i = 0; i < task_list_to_destroy.Count;i++)
         {
             yield return StartCoroutine(task_list_to_destroy[i].CallOnDisable());
-            yield return new WaitForSeconds(0.1f);
         }
         task_list_to_destroy.Clear();
         save_and_loader.SaveDatas();

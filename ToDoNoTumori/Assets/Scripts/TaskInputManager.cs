@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using System.IO;
-using UnityEngine.SceneManagement;
 
 public enum TaskCreationPhase
 {
@@ -133,6 +132,11 @@ public class TaskInputManager : MonoBehaviour
 
     //カメラロールから選択したテクスチャ
     private Texture2D choicedTexture2D;
+
+    [SerializeField,Header("SEプレイヤー")]
+    private AudioSource se_player;
+    [SerializeField,Header("SE")]
+    private AudioClip camera_se;
 
 
     IEnumerator Start()
@@ -498,7 +502,6 @@ public class TaskInputManager : MonoBehaviour
         taskData.mode = picture_mode;
         //タスク選択のテクスチャを初期化する
         display_choice.texture = null;
-
         callBack(taskData);
         yield break;
     }
@@ -537,9 +540,9 @@ public class TaskInputManager : MonoBehaviour
     public void TakePicture()
     {
         taked_picture = true;
-        #if UNITY_ANDROID
-            AndroidJavaObject androidJavaObject = new AndroidJavaObject("android.media.MediaActionSound");
-            androidJavaObject.Call("play",androidJavaObject.GetStatic<int>("SHUTTER_CLICK"));
+        #if UNITY_ANDROIO
+        if(se_player != null && camera_se != null)
+            se_player.PlayOneShot(camera_se);
         #endif
     }
 
@@ -663,12 +666,6 @@ public class TaskInputManager : MonoBehaviour
         important_level_panel.SetActive(true);
         cancel_decided_important_level = false;
         decided_important_level = false;
-    }
-
-    //通知に登録する
-    private void AddTaskToNotice()
-    {
-
     }
 
     //タスク追加操作をキャンセルする

@@ -390,8 +390,7 @@ public class SaveAndLoader : MonoBehaviour
             texture2D.LoadImage(textureData);
             texture2D.Apply();
             taskData.texture2D = texture2D;
-            GameObject taskObject =  applicationUser.InstantiateTaskObject(taskData,taskData.mode);
-            // Destroy(texture2D);
+            applicationUser.InstantiateTaskObject(taskData,taskData.mode);
             yield return new WaitForSeconds(task_object_spawn_span);
         }
     }

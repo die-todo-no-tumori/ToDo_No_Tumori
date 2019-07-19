@@ -585,7 +585,7 @@ ScriptsOnlyBuild:
     className: Unimgpicker
   - hash:
       serializedVersion: 2
-      Hash: ba3b36132f0b713e1f1e919195be415f
+      Hash: 1ab8be176872f32c3493bc3d0fc96e2d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TaskInputManager
