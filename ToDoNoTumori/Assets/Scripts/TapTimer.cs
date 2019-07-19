@@ -23,10 +23,12 @@ public class TapTimer
 			{
 				start_tap_time = Time.time;
 			}
-			else if(touch.phase == TouchPhase.End)
+			else if(touch.phase == TouchPhase.Ended)
 			{
 				total_tap_time += Time.time - start_tap_time;
 				count++;
+				if(count == 10)
+					Debug.Log(total_tap_time / count);
 			}
 		}
 	}
