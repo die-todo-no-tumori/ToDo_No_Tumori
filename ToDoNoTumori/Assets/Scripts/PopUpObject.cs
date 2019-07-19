@@ -28,8 +28,8 @@ public class PopUpObject : MonoBehaviour
     //吹き出しに内容を表示するメソッド
     public void Show(TaskData taskData)
     {
-        string[] limitData = taskData.task_limit.Split(':');
-        detail_text.text = "" + limitData[0] + "月" + limitData[1] + "日";
+        string[] limitData = taskData.task_limit.Split('/');
+        detail_text.text = "" + limitData[1] + "月" + limitData[2] + "日";
         // Debug.Log(taskData.task_limit);
         DateTime time = DateTime.Parse(taskData.task_limit);
         TimeSpan span = time - DateTime.Today;

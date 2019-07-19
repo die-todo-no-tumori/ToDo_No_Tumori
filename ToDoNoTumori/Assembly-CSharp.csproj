@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\PopUpObject.cs" />
      <Compile Include="Assets\Scripts\PositiveButton.cs" />
      <Compile Include="Assets\Scripts\SaveAndLoader.cs" />
+     <Compile Include="Assets\Scripts\TapTimer.cs" />
      <Compile Include="Assets\Scripts\TaskInputManager.cs" />
      <Compile Include="Assets\Scripts\TaskObject.cs" />
      <Compile Include="Assets\Scripts\TimeManaer.cs" />

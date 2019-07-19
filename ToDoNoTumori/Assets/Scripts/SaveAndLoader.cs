@@ -33,12 +33,51 @@ public class SaveAndLoader : MonoBehaviour
     {
     	notification_channel_id = "GrasPattChannel";
     	notification_channel_name = "GrasPatt";
+
+#if UNITY_EDITOR
+        DirectoryInfo directoryInfoImages = new DirectoryInfo(Application.dataPath + "/Images");
+        if(directoryInfoImages.Exists == false){
+            directoryInfoImages.Create();
+            yield return null;
+        }
+        
+        DirectoryInfo directoryInfoDatas = new DirectoryInfo(Application.dataPath + "/Datas");
+        if(directoryInfoDatas.Exists == false){
+            directoryInfoDatas.Create();
+            yield return null;
+        }
+
+        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/Data.json");
+        if(fileInfo.Exists == false){
+            fileInfo.Create();
+            yield return null;
+        }
+
+        FileInfo fileInfoInput = new FileInfo(Application.dataPath + "/Datas/InputHistory.json");
+        if(fileInfoInput.Exists == false){
+            fileInfoInput.Create();
+            yield return null;
+        }
+        
+        FileInfo fileInfoDestroy = new FileInfo(Application.dataPath + "/Datas/DestroyHistory.json");
+        if(fileInfoDestroy.Exists == false){
+            fileInfoDestroy.Create();
+            yield return null;
+        }
+        
+        FileInfo fileInfoTotal = new FileInfo(Application.dataPath + "/Datas/TotalHistory.json");
+        if(fileInfoTotal.Exists == false){
+            fileInfoTotal.Create();
+            yield return null;
+        }
+        //タスクデータを読み込みとオブジェクトの生成
+        LoadDatas();
+#endif
         
 #if UNITY_ANDROID && !UNITY_EDITOR
 
 		//通知のチャンネルを作成して通知センターに登録
 		CreateNotificationChannel();
-
 
 		//保存する場所が存在するか確認
         //これは実機環境のみで作動
@@ -120,6 +159,8 @@ public class SaveAndLoader : MonoBehaviour
         //タスクオブジェクトのデータを読み込む
         task_root = CollectTaskDatas();
 
+        // Debug.Log(task_root.task_datas.Count);
+
         //タスクオブジェクトのデータを書き込む
         WriteTaskData(task_root);
 
@@ -146,7 +187,7 @@ public class SaveAndLoader : MonoBehaviour
     //タスクデータを読み込み、タスクオブジェクトを生成する
     private bool LoadTaskObjects(){
         string taskDataStr = ReadTaskData();
-        if(taskDataStr == null)
+        if(taskDataStr == null || taskDataStr == "")
             return false;
         task_root = ConvertToTaskData(taskDataStr);
         StartCoroutine(CreateTaskObjects(task_root));
@@ -157,21 +198,21 @@ public class SaveAndLoader : MonoBehaviour
     private bool LoadHistoryObjects(){
         //入力履歴
         string inputHistoryDataStr = ReadInputHistoryData();
-        if(inputHistoryDataStr == null)
+        if(inputHistoryDataStr == null || inputHistoryDataStr == "")
             return false;
         input_history_root = ConvertToTaskData(inputHistoryDataStr);
         CreateInputHistoryObjects(input_history_root);
         
         //出力履歴
         string destroyHistoryDataStr = ReadDestroyHistoryData();
-        if(destroyHistoryDataStr == null)
+        if(destroyHistoryDataStr == null || destroyHistoryDataStr == "")
             return false;
         destory_history_root = ConvertToTaskData(destroyHistoryDataStr);
         CreateDestroyHistoryObjects(destory_history_root);
 
         //総合履歴
         string totalHistoryDataStr = ReadTotalHistoryData();
-        if(totalHistoryDataStr == null)
+        if(totalHistoryDataStr == null || totalHistoryDataStr == "")
             return false;
         total_history_root = ConvertToTaskData(totalHistoryDataStr);
         CreateTotalHistoryObjects(total_history_root);
@@ -318,13 +359,13 @@ public class SaveAndLoader : MonoBehaviour
     //タスクオブジェクトを探索してタスクデータを収集
     private TaskRoot CollectTaskDatas()
     {
-        TaskRoot task_root = new TaskRoot();
+        TaskRoot taskRoot = new TaskRoot();
         GameObject[] task_objects = GameObject.FindGameObjectsWithTag("TaskObject");
         foreach(GameObject task_object in task_objects)
         {
-            task_root.task_datas.Add(task_object.GetComponent<TaskObject>().task_data);
+            taskRoot.task_datas.Add(task_object.GetComponent<TaskObject>().task_data);
         }
-        return task_root;
+        return taskRoot;
     }
 
     //履歴オブジェクトを探索して、データを収集
@@ -340,7 +381,26 @@ public class SaveAndLoader : MonoBehaviour
     //タスクデータを書き込み
     private void WriteTaskData(TaskRoot taskRoot)
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_EDITOR
+        //データの保存先ファイルが存在するかどうかを確認し、存在しなければ作成
+        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/Data.json");
+        if (fileInfo.Exists == false)
+            fileInfo.Create();
+
+        //画像を保存
+        foreach(TaskData tData in taskRoot.task_datas){
+            Debug.Log(tData.task_name);
+            File.WriteAllBytes(Application.dataPath + "/Images/" + tData.task_name + ".png", tData.texture2D.EncodeToPNG());
+        }
+
+        string write_data = JsonUtility.ToJson(taskRoot);
+        using(StreamWriter streamWriter = new StreamWriter(fileInfo.FullName))
+        {
+            streamWriter.Write(write_data);
+        }
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
 
         //データの保存先ファイルが存在するかどうかを確認し、存在しなければ作成
         FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/Data.json");
@@ -357,7 +417,7 @@ public class SaveAndLoader : MonoBehaviour
         {
             streamWriter.Write(write_data);
         }
-        #endif
+#endif
     }
 
     //入力履歴データを書き込み
