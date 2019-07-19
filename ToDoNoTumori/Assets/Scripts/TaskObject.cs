@@ -12,21 +12,7 @@ public class TaskRoot
     {
         task_datas = new List<TaskData>();
     }
-    // public TaskRoot(TaskData[] taskDatas){
-    //     task_datas = new List<TaskData>(taskDatas);
-    // }
 }
-
-// [System.Serializable]
-// public class HistoryRoot
-// {
-//     public List<TaskData> history_datas;
-//     public HistoryRoot()
-//     {
-
-//     }
-// }
-
 
 [System.Serializable]
 //タスクデータクラス
@@ -104,12 +90,12 @@ public class TaskObject : MonoBehaviour
     //ハイライトの方法は検討中
     public void OnTapToHighlight()
     {
-        GetComponent<Renderer>().sharedMaterial.EnableKeyword("_EMISSION");
+        GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
     }
 
     public void OnTapToCancelHighlight()
     {
-        GetComponent<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
     }
 
     //破壊されるときにエフェクトと音を鳴らす

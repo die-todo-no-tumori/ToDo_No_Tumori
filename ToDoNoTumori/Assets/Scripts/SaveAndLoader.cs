@@ -70,6 +70,7 @@ public class SaveAndLoader : MonoBehaviour
             fileInfoTotal.Create();
             yield return null;
         }
+        yield return null;
         //タスクデータを読み込みとオブジェクトの生成
         LoadDatas();
 #endif
@@ -116,11 +117,10 @@ public class SaveAndLoader : MonoBehaviour
             fileInfoTotal.Create();
             yield return null;
         }
+        yield return null;
         //タスクデータを読み込みとオブジェクトの生成
         LoadDatas();
 #endif
-        yield return null;
-
     }
 
     void Update()
@@ -158,10 +158,6 @@ public class SaveAndLoader : MonoBehaviour
     public void SaveDatas(){
         //タスクオブジェクトのデータを読み込む
         task_root = CollectTaskDatas();
-
-        // Debug.Log(task_root.task_datas.Count);
-
-        //タスクオブジェクトのデータを書き込む
         WriteTaskData(task_root);
 
         //入力履歴データを読み込み
@@ -198,25 +194,24 @@ public class SaveAndLoader : MonoBehaviour
     private bool LoadHistoryObjects(){
         //入力履歴
         string inputHistoryDataStr = ReadInputHistoryData();
-        if(inputHistoryDataStr == null || inputHistoryDataStr == "")
-            return false;
-        input_history_root = ConvertToTaskData(inputHistoryDataStr);
-        CreateInputHistoryObjects(input_history_root);
-        
-        //出力履歴
+        if(inputHistoryDataStr != null && inputHistoryDataStr != ""){
+            input_history_root = ConvertToTaskData(inputHistoryDataStr);
+            CreateInputHistoryObjects(input_history_root);
+        }
+
+        //破壊履歴
         string destroyHistoryDataStr = ReadDestroyHistoryData();
-        if(destroyHistoryDataStr == null || destroyHistoryDataStr == "")
-            return false;
-        destory_history_root = ConvertToTaskData(destroyHistoryDataStr);
-        CreateDestroyHistoryObjects(destory_history_root);
+        if(destroyHistoryDataStr != null && destroyHistoryDataStr != ""){
+            destory_history_root = ConvertToTaskData(destroyHistoryDataStr);
+            CreateDestroyHistoryObjects(destory_history_root);
+        }
 
         //総合履歴
         string totalHistoryDataStr = ReadTotalHistoryData();
-        if(totalHistoryDataStr == null || totalHistoryDataStr == "")
-            return false;
-        total_history_root = ConvertToTaskData(totalHistoryDataStr);
-        CreateTotalHistoryObjects(total_history_root);
-
+        if(totalHistoryDataStr != null && totalHistoryDataStr != ""){
+            total_history_root = ConvertToTaskData(totalHistoryDataStr);
+            CreateTotalHistoryObjects(total_history_root);
+        }
         return true;
     }
 
@@ -224,6 +219,25 @@ public class SaveAndLoader : MonoBehaviour
     //タスクデータの読み込み
     private string ReadTaskData()
     {
+#if UNITY_EDITOR
+
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Datas");
+        if(directoryInfo.Exists == false)
+            return null;
+
+        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/Data.json");
+        if (fileInfo.Exists == false)
+            return null;
+
+        using(StreamReader streamReader = new StreamReader(Application.dataPath + "/Datas/Data.json"))
+        {
+            string data = streamReader.ReadToEnd();
+            return data;
+        }
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if(directoryInfo.Exists == false)
             return null;
@@ -237,11 +251,31 @@ public class SaveAndLoader : MonoBehaviour
             string data = streamReader.ReadToEnd();
             return data;
         }
+#endif
     }
 
     //入力履歴データの読み込み
     private string ReadInputHistoryData()
     {
+#if UNITY_EDITOR
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Datas");
+        if (directoryInfo.Exists == false){
+            return null;
+        }
+
+        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/InputHistory.json");
+        if (fileInfo.Exists == false)
+            return null;
+
+        using (StreamReader streamReader = new StreamReader(fileInfo.FullName))
+        {
+            string data = streamReader.ReadToEnd();
+            return data;
+        }
+#endif
+
+
+#if UNITY_ANDROID && !UNITY_EDITOR
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if (directoryInfo.Exists == false)
             return null;
@@ -255,11 +289,30 @@ public class SaveAndLoader : MonoBehaviour
             string data = streamReader.ReadToEnd();
             return data;
         }
+#endif
     }
 
     //破壊履歴データの読み込み
     private string ReadDestroyHistoryData()
     {
+#if UNITY_EDITOR
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Datas");
+        if (directoryInfo.Exists == false){
+            return null;
+        }
+
+        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/DetroyHistory.json");
+        if (fileInfo.Exists == false)
+            return null;
+
+        using (StreamReader streamReader = new StreamReader(fileInfo.FullName))
+        {
+            string data = streamReader.ReadToEnd();
+            return data;
+        }
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if (directoryInfo.Exists == false)
             return null;
@@ -273,11 +326,30 @@ public class SaveAndLoader : MonoBehaviour
             string data = streamReader.ReadToEnd();
             return data;
         }
+#endif
     }
 
     //総合履歴データの読み込み
     private string ReadTotalHistoryData()
     {
+#if UNITY_EDITOR
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Datas");
+        if (directoryInfo.Exists == false){
+            return null;
+        }
+
+        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/TotalHistory.json");
+        if (fileInfo.Exists == false)
+            return null;
+
+        using (StreamReader streamReader = new StreamReader(fileInfo.FullName))
+        {
+            string data = streamReader.ReadToEnd();
+            return data;
+        }
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if (directoryInfo.Exists == false)
             return null;
@@ -291,6 +363,7 @@ public class SaveAndLoader : MonoBehaviour
             string data = streamReader.ReadToEnd();
             return data;
         }
+#endif
     }
 
 
@@ -307,7 +380,12 @@ public class SaveAndLoader : MonoBehaviour
     private IEnumerator CreateTaskObjects(TaskRoot taskRoot)
     {
         foreach(TaskData taskData in taskRoot.task_datas){
-            byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+            byte[] textureData;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+#elif UNITY_EDITOR
+            textureData = File.ReadAllBytes(Application.dataPath + "/Images/" + taskData.task_name + ".png");
+#endif
             Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
             texture2D.Apply();
@@ -322,7 +400,12 @@ public class SaveAndLoader : MonoBehaviour
     //生成メソッドはHistoryManagerクラスのものを利用
     private void CreateInputHistoryObjects(TaskRoot taskRoot){
         foreach(TaskData taskData in taskRoot.task_datas){
-            byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+            byte[] textureData;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+#elif UNITY_EDITOR
+            textureData = File.ReadAllBytes(Application.dataPath + "/Images/" + taskData.task_name + ".png");
+#endif
             Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
             texture2D.Apply();
@@ -334,7 +417,12 @@ public class SaveAndLoader : MonoBehaviour
     //破壊履歴オブジェクトを生成する
     private void CreateDestroyHistoryObjects(TaskRoot taskRoot){
         foreach(TaskData taskData in taskRoot.task_datas){
-            byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+            byte[] textureData;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+#elif UNITY_EDITOR
+            textureData = File.ReadAllBytes(Application.dataPath + "/Images/" + taskData.task_name + ".png");
+#endif            
             Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
             texture2D.Apply();
@@ -346,7 +434,12 @@ public class SaveAndLoader : MonoBehaviour
     //総合履歴オブジェクトを生成する
     private void CreateTotalHistoryObjects(TaskRoot taskRoot){
         foreach(TaskData taskData in taskRoot.task_datas){
-            byte[] textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+            byte[] textureData;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
+#elif UNITY_EDITOR
+            textureData = File.ReadAllBytes(Application.dataPath + "/Images/" + taskData.task_name + ".png");
+#endif
             Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
             texture2D.Apply();
@@ -389,7 +482,6 @@ public class SaveAndLoader : MonoBehaviour
 
         //画像を保存
         foreach(TaskData tData in taskRoot.task_datas){
-            Debug.Log(tData.task_name);
             File.WriteAllBytes(Application.dataPath + "/Images/" + tData.task_name + ".png", tData.texture2D.EncodeToPNG());
         }
 
@@ -423,7 +515,20 @@ public class SaveAndLoader : MonoBehaviour
     //入力履歴データを書き込み
     private void WriteInputHistoryData(TaskRoot taskRoot)
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_EDITOR
+        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/InputHistory.json");
+        if (fileInfo.Exists == false)
+            fileInfo.Create();
+
+        string write_data = JsonUtility.ToJson(taskRoot);
+        using(StreamWriter streamWriter = new StreamWriter(fileInfo.FullName))
+        {
+            streamWriter.Write(write_data);
+        }
+#endif
+
+    
+#if UNITY_ANDROID && !UNITY_EDITOR
         FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/InputHistory.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
@@ -433,13 +538,27 @@ public class SaveAndLoader : MonoBehaviour
         {
             streamWriter.Write(write_data);
         }
-        #endif
+#endif
     }
 
     //破壊履歴データを書き込み
     private void WriteDestroyHistoryData(TaskRoot taskRoot)
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_EDITOR
+        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/DestroyHistory.json");
+        if (fileInfo.Exists == false)
+            fileInfo.Create();
+
+        string write_data = JsonUtility.ToJson(taskRoot);
+        using(StreamWriter streamWriter = new StreamWriter(fileInfo.FullName))
+        {
+            streamWriter.Write(write_data);
+        }
+#endif
+
+
+
+#if UNITY_ANDROID && !UNITY_EDITOR
         FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/DestroyHistory.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
@@ -449,13 +568,27 @@ public class SaveAndLoader : MonoBehaviour
         {
             streamWriter.Write(write_data);
         }
-        #endif
+#endif
     }
 
     //総合履歴データを書き込み
     private void WriteTotalHistoryData(TaskRoot taskRoot)
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_EDITOR
+        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/TotalHistory.json");
+        if (fileInfo.Exists == false)
+            fileInfo.Create();
+
+        string write_data = JsonUtility.ToJson(taskRoot);
+        using(StreamWriter streamWriter = new StreamWriter(fileInfo.FullName))
+        {
+            streamWriter.Write(write_data);
+        }
+#endif
+
+
+
+#if UNITY_ANDROID && !UNITY_EDITOR
         FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/TotalHistory.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
@@ -465,6 +598,6 @@ public class SaveAndLoader : MonoBehaviour
         {
             streamWriter.Write(write_data);
         }
-        #endif
+#endif
     }
 }

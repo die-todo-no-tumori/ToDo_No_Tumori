@@ -165,7 +165,8 @@ public class ApplicationUser : MonoBehaviour
                         }
                     }else
                     {
-                        Tap(hit.collider.gameObject);
+                        if(Input.GetTouch(0).phase == TouchPhase.Began)
+                            Tap(hit.collider.gameObject);
                     }
                 }
             }
@@ -212,7 +213,6 @@ public class ApplicationUser : MonoBehaviour
         {
             se_player.PlayOneShot(task_tap_sound);
             Vector2 popPos = Camera.main.WorldToViewportPoint(taskObject.transform.position);
-            Debug.Log(popPos);
             TaskData taskData = taskObject.GetComponent<TaskObject>().task_data;
             if(detail_popup != null)
             {
