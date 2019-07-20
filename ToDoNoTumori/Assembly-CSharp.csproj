@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ActiveMessagePanel.cs" />
+    <Compile Include="Assets\Branch.cs" />
+    <Compile Include="Assets\BranchButtonScript.cs" />
     <Compile Include="Assets\ButtonScript.cs" />
     <Compile Include="Assets\CubismHitTest.cs" />
     <Compile Include="Assets\Live2D\Cubism\Core\ArrayExtensionMethods.cs" />
@@ -196,6 +198,9 @@
     <Compile Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\Motion\CubismMotionPreview.cs" />
     <Compile Include="Assets\Live2D\Cubism\Samples\Raycasting\RaycastHitDisplay.cs" />
     <Compile Include="Assets\Message.cs" />
+    <Compile Include="Assets\Talk.cs" />
+    <Compile Include="Assets\TaskGenerater.cs" />
+    <Compile Include="Assets\TaskSaveAndLoader.cs" />
     <Compile Include="Assets\XMLAnalyzer.cs" />
     <None Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\MotionFade\Description.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\Masking\Description.txt" />

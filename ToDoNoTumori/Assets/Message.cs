@@ -31,10 +31,12 @@ public class Message : MonoBehaviour
     //　クリックアイコンの点滅秒数
     [SerializeField]
     private float clickFlashTime = 0.2f;
-    //もらったトークバルーンの属性
-    public string attribute;
-    //もらったトークバルーンのID
-    public string talkID;
+    //talkスクリプト
+    [SerializeField]
+    Talk talkScript;
+    //Branchスクリプト
+    [SerializeField]
+    Branch branchScript;
     //　1回分のメッセージを表示したかどうか
     private bool isOneMessage = false;
     //　メッセージをすべて表示したかどうか
@@ -102,6 +104,7 @@ public class Message : MonoBehaviour
                 {
                     isEndMessage = true;
                     transform.GetChild(0).gameObject.SetActive(false);
+                    RefferTempAttribute();
                 }
             }
         }
@@ -123,5 +126,25 @@ public class Message : MonoBehaviour
     {
         SetMessage(message);
         transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    void RefferTempAttribute()
+    {
+        if(talkScript.tempTalkInfo[0].Attribute == "None")
+        {
+            return;
+        }
+        else if(talkScript.tempTalkInfo[0].Attribute == "Branch")
+        {
+            branchScript.CreateBranch(talkScript.tempTalkInfo[0].SourceID);
+        }
+        else if (talkScript.tempTalkInfo[0].Attribute == "AddTask")
+        {
+            
+        }
+        else
+        {
+            return;
+        }
     }
 }
