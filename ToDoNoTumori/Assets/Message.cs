@@ -143,7 +143,7 @@ public class Message : MonoBehaviour
         }
         else if (talkScript.tempTalkInfo[0].Attribute == "AddTask")
         {
-            
+            taskScript.OpenInputCanvas();
         }
         else
         {
