@@ -83,7 +83,7 @@ public class Task : MonoBehaviour
     public void InputCtoTagC()
     {
         //this.tempContext = this.keyboard.text;
-        tempContext = inputField.text;
+        
         InputCanvasPanel.SetActive(false);
         TagCanvasPanel.SetActive(true);
     }
