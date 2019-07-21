@@ -206,7 +206,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.740566, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.92941177, g: 0.92941177, b: 0.92941177, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1953,6 +1953,46 @@ PrefabInstance:
         type: 3}
       propertyPath: catch_object_time
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: camera_normal_color.r
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: camera_normal_color.g
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: camera_normal_color.b
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: light_normal_color.r
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: light_normal_color.g
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: light_normal_color.b
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: camera_normal_color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: light_normal_color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8816140358307209947, guid: 7f4ea4621750d544689b70f8bc1c631f,
         type: 3}
