@@ -45,13 +45,22 @@ public class Task : MonoBehaviour
     [SerializeField]
     InputField inputField;
 
-    public string tempContext = "null";
-    public string tempTag = "null";
-    public string tempLimit = "null";
+    public string tempContext;
+    public string tempTag;
+    public string tempLimit;
 
     void Start()
     {
         //InputCanvasText = InputCanvas.transform.Find("Panel/InputField/Back/InputField/Text").GetComponent<Text>();
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Data.json");
+        if (fileInfo.Exists == false)
+        {
+            fileInfo.Create();
+        }
+
+        tempContext = null;
+        tempTag = null;
+        tempLimit = null;
 
         inputField = GetComponent<InputField>();
         InputCanvasPanel.SetActive(false);
