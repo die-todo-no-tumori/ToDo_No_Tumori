@@ -45,9 +45,9 @@ public class Task : MonoBehaviour
     [SerializeField]
     InputField inputField;
 
-    private string tempContext = "null";
-    private string tempTag = "null";
-    private string tempLimit = "null";
+    public string tempContext = "null";
+    public string tempTag = "null";
+    public string tempLimit = "null";
 
     void Start()
     {

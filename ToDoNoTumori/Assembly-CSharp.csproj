@@ -199,6 +199,7 @@
     <Compile Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\Motion\CubismMotionPreview.cs" />
     <Compile Include="Assets\Live2D\Cubism\Samples\Raycasting\RaycastHitDisplay.cs" />
     <Compile Include="Assets\Message.cs" />
+    <Compile Include="Assets\TagButtonScript.cs" />
     <Compile Include="Assets\Talk.cs" />
     <Compile Include="Assets\Task.cs" />
     <Compile Include="Assets\TaskGenerater.cs" />
