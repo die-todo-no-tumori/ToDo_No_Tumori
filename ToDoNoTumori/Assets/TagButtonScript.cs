@@ -16,7 +16,7 @@ public class TagButtonScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void onClick()
+    public void onClick()
     {
         switch(this.name)
         {
