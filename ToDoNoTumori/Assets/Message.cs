@@ -37,6 +37,9 @@ public class Message : MonoBehaviour
     //Branchスクリプト
     [SerializeField]
     Branch branchScript;
+    //Taskスクリプト
+    [SerializeField]
+    Task taskScript;
     //　1回分のメッセージを表示したかどうか
     private bool isOneMessage = false;
     //　メッセージをすべて表示したかどうか

@@ -41,7 +41,8 @@ public class TagButtonScript : MonoBehaviour
                 break;
         }
 
-        TagPanel.SetActive(false);
         taskScript.WriteTaskContentsinMemory();
+        TagPanel.SetActive(false);
+        
     }
 }

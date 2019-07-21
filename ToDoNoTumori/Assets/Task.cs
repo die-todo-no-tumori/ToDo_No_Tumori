@@ -88,39 +88,6 @@ public class Task : MonoBehaviour
         TagCanvasPanel.SetActive(true);
     }
 
-
-    public void SelectTag()
-    {
-        //タグ選択画面を表示して選ばせた後にtempTagへそのタグ名を格納するメソッド
-        
-
-        switch (TagCanvasPanel.transform.Find("Panel/TagFieldBack").GetChild(0).name)
-        {
-            case "AnimeButton":
-                tempTag = "Anime";
-                break;
-
-            case "MovieButton":
-                tempTag = "Movie";
-                break;
-
-            case "OtherButton":
-                tempTag = "Other";
-                break;
-
-            case "NovelButton":
-                tempTag = "Novel";
-                break;
-
-            case "ArtButton":
-                tempTag = "Art";
-                break;
-        }
-
-        TagCanvasPanel.SetActive(false);
-        WriteTaskContentsinMemory();
-    }
-
     public void WriteTaskContentsinMemory()
     {
 

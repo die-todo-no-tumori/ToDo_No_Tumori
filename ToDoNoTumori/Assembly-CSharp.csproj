@@ -203,6 +203,7 @@
     <Compile Include="Assets\Talk.cs" />
     <Compile Include="Assets\Task.cs" />
     <Compile Include="Assets\TaskGenerater.cs" />
+    <Compile Include="Assets\TaskInputFieldScript.cs" />
     <Compile Include="Assets\TaskSaveAndLoader.cs" />
     <Compile Include="Assets\XMLAnalyzer.cs" />
     <None Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\MotionFade\Description.txt" />
