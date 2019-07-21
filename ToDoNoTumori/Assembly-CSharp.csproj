@@ -67,6 +67,7 @@
     <Compile Include="Assets\BranchButtonScript.cs" />
     <Compile Include="Assets\ButtonScript.cs" />
     <Compile Include="Assets\CubismHitTest.cs" />
+    <Compile Include="Assets\InputCtoTagC.cs" />
     <Compile Include="Assets\Live2D\Cubism\Core\ArrayExtensionMethods.cs" />
     <Compile Include="Assets\Live2D\Cubism\Core\ComponentExtensionMethods.cs" />
     <Compile Include="Assets\Live2D\Cubism\Core\CubismCanvasInformation.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Assets\Live2D\Cubism\Samples\Raycasting\RaycastHitDisplay.cs" />
     <Compile Include="Assets\Message.cs" />
     <Compile Include="Assets\Talk.cs" />
+    <Compile Include="Assets\Task.cs" />
     <Compile Include="Assets\TaskGenerater.cs" />
     <Compile Include="Assets\TaskSaveAndLoader.cs" />
     <Compile Include="Assets\XMLAnalyzer.cs" />
