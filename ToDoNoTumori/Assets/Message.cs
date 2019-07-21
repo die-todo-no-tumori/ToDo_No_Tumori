@@ -37,6 +37,9 @@ public class Message : MonoBehaviour
     //Branchスクリプト
     [SerializeField]
     Branch branchScript;
+    //Taskスクリプト
+    [SerializeField]
+    Task taskScript;
     //　1回分のメッセージを表示したかどうか
     private bool isOneMessage = false;
     //　メッセージをすべて表示したかどうか
@@ -132,15 +135,18 @@ public class Message : MonoBehaviour
     {
         if(talkScript.tempTalkInfo[0].Attribute == "None")
         {
+            //属性が何もないときはなにもしない
             return;
         }
         else if(talkScript.tempTalkInfo[0].Attribute == "Branch")
         {
+            //属性がBranchの時は選択肢画面を表示する
             branchScript.CreateBranch(talkScript.tempTalkInfo[0].SourceID);
         }
         else if (talkScript.tempTalkInfo[0].Attribute == "AddTask")
         {
-            
+            //属性がAddTaskの時はタスク追加画面を表示する
+            taskScript.TypeTaskContext();
         }
         else
         {
