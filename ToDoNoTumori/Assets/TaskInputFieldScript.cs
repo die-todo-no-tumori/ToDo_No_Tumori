@@ -7,12 +7,13 @@ public class TaskInputFieldScript : MonoBehaviour
 {
     [SerializeField]
     Task taskScript;
+    [SerializeField]
     Text inputFieldText;
 
     // Start is called before the first frame update
     void Start()
     {
-        inputFieldText = this.GetComponent<Text>();
+        inputFieldText.text = "test";
     }
 
     public void CloseTaskInput()
