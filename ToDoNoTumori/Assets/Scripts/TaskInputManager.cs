@@ -76,12 +76,14 @@ public class TaskInputManager : MonoBehaviour
     //重要度設定時にイメージを入れるRawImage
     [SerializeField,Header("重要度設定時に画像を入れるイメージ")]
     private RawImage display_to_change_task_level;
-    [SerializeField,Header("重要度設定時に操作を連想させるイメージのレクト")]
-    private RectTransform control_image_rect_to_set_important_level;
+    [SerializeField,Header("重要度設定時に操作を連想させるイメージ")]
+    private Image control_image;
+    [SerializeField,Header("連想イメージ")]
+    private Sprite[] pinch_images;
     [SerializeField,Header("連想イメージのスケールの変化割合")]
     private float scale_change_rate;
-    [SerializeField,Header("重要度設定の操作連想イメージの最小サイズと最大サイズ")]
-    private Vector3[] control_image_size;
+    [SerializeField,Header("重要度設定の操作連想イメージの表示切り替え間隔")]
+    private float change_span_of_pinch_image;
     //重要度設定イメージが操作されたかどうか
     private bool is_controlled;
     //カメラ（撮影時に使う端末のカメラ）
@@ -141,6 +143,7 @@ public class TaskInputManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        
         if (WebCamTexture.devices.Length == 0)
         {
             yield break;
@@ -432,31 +435,21 @@ public class TaskInputManager : MonoBehaviour
     //ピンチインとピンチアウトの操作を連想させる動きを行う
     private IEnumerator PintiImageControlCor(){
         int move_mode = 1;
-        control_image_rect_to_set_important_level.gameObject.SetActive(true);
+        control_image.gameObject.SetActive(true);
+        control_image.sprite = pinch_images[0];
         is_controlled = false;
+        float passed_time = 0;
         while(is_controlled == false){
-            //拡大モード
-            if(move_mode == 1){
-                Vector2 image_scale = control_image_rect_to_set_important_level.localScale;
-                image_scale.x += scale_change_rate * Time.deltaTime;
-                control_image_rect_to_set_important_level.localScale = image_scale;
-                //大きさが一定値を超えたらモード変更
-                if(control_image_rect_to_set_important_level.localScale.magnitude >= control_image_size[1].magnitude)
-                    move_mode = 1 - move_mode;
-            }
-            //縮小モード
-            else
-            {
-                Vector2 image_scale = control_image_rect_to_set_important_level.localScale;
-                image_scale.x -= scale_change_rate * Time.deltaTime;
-                control_image_rect_to_set_important_level.localScale = image_scale;
-                //大きさが一定値を超えたらモード変更
-                if(control_image_rect_to_set_important_level.localScale.magnitude <= control_image_size[0].magnitude)
-                    move_mode = 1 - move_mode;
+            //時間を計測し、一定時間がたったら画像切り替え
+            passed_time += scale_change_rate * Time.deltaTime;
+            if(passed_time >= change_span_of_pinch_image){
+                passed_time = 0;
+                move_mode = 1 - move_mode;
+
             }
             yield return null;
         }
-        control_image_rect_to_set_important_level.gameObject.SetActive(false);
+        control_image.gameObject.SetActive(false);
     }
 
     //カレンダーに投げて、タスクの期限を設定する

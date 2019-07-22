@@ -58,11 +58,12 @@ MonoBehaviour:
   display_take: {fileID: 0}
   display_choice: {fileID: 0}
   display_to_change_task_level: {fileID: 0}
-  control_image_rect_to_set_important_level: {fileID: 0}
-  scale_change_rate: 0
-  control_image_size:
-  - {x: 0.5, y: 0.5, z: 1}
-  - {x: 1, y: 1, z: 1}
+  control_image: {fileID: 0}
+  pinch_images:
+  - {fileID: 21300000, guid: 25319d1c870dc1e4b925a7789cada746, type: 3}
+  - {fileID: 21300000, guid: a99aed205cd95f84ca8fd482f04d5e75, type: 3}
+  scale_change_rate: 2
+  change_span_of_pinch_image: 1
   open_add_menu_button: {fileID: 0}
   button_parent: {fileID: 0}
   hammer_button: {fileID: 0}
@@ -80,3 +81,5 @@ MonoBehaviour:
   home_button: {fileID: 0}
   history_button: {fileID: 0}
   config_button: {fileID: 0}
+  se_player: {fileID: 0}
+  camera_se: {fileID: 0}
