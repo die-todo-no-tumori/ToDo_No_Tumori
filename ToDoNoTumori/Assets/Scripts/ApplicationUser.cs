@@ -77,6 +77,8 @@ public class ApplicationUser : MonoBehaviour
     private AudioClip negative_sound;
     [SerializeField,Header("タスクタップ音")]
     private AudioClip task_tap_sound;
+    [SerializeField,Header("タスクスロー音")]
+    private AudioClip task_throw;
     [SerializeField]
     private GameObject task_menu_button;
     [SerializeField]
@@ -141,6 +143,7 @@ public class ApplicationUser : MonoBehaviour
                     isCatching = false;
                     before_before_finger_pos = Vector2.zero;
                     before_finger_pos = Vector2.zero;
+                    se_player.PlayOneShot(task_throw);
                 }
             }
         }
