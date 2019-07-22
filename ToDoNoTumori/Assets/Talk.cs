@@ -7,10 +7,7 @@ public class Talk : MonoBehaviour
     // Start is called before the first frame update
     //public string tempSourceID;
     //public string tempAttribute;
-    public List<XMLAnalyzer.XMLData> tempTalkInfo = new List<XMLAnalyzer.XMLData>
-    {
-        new XMLAnalyzer.XMLData{SourceID = "null", Attribute = "null", TargetID = "null", TextMessage = "null"}
-    };
+    public List<XMLAnalyzer.XMLData> tempTalkInfo = new List<XMLAnalyzer.XMLData>();
     [SerializeField]
     private XMLAnalyzer xmlScript;
     [SerializeField]
@@ -19,7 +16,14 @@ public class Talk : MonoBehaviour
     private Message messageScript;
     void Start()
     {
-        
+        //List<XMLAnalyzer.XMLData> XMLReference = new List<XMLAnalyzer.XMLData>();
+        XMLAnalyzer.XMLData data = new XMLAnalyzer.XMLData();
+        data.SourceID = null;
+        data.TargetID = null;
+        data.Attributes.Add(null);
+        data.TextMessage = null;
+
+        tempTalkInfo.Add(data);
     }
 
     public void FirstTalk()
