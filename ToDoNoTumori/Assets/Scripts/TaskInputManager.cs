@@ -445,7 +445,7 @@ public class TaskInputManager : MonoBehaviour
             if(passed_time >= change_span_of_pinch_image){
                 passed_time = 0;
                 move_mode = 1 - move_mode;
-
+                control_image.sprite = pinch_images[move_mode];
             }
             yield return null;
         }
