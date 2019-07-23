@@ -10,25 +10,22 @@ public class XMLAnalyzer : MonoBehaviour
     private string talkID;
     //private List<string> NextMessageList;
 
-    public class XMLData
-    {
-        public string SourceID;
-        public string TargetID;
-        public string TextMessage;
-        public List<string> Attributes;
+    public class XMLDataMessage{
+        public string id;
+        public string textMessage;
+        public List<string> attributes;
 
-        public XMLData()
-        {
-            Attributes = new List<string>();
+        public XMLDataMessage(){
+            attributes = new List<string>();
         }
+    }
 
-        public XMLData(string sID, string tID, string tMessage, string attribute)
-        {
-            this.SourceID = sID;
-            this.TargetID = tID;
-            this.TextMessage = tMessage;
-            this.Attributes = new List<string>();
-            this.Attributes.Add(attribute);
+    public class XMLDataArrow{
+        public string sourceID;
+        public string targetID;
+        public List<string> attributes;
+        public XMLDataArrow(){
+            attributes = new List<string>();
         }
     }
 
