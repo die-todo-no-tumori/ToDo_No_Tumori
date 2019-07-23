@@ -5,14 +5,32 @@ using System.Xml.Linq;
 
 public class XMLTest : MonoBehaviour
 {
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         XDocument xDocument = new XDocument(Application.dataPath + "/Resources/commBasic1.xml");
-        r
-        XElement rootElement = xDocument.Element("root");
+        
+        XElement rootElement = xDocument.Element("mxGraphModel").Element("root");
 
-        var obj = rootElement.Elements("object");
+        IEnumerable<XElement> xElements = rootElement.Elements("object");
+
+        foreach(XElement element in xElements)
+        {
+            //矢印だったら
+            if(element.Attribute("choice") != null)
+            {
+
+            }
+            //それ以外だったら
+            else
+            {
+
+            }
+        }
+
     }
 
     // Update is called once per frame
