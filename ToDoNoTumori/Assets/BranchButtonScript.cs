@@ -22,7 +22,7 @@ public class BranchButtonScript : MonoBehaviour
         BranchText = transform.GetComponentInChildren<Text>().text;
         
 
-        if (BranchText == branchScript.NextMessageList[0].TextMessage)
+        if (BranchText == branchScript.NextMessageList[0].textMessage)
         {
             //一時的に次のメッセージの情報をリストとして保存。
             //List<XMLAnalyzer.XMLData> nextTalkInfo;
@@ -43,7 +43,7 @@ public class BranchButtonScript : MonoBehaviour
             //talkScript.CreateTalk(nextTalkInfo);
             
         }
-        else if (BranchText == branchScript.NextMessageList[1].TextMessage)
+        else if (BranchText == branchScript.NextMessageList[1].textMessage)
         {
             //一時的に次のメッセージの情報をリストとして保存
             //List<XMLAnalyzer.XMLData> nextTalkInfo;
@@ -65,7 +65,7 @@ public class BranchButtonScript : MonoBehaviour
         }
     }
 
-    public void ShowListContentsInTheDebugLog<T>(List<XMLAnalyzer.XMLData> list)
+    public void ShowListContentsInTheDebugLog<T>(List<XMLDataMessage> list)
     {
         string log = "";
 

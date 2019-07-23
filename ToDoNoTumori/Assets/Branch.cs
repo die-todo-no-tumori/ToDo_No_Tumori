@@ -14,7 +14,7 @@ public class Branch : MonoBehaviour
     [SerializeField]
     private Talk talkScript;
     //次のメッセージを格納した配列
-    public List<XMLAnalyzer.XMLData> NextMessageList;
+    public List<XMLDataMessage> NextMessageList;
 
     //private string talkID;
     // Start is called before the first frame update
@@ -47,8 +47,8 @@ public class Branch : MonoBehaviour
         {
             NextMessageList = xMLAnalyzer.SearchNextMessage(sourceID);
             //メッセージ内容をイエスとノーの選択肢のテキストに流し込み
-            YesText.text = NextMessageList[0].TextMessage;
-            NoText.text = NextMessageList[1].TextMessage;
+            YesText.text = NextMessageList[0].textMessage;
+            NoText.text = NextMessageList[1].textMessage;
         }
         
     }
@@ -58,11 +58,11 @@ public class Branch : MonoBehaviour
         //選択肢に続くメッセージを表示する
         if(YESorNO == "YES")
         {
-            talkScript.CreateTalk(xMLAnalyzer.SearchNextMessage(NextMessageList[0].SourceID));
+            talkScript.CreateTalk(xMLAnalyzer.SearchNextMessage(NextMessageList[0].id));
         }
         else if(YESorNO == "NO")
         {
-            talkScript.CreateTalk(xMLAnalyzer.SearchNextMessage(NextMessageList[1].SourceID));
+            talkScript.CreateTalk(xMLAnalyzer.SearchNextMessage(NextMessageList[1].id));
         }
         
         //選択肢画面を閉じる

@@ -133,17 +133,17 @@ public class Message : MonoBehaviour
 
     void RefferTempAttribute()
     {
-        for(int i = 0; i <  talkScript.tempTalkInfo[0].Attributes.Count; i++)
+        for(int i = 0; i <  talkScript.tempTalkInfo[0].attributes.Count; i++)
         {
-            if (talkScript.tempTalkInfo[0].Attributes[i] == "None")
+            if (talkScript.tempTalkInfo[0].attributes[i] == "None")
             {
                 return;
             }
-            else if (talkScript.tempTalkInfo[0].Attributes[i] == "Branch")
+            else if (talkScript.tempTalkInfo[0].attributes[i] == "Branch")
             {
-                branchScript.CreateBranch(talkScript.tempTalkInfo[0].SourceID);
+                branchScript.CreateBranch(talkScript.tempTalkInfo[0].id);
             }
-            else if (talkScript.tempTalkInfo[0].Attributes[i] == "AddTask")
+            else if (talkScript.tempTalkInfo[0].attributes[i] == "AddTask")
             {
                 taskScript.OpenInputCanvas();
             }

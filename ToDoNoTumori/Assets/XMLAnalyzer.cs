@@ -2,6 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class XMLDataMessage
+{
+    public string id;
+    public string textMessage;
+    public List<string> attributes;
+
+    public XMLDataMessage()
+    {
+        attributes = new List<string>();
+    }
+}
+
+public class XMLDataArrow
+{
+    public string sourceID;
+    public string targetID;
+    public List<string> attributes;
+    public XMLDataArrow()
+    {
+        attributes = new List<string>();
+    }
+}
+
 public class XMLAnalyzer : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -10,31 +33,14 @@ public class XMLAnalyzer : MonoBehaviour
     private string talkID;
     //private List<string> NextMessageList;
 
-    public class XMLDataMessage{
-        public string id;
-        public string textMessage;
-        public List<string> attributes;
-
-        public XMLDataMessage(){
-            attributes = new List<string>();
-        }
-    }
-
-    public class XMLDataArrow{
-        public string sourceID;
-        public string targetID;
-        public List<string> attributes;
-        public XMLDataArrow(){
-            attributes = new List<string>();
-        }
-    }
+    
 
     void Start()
     {
         
     }
 
-    public List<XMLData> SearchFirstMessage()
+    public List<XMLDataMessage> SearchFirstMessage()
     {
         string FirstMessage;
         //仮置き
@@ -48,20 +54,20 @@ public class XMLAnalyzer : MonoBehaviour
         */
         // XMLのデータを保存
 
-        List<XMLData> XMLReference = new List<XMLData>();
-        XMLData data = new XMLData();
-        data.SourceID = "first001";
-        data.TargetID = "branch001";
-        data.Attributes.Add("Branch");
-        data.TextMessage = FirstMessage;
+        List<XMLDataMessage> XMLReference = new List<XMLDataMessage>();
+        XMLDataMessage data = new XMLDataMessage();
+        data.id = "first001";
+        //data.TargetID = "branch001";
+        data.attributes.Add("Branch");
+        data.textMessage = FirstMessage;
         XMLReference.Add(data);
 
         return XMLReference;
     }
 
-    public List<XMLData> SearchNextMessage(string SourceID)
+    public List<XMLDataMessage> SearchNextMessage(string SourceID)
     {
-        List<XMLData> XMLReference = new List<XMLData>();
+        List<XMLDataMessage> XMLReference = new List<XMLDataMessage>();
         
         /*
         List<string> NextMessageList = new List<string>();//newで生成するのを忘れない
@@ -72,18 +78,18 @@ public class XMLAnalyzer : MonoBehaviour
 
         if (SourceID == "first001")
         {
-            XMLData data = new XMLData();
-            data.SourceID = "branch001";
-            data.TargetID = "talk002";
-            data.Attributes.Add("Next");
-            data.TextMessage = "はい";
+            XMLDataMessage data = new XMLDataMessage();
+            data.id = "branch001";
+            //data.TargetID = "talk002";
+            data.attributes.Add("Next");
+            data.textMessage = "はい";
             XMLReference.Add(data);
 
-            XMLData data002 = new XMLData();
-            data002.SourceID = "branch002";
-            data002.TargetID = "talk003";
-            data002.Attributes.Add("End");
-            data002.TextMessage = "いいえ";
+            XMLDataMessage data002 = new XMLDataMessage();
+            data002.id = "branch002";
+            //data002.TargetID = "talk003";
+            data002.attributes.Add("End");
+            data002.textMessage = "いいえ";
             XMLReference.Add(data002);
 
 
@@ -92,22 +98,22 @@ public class XMLAnalyzer : MonoBehaviour
         }
         else if(SourceID == "branch001")
         {
-            XMLData data = new XMLData();
-            data.SourceID = "talk002";
-            data.TargetID = "null";
-            data.Attributes.Add("AddTask");
-            data.TextMessage = "ですよね！じゃあパパっと入力しちゃいましょう！";
+            XMLDataMessage data = new XMLDataMessage();
+            data.id = "talk002";
+            //data.TargetID = "null";
+            data.attributes.Add("AddTask");
+            data.textMessage = "ですよね！じゃあパパっと入力しちゃいましょう！";
             XMLReference.Add(data);
 
             //XMLReference.Add(new XMLData { SourceID = "talk002", TargetID = "null", Attribute = "AddTask", TextMessage = "ですよね！じゃあパパっと入力しちゃいましょう！" });
         }
         else if(SourceID == "branch002")
         {
-            XMLData data = new XMLData();
-            data.SourceID = "talk003";
-            data.TargetID = "null";
-            data.Attributes.Add("End");
-            data.TextMessage = "そうですか…。わかりました！";
+            XMLDataMessage data = new XMLDataMessage();
+            data.id = "talk003";
+            //data.TargetID = "null";
+            data.attributes.Add("End");
+            data.textMessage = "そうですか…。わかりました！";
             XMLReference.Add(data);
 
             //XMLReference.Add(new XMLData { SourceID = "talk003", TargetID = "null", Attribute = "End", TextMessage = "そうですか…。わかりました！" });

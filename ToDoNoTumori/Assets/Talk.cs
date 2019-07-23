@@ -7,7 +7,7 @@ public class Talk : MonoBehaviour
     // Start is called before the first frame update
     //public string tempSourceID;
     //public string tempAttribute;
-    public List<XMLAnalyzer.XMLData> tempTalkInfo = new List<XMLAnalyzer.XMLData>();
+    public List<XMLDataMessage> tempTalkInfo = new List<XMLDataMessage>();
     [SerializeField]
     private XMLAnalyzer xmlScript;
     [SerializeField]
@@ -17,11 +17,11 @@ public class Talk : MonoBehaviour
     void Start()
     {
         //List<XMLAnalyzer.XMLData> XMLReference = new List<XMLAnalyzer.XMLData>();
-        XMLAnalyzer.XMLData data = new XMLAnalyzer.XMLData();
-        data.SourceID = null;
-        data.TargetID = null;
-        data.Attributes.Add(null);
-        data.TextMessage = null;
+        XMLDataMessage data = new XMLDataMessage();
+        data.id = null;
+        //data.TargetID = null;
+        data.attributes.Add(null);
+        data.textMessage = null;
 
         tempTalkInfo.Add(data);
     }
@@ -32,16 +32,16 @@ public class Talk : MonoBehaviour
         tempTalkInfo = xmlScript.SearchFirstMessage();
         //tempSourceID = talkInfo[0].SourceID;
         //tempAttribute = talkInfo[0].Attribute;
-        messageScript.SetMessagePanel(tempTalkInfo[0].TextMessage);
+        messageScript.SetMessagePanel(tempTalkInfo[0].textMessage);
 
     }
 
-    public void CreateTalk(List<XMLAnalyzer.XMLData> nextTalkInfo)
+    public void CreateTalk(List<XMLDataMessage> nextTalkInfo)
     {
         tempTalkInfo = nextTalkInfo;
         //tempAttribute = nextTalkInfo[0].Attribute;
         //tempSourceID = nextTalkInfo[0].SourceID;
-        messageScript.SetMessagePanel(nextTalkInfo[0].TextMessage);
+        messageScript.SetMessagePanel(nextTalkInfo[0].textMessage);
     }
 
     // Update is called once per frame
