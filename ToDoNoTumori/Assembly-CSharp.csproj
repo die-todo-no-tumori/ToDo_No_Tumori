@@ -199,6 +199,7 @@
     <Compile Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\Motion\CubismMotionPreview.cs" />
     <Compile Include="Assets\Live2D\Cubism\Samples\Raycasting\RaycastHitDisplay.cs" />
     <Compile Include="Assets\Message.cs" />
+    <Compile Include="Assets\Scripts\XMLTest.cs" />
     <Compile Include="Assets\TagButtonScript.cs" />
     <Compile Include="Assets\Talk.cs" />
     <Compile Include="Assets\Task.cs" />
@@ -213,6 +214,7 @@
     <None Include="Assets\Live2D\Cubism\Samples\PerspectiveCamera\Description.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\AsyncBenchmark\Description.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\Demo\Description.txt" />
+    <None Include="Assets\Resources\commBasic1.xml" />
     <None Include="Assets\Live2D\Cubism\Rendering\Resources\Live2D\Cubism\Shaders\CubismCG.cginc" />
     <None Include="Assets\Live2D\Cubism\Rendering\Resources\Live2D\Cubism\Shaders\Mask.shader" />
     <None Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\Pose\Description.txt" />
@@ -225,7 +227,7 @@
     <None Include="Assets\Live2D\Cubism\Samples\LookAt\Description.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\Motion\Description.txt" />
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/H.A/Documents/GitHub/ToDo_No_Tumori/ToDoNoTumori/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/slici/Documents/GitHub/ToDo_No_Tumori/ToDoNoTumori/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
