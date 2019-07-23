@@ -33,7 +33,8 @@ public class XMLAnalyzer : MonoBehaviour
     private string talkID;
     //private List<string> NextMessageList;
 
-    
+    public List<XMLDataMessage> xmlDataMessage;
+    public List<XMLDataArrow> xmlDataArrow;
 
     void Start()
     {
