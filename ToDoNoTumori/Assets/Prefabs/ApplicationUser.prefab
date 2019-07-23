@@ -70,6 +70,7 @@ MonoBehaviour:
   positive_sound: {fileID: 8300000, guid: d66626041d1174723b07fcbcc61c6268, type: 3}
   negative_sound: {fileID: 8300000, guid: dd9f3abd899df4f05bd4500e2921249c, type: 3}
   task_tap_sound: {fileID: 8300000, guid: 119a71b2ba89246738ae39a1d63fdf2b, type: 3}
+  task_throw: {fileID: 8300000, guid: 1705bbfd12d30324595afccc31570b14, type: 3}
   task_menu_button: {fileID: 0}
   task_butto_parent: {fileID: 0}
   break_button: {fileID: 0}

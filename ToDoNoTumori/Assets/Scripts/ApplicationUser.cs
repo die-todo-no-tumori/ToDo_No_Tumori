@@ -135,6 +135,7 @@ public class ApplicationUser : MonoBehaviour
                 }
                 //離された瞬間
                 else if(touch.phase == TouchPhase.Ended){
+                    se_player.PlayOneShot(task_throw);
                     Vector2 direct = before_finger_pos - before_before_finger_pos;
                     catching_object_rigid.AddForce(direct * flick_power,ForceMode.VelocityChange);
                     catching_object_rigid.useGravity = true;
@@ -143,7 +144,6 @@ public class ApplicationUser : MonoBehaviour
                     isCatching = false;
                     before_before_finger_pos = Vector2.zero;
                     before_finger_pos = Vector2.zero;
-                    se_player.PlayOneShot(task_throw);
                 }
             }
         }
@@ -390,6 +390,7 @@ public class ApplicationUser : MonoBehaviour
         {
             yield return StartCoroutine(task_list_to_destroy[i].CallOnDisable());
         }
+        yield return new WaitForEndOfFrame();
         task_list_to_destroy.Clear();
         save_and_loader.SaveDatas();
     }

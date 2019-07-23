@@ -138,7 +138,10 @@ public class SaveAndLoader : MonoBehaviour
 			Importance = Importance.High,
 			Description = "GrasPattの通知"
 		};
-		
+
+        //いったん通知情報を初期化
+		AndroidNotificationCenter.CancelAllScheduledNotifications();
+        //チャンネルを登録
 		AndroidNotificationCenter.RegisterNotificationChannel(channel);
 	}
 	
@@ -148,11 +151,17 @@ public class SaveAndLoader : MonoBehaviour
 		AndroidNotification notification = new AndroidNotification{
 			Title = "期限の近いタスクがあります！",
 			Text = "今すぐパッとGraspしましょう}",
-			FireTime = System.DateTime.Now.AddSeconds(10)
+			FireTime = GetNotificationTime(taskData)
 		};
 		
 		AndroidNotificationCenter.SendNotification (notification , notification_channel_id);
 	}
+
+    private System.DateTime GetNotificationTime(TaskData tData){
+        System.DateTime time = System.DateTime.Parse(tData.task_limit);
+        time = System.DateTime.Parse(time.Year + "/" + time.Month + "/" + time.Day + "/ 06:00:00");
+        return time;
+    }
 
     //セーブ
     public void SaveDatas(){
@@ -482,6 +491,7 @@ public class SaveAndLoader : MonoBehaviour
         //画像を保存
         foreach(TaskData tData in taskRoot.task_datas){
             File.WriteAllBytes(Application.dataPath + "/Images/" + tData.task_name + ".png", tData.texture2D.EncodeToPNG());
+            AddNotification(tData);
         }
 
         string write_data = JsonUtility.ToJson(taskRoot);
