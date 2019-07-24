@@ -154,6 +154,8 @@ public class HistoryManager : MonoBehaviour
             delta.y = 520 * (vertical + 1);
             destroy_history_panel_rect.sizeDelta = delta;
         }
+        
+        Debug.Log("破壊履歴に追加");
     }
 
     //破壊履歴から削除
