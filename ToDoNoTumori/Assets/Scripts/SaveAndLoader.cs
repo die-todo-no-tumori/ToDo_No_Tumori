@@ -159,7 +159,7 @@ public class SaveAndLoader : MonoBehaviour
 
     private System.DateTime GetNotificationTime(TaskData tData){
         System.DateTime time = System.DateTime.Parse(tData.task_limit);
-        time = System.DateTime.Parse(time.Year + "/" + time.Month + "/" + time.Day + "/ 06:00:00");
+        time = System.DateTime.Parse(time.Year + "/" + time.Month + "/" + time.AddDays(Config.notification_shift_days) + "/ " + string.Format("{00}",Config.notification_hour) + ":00:00");
         return time;
     }
 
@@ -187,6 +187,8 @@ public class SaveAndLoader : MonoBehaviour
     private void LoadDatas(){
         LoadTaskObjects();
         LoadHistoryObjects();
+        //アプリ起動時にスケジュールされた通知データをいったん全消去するため、ロード直後に保存
+        SaveDatas();
     }
 
     //タスクデータを読み込み、タスクオブジェクトを生成する
@@ -511,6 +513,7 @@ public class SaveAndLoader : MonoBehaviour
         //画像を保存
         foreach(TaskData tData in taskRoot.task_datas){
             File.WriteAllBytes(Application.persistentDataPath + "/Images/" + tData.task_name + ".png", tData.texture2D.EncodeToPNG());
+            AddNotification(tData);
         }
 
         string write_data = JsonUtility.ToJson(taskRoot);

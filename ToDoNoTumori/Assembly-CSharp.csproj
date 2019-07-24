@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\HistoryObject.cs" />
      <Compile Include="Assets\Scripts\HistoryPanelButton.cs" />
      <Compile Include="Assets\Scripts\InputHstoryObject.cs" />
+     <Compile Include="Assets\Scripts\MethodTest.cs" />
      <Compile Include="Assets\Scripts\NegativeButton.cs" />
      <Compile Include="Assets\Scripts\OpenTakePictureMenuButton.cs" />
      <Compile Include="Assets\Scripts\PopUpObject.cs" />

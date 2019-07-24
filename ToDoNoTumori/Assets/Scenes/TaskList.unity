@@ -52,7 +52,7 @@ LightmapSettings:
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 1
-    m_EnableRealtimeLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 2
@@ -637,6 +637,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dodai 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1757922991553967788, guid: 3a2ec5165a8460e46897844920a19bf5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Dodai
       objectReference: {fileID: 0}
     - target: {fileID: 3332167283773932735, guid: 3a2ec5165a8460e46897844920a19bf5,
         type: 3}
@@ -1857,6 +1862,101 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 834163952}
+    - target: {fileID: 8475369265831829971, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369265831829971, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369264661728548, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369264661728548, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475369264661728548, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148325867072413827, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148325867072413827, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_WholeNumbers
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785587161377197117, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785587161377197117, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708466301421026625, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708466301421026625, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708466301421026625, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298591493202409595, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298591493202409595, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_Value
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723957781330288902, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723957781330288902, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723957781330288902, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746353751114996996, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746353751114996996, guid: 40a1e5b067b841749bc4a744913bb113,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a1e5b067b841749bc4a744913bb113, type: 3}
 --- !u!1 &8475369265756335974 stripped

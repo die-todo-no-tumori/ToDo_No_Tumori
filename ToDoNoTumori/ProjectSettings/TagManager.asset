@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CalenderCell
   - TaskObject
+  - Dodai
   layers:
   - Default
   - TransparentFX

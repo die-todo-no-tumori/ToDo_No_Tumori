@@ -108,7 +108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.0000000074506}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.8, y: 0.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6960076492477565451
@@ -289,7 +289,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9052485830608964799}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 30}
   m_Children:
@@ -362,9 +362,14 @@ MonoBehaviour:
     mode: 0
   destroy_effect: {fileID: 2656763348113513863}
   destroy_sound: {fileID: 8300000, guid: d66626041d1174723b07fcbcc61c6268, type: 3}
+  bound_sound: {fileID: 0}
+  se_player: {fileID: 0}
   color_blue: {fileID: 2100000, guid: 24726e26f62110642bbfe314a5c93ee1, type: 2}
+  color_blue_emit: {fileID: 2100000, guid: 634a66613dbfc074497f4445a2297ed0, type: 2}
   color_yellow: {fileID: 2100000, guid: a3118eea682742442a053ddeddf7c668, type: 2}
+  color_yellow_emit: {fileID: 2100000, guid: 108c647e9cdd6c842b4d666229dc143f, type: 2}
   color_red: {fileID: 2100000, guid: 094baf12ee84c82498b47f871b5dfacc, type: 2}
+  color_red_emit: {fileID: 2100000, guid: 3b262a6ea12068a4ab5bbccdd7d5bebf, type: 2}
 --- !u!54 &1197345316662425287
 Rigidbody:
   m_ObjectHideFlags: 0

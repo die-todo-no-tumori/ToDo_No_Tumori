@@ -38,20 +38,28 @@ public class TaskObject : MonoBehaviour
     //破壊サウンド
     [SerializeField]
     private AudioClip destroy_sound;
+    [SerializeField]
+    private AudioClip bound_sound;
     //音のスピーカー
-    //[SerializeField]
     private AudioSource se_player;
     private HistoryManager history_manager;
-    [SerializeField]
+    [SerializeField,Header("青色ノーマル")]
     private Material color_blue;
-    [SerializeField]
+
+    [SerializeField,Header("青色ハイライト")]
+    private Material color_blue_emit;
+    [SerializeField,Header("黄色ノーマル")]
     private Material color_yellow;
-    [SerializeField]
+    [SerializeField,Header("黄色ハイライト")]
+    private Material color_yellow_emit;
+    [SerializeField,Header("赤ノーマル")]
     private Material color_red;
+    [SerializeField,Header("赤ハイライト")]
+    private Material color_red_emit;
     
     void Start()
     {
-        se_player = GetComponent<AudioSource>();
+        se_player = Camera.main.gameObject.GetComponent<AudioSource>();
         history_manager = GameObject.Find("HistoryManager").GetComponent<HistoryManager>();
     }
 
@@ -90,12 +98,36 @@ public class TaskObject : MonoBehaviour
     //ハイライトの方法は検討中
     public void OnTapToHighlight()
     {
-        GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+        switch(GetComponent<Renderer>().sharedMaterial.name){
+            case "TaskBallBlue":
+                GetComponent<Renderer>().sharedMaterial = color_blue_emit;
+            break;
+            case "TaskBallYellow":
+                GetComponent<Renderer>().sharedMaterial = color_yellow_emit;
+            break;
+            case "TaskBallRed":
+                GetComponent<Renderer>().sharedMaterial = color_red_emit;
+            break;
+            default:
+            break;
+        }
     }
 
     public void OnTapToCancelHighlight()
     {
-        GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+        switch(GetComponent<Renderer>().sharedMaterial.name){
+            case "TaskBallBlue_Emit":
+                GetComponent<Renderer>().sharedMaterial = color_blue;
+            break;
+            case "TaskBallYellow_Emit":
+                GetComponent<Renderer>().sharedMaterial = color_yellow;
+            break;
+            case "TaskBallRed_Emit":
+                GetComponent<Renderer>().sharedMaterial = color_red;
+            break;
+            default:
+            break;
+        }
     }
 
     //破壊されるときにエフェクトと音を鳴らす
@@ -115,4 +147,12 @@ public class TaskObject : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    private void OnCollisionExit(Collision other) {
+        if(other.gameObject.tag != "DOdai"){
+            se_player.PlayOneShot(bound_sound);
+        }
+    }
+
+
 }

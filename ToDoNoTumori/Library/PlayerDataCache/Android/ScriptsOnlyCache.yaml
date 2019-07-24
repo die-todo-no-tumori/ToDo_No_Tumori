@@ -77,61 +77,61 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9200}
+      Script: {instanceID: 10168}
     - Class: 114
-      Script: {instanceID: 9226}
+      Script: {instanceID: 10192}
     - Class: 114
-      Script: {instanceID: 9228}
+      Script: {instanceID: 10212}
     - Class: 114
-      Script: {instanceID: 9248}
+      Script: {instanceID: 10214}
     - Class: 114
-      Script: {instanceID: 9250}
+      Script: {instanceID: 10220}
     - Class: 114
-      Script: {instanceID: 9256}
+      Script: {instanceID: 10226}
     - Class: 114
-      Script: {instanceID: 9262}
+      Script: {instanceID: 10234}
     - Class: 114
-      Script: {instanceID: 9270}
+      Script: {instanceID: 10242}
     - Class: 114
-      Script: {instanceID: 9278}
+      Script: {instanceID: 10256}
     - Class: 114
-      Script: {instanceID: 9292}
+      Script: {instanceID: 10260}
     - Class: 114
-      Script: {instanceID: 9296}
+      Script: {instanceID: 10262}
     - Class: 114
-      Script: {instanceID: 9298}
+      Script: {instanceID: 10268}
     - Class: 114
-      Script: {instanceID: 9304}
+      Script: {instanceID: 10270}
     - Class: 114
-      Script: {instanceID: 9306}
+      Script: {instanceID: 10272}
     - Class: 114
-      Script: {instanceID: 9308}
+      Script: {instanceID: 10392}
     - Class: 114
-      Script: {instanceID: 9432}
+      Script: {instanceID: 10412}
     - Class: 114
-      Script: {instanceID: 9454}
+      Script: {instanceID: 10420}
     - Class: 114
-      Script: {instanceID: 9462}
+      Script: {instanceID: 10430}
     - Class: 114
-      Script: {instanceID: 9474}
+      Script: {instanceID: 10438}
     - Class: 114
-      Script: {instanceID: 9486}
+      Script: {instanceID: 10440}
     - Class: 114
-      Script: {instanceID: 9488}
+      Script: {instanceID: 10452}
     - Class: 114
-      Script: {instanceID: 9490}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 9508}
+      Script: {instanceID: 10530}
     - Class: 114
-      Script: {instanceID: 9510}
+      Script: {instanceID: 10648}
     - Class: 114
-      Script: {instanceID: 9572}
+      Script: {instanceID: 11282}
     - Class: 114
-      Script: {instanceID: 9580}
+      Script: {instanceID: 11290}
     - Class: 114
-      Script: {instanceID: 9602}
+      Script: {instanceID: 11304}
     - Class: 114
-      Script: {instanceID: 9728}
+      Script: {instanceID: 11308}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -165,22 +165,10 @@ ScriptsOnlyBuild:
     className: ApplicationUser
   - hash:
       serializedVersion: 2
-      Hash: 969adefd0ca8d055019f541f4421963c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: DestroyHistoryObject
-  - hash:
-      serializedVersion: 2
       Hash: 5cae2e270dd867eb9c59ac61683ade56
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SaveAndLoader
-  - hash:
-      serializedVersion: 2
-      Hash: 27981c9c3e678fd49c89d7388d0bf9ba
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HistoryObject
   - hash:
       serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
@@ -597,16 +585,10 @@ ScriptsOnlyBuild:
     className: CalenderMaker
   - hash:
       serializedVersion: 2
-      Hash: 448612cdc0cb3147ec9ac349520ed4ee
+      Hash: 416a99942bb45675a6ca846a65fe7730
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TaskObject
-  - hash:
-      serializedVersion: 2
-      Hash: 854f25b386ab9f8cbc61c7fe3d489b6c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PopUpObject
   - hash:
       serializedVersion: 2
       Hash: 0c0d4a8f4a647cb00214bbe34d9b6f62
@@ -615,7 +597,7 @@ ScriptsOnlyBuild:
     className: CalenderCell
   - hash:
       serializedVersion: 2
-      Hash: 75a8bd697ca3ddf9c0a40f9a042613ac
+      Hash: 1c1ca9f4379260860a33f8728d1d2208
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Config
@@ -625,12 +607,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: OpenTakePictureMenuButton
-  - hash:
-      serializedVersion: 2
-      Hash: 27981c9c3e678fd49c89d7388d0bf9ba
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: InputHstoryObject
   - hash:
       serializedVersion: 2
       Hash: 88cc9df3c6fc697bfbeacd24c0d6f2d7
@@ -669,6 +645,48 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
+      Hash: 158f59c995b8640c74e1cb6be75d81de
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Kakera
+    className: PickerController
+  - hash:
+      serializedVersion: 2
+      Hash: d2002134efb9d9e81bf4fe4cd064bf75
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ButtonBase
+  - hash:
+      serializedVersion: 2
+      Hash: d2002134efb9d9e81bf4fe4cd064bf75
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NegativeButton
+  - hash:
+      serializedVersion: 2
+      Hash: 969adefd0ca8d055019f541f4421963c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DestroyHistoryObject
+  - hash:
+      serializedVersion: 2
+      Hash: 27981c9c3e678fd49c89d7388d0bf9ba
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HistoryObject
+  - hash:
+      serializedVersion: 2
+      Hash: 854f25b386ab9f8cbc61c7fe3d489b6c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PopUpObject
+  - hash:
+      serializedVersion: 2
+      Hash: 27981c9c3e678fd49c89d7388d0bf9ba
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: InputHstoryObject
+  - hash:
+      serializedVersion: 2
       Hash: 27981c9c3e678fd49c89d7388d0bf9ba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -693,28 +711,16 @@ ScriptsOnlyBuild:
     className: HistoryManager
   - hash:
       serializedVersion: 2
-      Hash: 158f59c995b8640c74e1cb6be75d81de
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: Kakera
-    className: PickerController
-  - hash:
-      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TapTimer
   - hash:
       serializedVersion: 2
-      Hash: d2002134efb9d9e81bf4fe4cd064bf75
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: ButtonBase
-  - hash:
-      serializedVersion: 2
-      Hash: d2002134efb9d9e81bf4fe4cd064bf75
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: NegativeButton
+    className: MethodTest
   platform: 13
   scenePathNames:
   - Assets/Scenes/TaskList.unity
