@@ -16,6 +16,7 @@ public class XMLDataMessage
 
 public class XMLDataArrow
 {
+    public string choice;
     public string sourceID;
     public string targetID;
     public List<string> attributes;
@@ -75,6 +76,17 @@ public class XMLAnalyzer : MonoBehaviour
         NextMessageList.Add("TestMessage_001");
         NextMessageList.Add("TestMessage_002");
         */
+
+        //Arrowリストを初期化
+
+
+        //引数のIDを持つArrowを探してArrowリストに追加
+
+
+        //追加したArrowそれぞれのtargetIDに該当するMessageをメッセージリストに追加
+
+
+        //メッセージリストを返す
 
 
         if (SourceID == "first001")

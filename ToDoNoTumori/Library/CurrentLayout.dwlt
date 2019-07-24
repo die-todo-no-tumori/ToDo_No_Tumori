@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 444}
   m_MaxSize: {x: 22012, y: 14044}
   vertical: 0
-  controlID: 186
+  controlID: 158
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 444}
   m_MaxSize: {x: 4002, y: 8044}
   vertical: 1
-  controlID: 59
+  controlID: 159
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -318,8 +318,8 @@ MonoBehaviour:
     y: 629
     width: 906
     height: 358
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 104, y: 122}
+  m_MaxSize: {x: 4004, y: 4022}
   m_ActualView: {fileID: 23}
   m_Panes:
   - {fileID: 23}
@@ -1056,7 +1056,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: a8f9ffff
+      m_ExpandedIDs: 6efaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1118,20 +1118,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources
+  - Assets/Scripts
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\slici\Documents\GitHub\ToDo_No_Tumori\ToDoNoTumori
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: fc3e0000
-    m_LastClickedID: 16124
-    m_ExpandedIDs: 00000000462d00003a2f00007e2f0000e03e0000e23e0000e43e000000ca9a3b
+    m_SelectedIDs: 169b0000
+    m_LastClickedID: 39702
+    m_ExpandedIDs: 000000003a980000569a0000a29a000068aa00006aaa00006caa000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1159,7 +1159,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 9a590000
     m_LastClickedID: 22938
-    m_ExpandedIDs: 00000000462d00003a2f00007e2f0000e03e0000e23e0000e43e0000
+    m_ExpandedIDs: 000000003a980000569a0000a29a000068aa00006aaa00006caa0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1190,18 +1190,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Resources
-      m_OriginalName: Resources
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 16124
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 12}
     m_CreateAssetUtility:
