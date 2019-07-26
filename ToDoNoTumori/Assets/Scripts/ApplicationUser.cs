@@ -93,6 +93,11 @@ public class ApplicationUser : MonoBehaviour
     private SaveAndLoader save_and_loader;
     [SerializeField,Header("タスクオブジェクトを飛ばす力")]
     private float flick_power;
+    [SerializeField]
+    private int fix;
+
+    //タスク作成中は、タスクオブジェクトに影響が出ないように制御
+    private bool is_creating_task;
     
     private Vector2 before_finger_pos;
     private Vector2 before_before_finger_pos;
@@ -103,6 +108,7 @@ public class ApplicationUser : MonoBehaviour
         taskInputManager = GameObject.Find("TaskInputManager").GetComponent<TaskInputManager>();
         isCatching = false;
         isJudging = false;
+        is_creating_task = false;
         mode = Mode.Normal;
         task_list_to_destroy = new List<TaskObject>();
     }
@@ -111,7 +117,8 @@ public class ApplicationUser : MonoBehaviour
 
     void Update()
     {
-
+        if(is_creating_task)
+            return;
 
         //タスクオブジェクトを動かす
         if (catching_object != null && isCatching)
@@ -120,7 +127,7 @@ public class ApplicationUser : MonoBehaviour
             {
                 Touch touch = Input.GetTouch(0);
                 if(touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary){
-                    if(270 <= touch.position.x && touch.position.x <= 1150){
+                    if(270 <= touch.position.x && touch.position.x <= 1150 && touch.position.y >= 550){
                         if(before_finger_pos == Vector2.zero){
                             before_finger_pos = touch.position;
                         }else
@@ -217,7 +224,6 @@ public class ApplicationUser : MonoBehaviour
             se_player.PlayOneShot(task_tap_sound);
             Vector2 popPos = Camera.main.WorldToScreenPoint(taskObject.transform.position);
             TaskData taskData = taskObject.GetComponent<TaskObject>().task_data;
-            int fix = 100;
             if(detail_popup != null)
             {
                 detail_popup.SetActive(true);
@@ -404,6 +410,7 @@ public class ApplicationUser : MonoBehaviour
     //タスクの作成を行うコルーチンを呼び出すメソッド
     public IEnumerator CreateTaskCor(bool mode)
     {
+        is_creating_task = true;
         TaskData taskData = null;
         yield return StartCoroutine(taskInputManager.MakeTask(data => taskData = data,mode));
         if(taskData != null){
@@ -414,5 +421,6 @@ public class ApplicationUser : MonoBehaviour
             yield return null;
             save_and_loader.SaveDatas();
         }
+        is_creating_task = false;
     }
 }

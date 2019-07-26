@@ -2111,6 +2111,11 @@ PrefabInstance:
       propertyPath: light_normal_color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8816140358307209944, guid: 7f4ea4621750d544689b70f8bc1c631f,
+        type: 3}
+      propertyPath: fix
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8816140358307209947, guid: 7f4ea4621750d544689b70f8bc1c631f,
         type: 3}
       propertyPath: m_LocalPosition.x

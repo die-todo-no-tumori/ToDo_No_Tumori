@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7537124753825671072}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Dodai
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546558672416602882}
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0.0084, y: 0.0028, z: -0.0098}
+  m_LocalPosition: {x: 0.00958, y: 0.0028, z: -0.0108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3332167283773932735}
@@ -42,7 +42,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.005, y: 0.01, z: 0.01}
+  m_Size: {x: 0.009, y: 0.01, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1757922991553967788
 GameObject:
@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 25248812088083056}
   - component: {fileID: 2248378379339786248}
   - component: {fileID: 8545751692718193008}
-  - component: {fileID: 2394793882964995969}
   m_Layer: 0
   m_Name: Dodai 1
   m_TagString: Untagged
@@ -153,19 +152,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.004999999, z: 0.14527296}
   m_Center: {x: 0.02, y: 0.0024999995, z: 0.052636486}
---- !u!65 &2394793882964995969
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757922991553967788}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.005, z: 0.03}
-  m_Center: {x: 0, y: 0.0025000002, z: 0.12}
 --- !u!1 &5336463307225244271
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +164,7 @@ GameObject:
   - component: {fileID: 5101981978248257919}
   m_Layer: 0
   m_Name: GameObject (2)
-  m_TagString: Untagged
+  m_TagString: Dodai
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,7 +177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5336463307225244271}
   m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -0.00821, y: 0.0028, z: -0.0098}
+  m_LocalPosition: {x: -0.00906, y: 0.0028, z: -0.0105}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3332167283773932735}
@@ -208,7 +194,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.005, y: 0.01, z: 0.01}
+  m_Size: {x: 0.009, y: 0.01, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7092975785803414708
 GameObject:
@@ -222,7 +208,7 @@ GameObject:
   - component: {fileID: 3753110216980350001}
   m_Layer: 0
   m_Name: GameObject (1)
-  m_TagString: Untagged
+  m_TagString: Dodai
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,7 +221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7092975785803414708}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.0028, z: -0.0122}
+  m_LocalPosition: {x: 0, y: 0.0028, z: -0.0139}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3332167283773932735}
@@ -252,5 +238,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.005, y: 0.01, z: 0.01}
+  m_Size: {x: 0.009, y: 0.01, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}

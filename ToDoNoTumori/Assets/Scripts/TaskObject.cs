@@ -144,16 +144,17 @@ public class TaskObject : MonoBehaviour
             ParticleSystem particleSystem = destroy_effect.GetComponent<ParticleSystem>();
             if(destroy_sound != null)
             	se_player.PlayOneShot(destroy_sound);
+            //破壊するまえに一度見えなくする
             GetComponent<MeshRenderer>().enabled = false;
-            //if (particleSystem.isPlaying == false)
-                particleSystem.Play();
+            transform.GetChild(0).gameObject.SetActive(false);
+            particleSystem.Play();
             while (particleSystem.isPlaying || se_player.isPlaying) yield return null;
         }
         Destroy(gameObject);
     }
 
     private void OnCollisionExit(Collision other) {
-        if(other.gameObject.tag != "Dodai"){
+        if(other.gameObject.tag == "Dodai"){
             se_player.PlayOneShot(bound_sound);
         }
     }

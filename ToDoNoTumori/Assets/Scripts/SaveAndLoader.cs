@@ -32,7 +32,6 @@ public class SaveAndLoader : MonoBehaviour
 
     IEnumerator Start()
     {
-        Debug.Log(Application.persistentDataPath);
     	notification_channel_id = "GrasPattChannel";
     	notification_channel_name = "GrasPatt";
 
