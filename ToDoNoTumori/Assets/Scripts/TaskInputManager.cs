@@ -312,8 +312,8 @@ public class TaskInputManager : MonoBehaviour
         takedTexture2D.SetPixels(webCamTexture.GetPixels());
         takedTexture2D.Apply();
         //タスク名を入力（現在は日付）
-        add_task_name = System.DateTime.Now.ToLongDateString();
-        // Debug.Log(add_task_name);
+        add_task_name = System.DateTime.Now.ToLongDateString() + " " + System.DateTime.Now.ToLongTimeString();
+        // Debug.Log(add_task_name);""
         //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
         //カメラを止める
@@ -345,7 +345,7 @@ public class TaskInputManager : MonoBehaviour
         }
         choicedTexture2D = (Texture2D)display_choice.texture;
         //タスク名を入力（現在は日付）
-        add_task_name = System.DateTime.Now.ToLongDateString();
+        add_task_name = System.DateTime.Now.ToLongDateString() + " " + System.DateTime.Now.ToLongTimeString();
         //処理が終わるまで待つ
         yield return new WaitForEndOfFrame();
         //取り込んだデータを返す

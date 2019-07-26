@@ -408,8 +408,10 @@ public class ApplicationUser : MonoBehaviour
         yield return StartCoroutine(taskInputManager.MakeTask(data => taskData = data,mode));
         if(taskData != null){
             InstantiateTaskObject(taskData,mode);
+            yield return null;
             history_manager.AddToInputHistory(taskData);
             history_manager.AddToTotalHisttory(taskData);
+            yield return null;
             save_and_loader.SaveDatas();
         }
     }

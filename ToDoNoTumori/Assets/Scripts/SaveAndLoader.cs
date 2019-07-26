@@ -1,4 +1,5 @@
 ﻿using System.IO;    
+using System.Security;
 using System.Collections;
 using UnityEngine;
 using Unity.Notifications.Android;
@@ -31,41 +32,42 @@ public class SaveAndLoader : MonoBehaviour
 
     IEnumerator Start()
     {
+        Debug.Log(Application.persistentDataPath);
     	notification_channel_id = "GrasPattChannel";
     	notification_channel_name = "GrasPatt";
 
 #if UNITY_EDITOR
-        DirectoryInfo directoryInfoImages = new DirectoryInfo(Application.dataPath + "/Images");
+        DirectoryInfo directoryInfoImages = new DirectoryInfo(Application.persistentDataPath + "/Images");
         if(directoryInfoImages.Exists == false){
             directoryInfoImages.Create();
             yield return null;
         }
         
-        DirectoryInfo directoryInfoDatas = new DirectoryInfo(Application.dataPath + "/Datas");
+        DirectoryInfo directoryInfoDatas = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if(directoryInfoDatas.Exists == false){
             directoryInfoDatas.Create();
             yield return null;
         }
 
-        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/Data.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/Data.json");
         if(fileInfo.Exists == false){
             fileInfo.Create();
             yield return null;
         }
 
-        FileInfo fileInfoInput = new FileInfo(Application.dataPath + "/Datas/InputHistory.json");
+        FileInfo fileInfoInput = new FileInfo(Application.persistentDataPath + "/Datas/InputHistory.json");
         if(fileInfoInput.Exists == false){
             fileInfoInput.Create();
             yield return null;
         }
         
-        FileInfo fileInfoDestroy = new FileInfo(Application.dataPath + "/Datas/DestroyHistory.json");
+        FileInfo fileInfoDestroy = new FileInfo(Application.persistentDataPath + "/Datas/DestroyHistory.json");
         if(fileInfoDestroy.Exists == false){
             fileInfoDestroy.Create();
             yield return null;
         }
         
-        FileInfo fileInfoTotal = new FileInfo(Application.dataPath + "/Datas/TotalHistory.json");
+        FileInfo fileInfoTotal = new FileInfo(Application.persistentDataPath + "/Datas/TotalHistory.json");
         if(fileInfoTotal.Exists == false){
             fileInfoTotal.Create();
             yield return null;
@@ -78,7 +80,7 @@ public class SaveAndLoader : MonoBehaviour
 #if UNITY_ANDROID && !UNITY_EDITOR
 
 		//通知のチャンネルを作成して通知センターに登録
-		CreateNotificationChannel();
+		// CreateNotificationChannel();
 
 		//保存する場所が存在するか確認
         //これは実機環境のみで作動
@@ -232,15 +234,15 @@ public class SaveAndLoader : MonoBehaviour
     {
 #if UNITY_EDITOR
 
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Datas");
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if(directoryInfo.Exists == false)
             return null;
 
-        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/Data.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/Data.json");
         if (fileInfo.Exists == false)
             return null;
 
-        using(StreamReader streamReader = new StreamReader(Application.dataPath + "/Datas/Data.json"))
+        using(StreamReader streamReader = new StreamReader(Application.persistentDataPath + "/Datas/Data.json"))
         {
             string data = streamReader.ReadToEnd();
             return data;
@@ -269,12 +271,12 @@ public class SaveAndLoader : MonoBehaviour
     private string ReadInputHistoryData()
     {
 #if UNITY_EDITOR
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Datas");
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if (directoryInfo.Exists == false){
             return null;
         }
 
-        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/InputHistory.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/InputHistory.json");
         if (fileInfo.Exists == false)
             return null;
 
@@ -307,12 +309,12 @@ public class SaveAndLoader : MonoBehaviour
     private string ReadDestroyHistoryData()
     {
 #if UNITY_EDITOR
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Datas");
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if (directoryInfo.Exists == false){
             return null;
         }
 
-        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/DetroyHistory.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/DetroyHistory.json");
         if (fileInfo.Exists == false)
             return null;
 
@@ -344,12 +346,12 @@ public class SaveAndLoader : MonoBehaviour
     private string ReadTotalHistoryData()
     {
 #if UNITY_EDITOR
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Datas");
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/Datas");
         if (directoryInfo.Exists == false){
             return null;
         }
 
-        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/TotalHistory.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + "/Datas/TotalHistory.json");
         if (fileInfo.Exists == false)
             return null;
 
@@ -395,7 +397,7 @@ public class SaveAndLoader : MonoBehaviour
 #if UNITY_ANDROID && !UNITY_EDITOR
             textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
 #elif UNITY_EDITOR
-            textureData = File.ReadAllBytes(Application.dataPath + "/Images/" + taskData.task_name + ".png");
+            textureData = File.ReadAllBytes(Application.persistentDataPath + @"\Images\" + taskData.task_name + ".png");
 #endif
             Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
@@ -414,7 +416,7 @@ public class SaveAndLoader : MonoBehaviour
 #if UNITY_ANDROID && !UNITY_EDITOR
             textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
 #elif UNITY_EDITOR
-            textureData = File.ReadAllBytes(Application.dataPath + "/Images/" + taskData.task_name + ".png");
+            textureData = File.ReadAllBytes(Application.persistentDataPath + @"\Images\" + taskData.task_name + ".png");
 #endif
             Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
@@ -431,7 +433,7 @@ public class SaveAndLoader : MonoBehaviour
 #if UNITY_ANDROID && !UNITY_EDITOR
             textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
 #elif UNITY_EDITOR
-            textureData = File.ReadAllBytes(Application.dataPath + "/Images/" + taskData.task_name + ".png");
+            textureData = File.ReadAllBytes(Application.persistentDataPath + @"\Images\" + taskData.task_name + ".png");
 #endif            
             Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
@@ -448,7 +450,7 @@ public class SaveAndLoader : MonoBehaviour
 #if UNITY_ANDROID && !UNITY_EDITOR
             textureData = File.ReadAllBytes(Application.persistentDataPath + "/Images/" + taskData.task_name + ".png");
 #elif UNITY_EDITOR
-            textureData = File.ReadAllBytes(Application.dataPath + "/Images/" + taskData.task_name + ".png");
+            textureData = File.ReadAllBytes(Application.persistentDataPath + @"\Images\" + taskData.task_name + ".png");
 #endif
             Texture2D texture2D = new Texture2D(1200,1200,TextureFormat.ARGB32,false);
             texture2D.LoadImage(textureData);
@@ -475,6 +477,7 @@ public class SaveAndLoader : MonoBehaviour
     private TaskRoot CollectHistoryData(GameObject parent){
         TaskRoot taskRoot = new TaskRoot();
         HistoryObject[] historyObjects = parent.GetComponentsInChildren<HistoryObject>();
+        Debug.Log("history : " + historyObjects.Length);
         foreach(HistoryObject historyObject in historyObjects){
             taskRoot.task_datas.Add(historyObject.task_data);
         }
@@ -485,15 +488,18 @@ public class SaveAndLoader : MonoBehaviour
     private void WriteTaskData(TaskRoot taskRoot)
     {
 #if UNITY_EDITOR
+        
+
         //データの保存先ファイルが存在するかどうかを確認し、存在しなければ作成
-        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/Data.json");
+        FileInfo fileInfo = new FileInfo(Application.persistentDataPath + @"\Datas\Data.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
 
         //画像を保存
         foreach(TaskData tData in taskRoot.task_datas){
-            File.WriteAllBytes(Application.dataPath + "/Images/" + tData.task_name + ".png", tData.texture2D.EncodeToPNG());
-            AddNotification(tData);
+            Debug.Log(tData.task_name);
+            File.WriteAllBytes(Application.persistentDataPath + @"\Images\" + tData.task_name + ".png", tData.texture2D.EncodeToPNG());
+            // AddNotification(tData);
         }
 
         string write_data = JsonUtility.ToJson(taskRoot);
@@ -513,7 +519,7 @@ public class SaveAndLoader : MonoBehaviour
         //画像を保存
         foreach(TaskData tData in taskRoot.task_datas){
             File.WriteAllBytes(Application.persistentDataPath + "/Images/" + tData.task_name + ".png", tData.texture2D.EncodeToPNG());
-            AddNotification(tData);
+            // AddNotification(tData);
         }
 
         string write_data = JsonUtility.ToJson(taskRoot);
@@ -528,7 +534,7 @@ public class SaveAndLoader : MonoBehaviour
     private void WriteInputHistoryData(TaskRoot taskRoot)
     {
 #if UNITY_EDITOR
-        FileInfo fileInfo = new FileInfo(Application.dataPath + "/Datas/InputHistory.json");
+        FileInfo fileInfo = new FileInfo(Application.dataPath + @"\Datas\InputHistory.json");
         if (fileInfo.Exists == false)
             fileInfo.Create();
 

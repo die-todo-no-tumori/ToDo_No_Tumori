@@ -133,7 +133,9 @@ public class TaskObject : MonoBehaviour
     //破壊されるときにエフェクトと音を鳴らす
     public IEnumerator CallOnDisable()
     {
-        history_manager.AddToDestroyHistory(task_data);
+        TaskData data = new TaskData();
+        data = task_data;
+        history_manager.AddToDestroyHistory(data);
         history_manager.RemoveFromInputHistory(task_data);
 
         if(destroy_effect != null && se_player != null)
@@ -142,6 +144,7 @@ public class TaskObject : MonoBehaviour
             ParticleSystem particleSystem = destroy_effect.GetComponent<ParticleSystem>();
             if(destroy_sound != null)
             	se_player.PlayOneShot(destroy_sound);
+            GetComponent<MeshRenderer>().enabled = false;
             //if (particleSystem.isPlaying == false)
                 particleSystem.Play();
             while (particleSystem.isPlaying || se_player.isPlaying) yield return null;
