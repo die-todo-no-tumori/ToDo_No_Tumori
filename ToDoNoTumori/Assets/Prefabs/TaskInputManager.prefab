@@ -82,4 +82,4 @@ MonoBehaviour:
   history_button: {fileID: 0}
   config_button: {fileID: 0}
   se_player: {fileID: 0}
-  camera_se: {fileID: 0}
+  camera_se: {fileID: 8300000, guid: b4d3c8e1ddcee6f48810aea66b0962d5, type: 3}

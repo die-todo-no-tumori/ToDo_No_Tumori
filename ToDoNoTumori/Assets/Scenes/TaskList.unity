@@ -1349,6 +1349,11 @@ PrefabInstance:
       propertyPath: control_image
       value: 
       objectReference: {fileID: 1440934916}
+    - target: {fileID: 4097782730596263001, guid: 424c6e3cfaaf7df4ab5a6fa1ef5ebf52,
+        type: 3}
+      propertyPath: se_player
+      value: 
+      objectReference: {fileID: 465941353}
     - target: {fileID: 4097782730596263000, guid: 424c6e3cfaaf7df4ab5a6fa1ef5ebf52,
         type: 3}
       propertyPath: m_LocalPosition.x
