@@ -209,6 +209,7 @@
     <Compile Include="Assets\XMLAnalyzer.cs" />
     <None Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\MotionFade\Description.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\Masking\Description.txt" />
+    <None Include="Assets\Resources\commRecmend.xml" />
     <None Include="Assets\Live2D\Cubism\Samples\Animation\Description.txt" />
     <None Include="Assets\Live2D\Cubism\License.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\PerspectiveCamera\Description.txt" />
@@ -220,6 +221,7 @@
     <None Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\Pose\Description.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\Models\License.txt" />
     <None Include="Assets\Live2D\Cubism\Samples\Raycasting\Description.txt" />
+    <None Include="Assets\Resources\commBasic.xml" />
     <None Include="Assets\Live2D\Cubism\Plugins\RedistributableFiles.txt" />
     <None Include="Assets\Live2D\Cubism\Rendering\Resources\Live2D\Cubism\Shaders\Unlit.shader" />
     <None Include="Assets\Live2D\Cubism\Samples\OriginalWorkflow\Expression\Description.txt" />

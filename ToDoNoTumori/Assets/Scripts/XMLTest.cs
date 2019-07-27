@@ -12,9 +12,15 @@ public class XMLTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ReadXMLFile("commBasic1");
-        Debug.Log(xMLAnalyzer.xmlDataMessage.Count);
+        ReadXMLFile("commBasic");
 
+        //Debug.Log(xMLAnalyzer.xmlDataMessage.Count);
+        foreach(XMLDataMessage m in xMLAnalyzer.xmlDataMessage)
+        {
+            Debug.Log(m.kind);
+        }
+        //ReadXMLFile("commRecmend"); 保留
+        //Debug.Log(xMLAnalyzer.xmlDataMessage.Count);
     }
 
 
@@ -38,18 +44,22 @@ public class XMLTest : MonoBehaviour
             if (element.Attribute("choice") != null)
             {
                 XMLDataArrow arrow = new XMLDataArrow();
-                arrow.choice = element.Attribute("choice").ToString();
-                arrow.sourceID = element.Element("mxCell").Attribute("source").ToString();
-                arrow.targetID = element.Element("mxCell").Attribute("target").ToString();
+                arrow.choice = element.Attribute("choice").Value;
+                arrow.sourceID = element.Element("mxCell").Attribute("source").Value;
+                arrow.targetID = element.Element("mxCell").Attribute("target").Value;
                 xMLAnalyzer.xmlDataArrow.Add(arrow);
             }
             //それ以外だったら
             else
             {
                 XMLDataMessage message = new XMLDataMessage();
-                message.id = element.Attribute("id").ToString();
-                message.textMessage = element.Attribute("text").ToString();
+                message.id = element.Attribute("id").Value;
+                message.textMessage = element.Attribute("text").Value;
+                
+                if (element.Attribute("kind") != null) message.kind = element.Attribute("kind").Value;
+                if (element.Attribute("kind") != null) message.attributes.Add(element.Attribute("status").Value);
                 xMLAnalyzer.xmlDataMessage.Add(message);
+                //Debug.Log(message.textMessage);
             }
         }
     }

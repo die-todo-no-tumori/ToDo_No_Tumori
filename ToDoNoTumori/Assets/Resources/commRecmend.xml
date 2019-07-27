@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="857" dy="684" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <object label="" choice="0" id="LpEFm0rvVKJTRMfepjBh-1">
+      <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="LpEFm0rvVKJTRMfepjBh-4" target="LpEFm0rvVKJTRMfepjBh-5" edge="1">
+        <mxGeometry relative="1" as="geometry"/>
+      </mxCell>
+    </object>
+    <object label="" choice="1" id="LpEFm0rvVKJTRMfepjBh-2">
+      <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="LpEFm0rvVKJTRMfepjBh-4" target="LpEFm0rvVKJTRMfepjBh-6" edge="1">
+        <mxGeometry relative="1" as="geometry"/>
+      </mxCell>
+    </object>
+    <object label="" choice="2" id="LpEFm0rvVKJTRMfepjBh-3">
+      <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="LpEFm0rvVKJTRMfepjBh-4" target="LpEFm0rvVKJTRMfepjBh-7" edge="1">
+        <mxGeometry relative="1" as="geometry"/>
+      </mxCell>
+    </object>
+    <object label="" text="オススメだね！何しよっか？" id="LpEFm0rvVKJTRMfepjBh-4">
+      <mxCell style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxGeometry x="80" y="40" width="120" height="80" as="geometry"/>
+      </mxCell>
+    </object>
+    <object label="" text="イラストだね！ん～どれがいいかな～？" id="LpEFm0rvVKJTRMfepjBh-5">
+      <mxCell style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxGeometry x="470" y="40" width="120" height="80" as="geometry"/>
+      </mxCell>
+    </object>
+    <object label="" text="小説を書きたいと…。ふむふむ。" id="LpEFm0rvVKJTRMfepjBh-6">
+      <mxCell style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxGeometry x="470" y="160" width="120" height="80" as="geometry"/>
+      </mxCell>
+    </object>
+    <object label="" text="音楽だね！こんなのどうどう？" id="LpEFm0rvVKJTRMfepjBh-7">
+      <mxCell style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxGeometry x="470" y="280" width="120" height="80" as="geometry"/>
+      </mxCell>
+    </object>
+  </root>
+</mxGraphModel>
