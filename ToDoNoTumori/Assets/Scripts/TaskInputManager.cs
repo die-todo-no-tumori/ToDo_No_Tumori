@@ -533,7 +533,7 @@ public class TaskInputManager : MonoBehaviour
     public void TakePicture()
     {
         taked_picture = true;
-        #if UNITY_ANDROIO
+        #if UNITY_ANDROID
         if(se_player != null && camera_se != null)
             se_player.PlayOneShot(camera_se);
         #endif

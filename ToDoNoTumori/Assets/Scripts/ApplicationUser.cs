@@ -119,6 +119,7 @@ public class ApplicationUser : MonoBehaviour
     {
         if(is_creating_task)
             return;
+        Debug.Log((Input.touchCount == 1) ? Input.GetTouch(0).position.x:0);
 
         //タスクオブジェクトを動かす
         if (catching_object != null && isCatching)
