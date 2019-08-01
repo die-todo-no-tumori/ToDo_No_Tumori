@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403ae2dd693bb1d4b924f6b8d206b053, type: 3}
   m_Name: Tasuco.fadeMotionList
   m_EditorClassIdentifier: 
-  MotionInstanceIds: 4ecaffff42caffff3acaffff32caffff6cc0ffffa2bbffffdeb7ffff
+  MotionInstanceIds: 4ecaffff42caffff3acaffff32caffff6cc0ffffa2bbffffdeb7ffffc4280000c0280000c8280000e0280000dc280000b8280000cc280000
   CubismFadeMotionObjects:
   - {fileID: 11400000, guid: 574afdee2e46ff042a2f5f227aa9f4d3, type: 2}
   - {fileID: 11400000, guid: e5129936950b0d240828dc4eb78d4a6d, type: 2}
@@ -20,4 +20,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e36b7bda3d3a73c40ae4f2f201b61f07, type: 2}
   - {fileID: 11400000, guid: 6663724533737f44e832f655bc7d968c, type: 2}
   - {fileID: 11400000, guid: 10b84629063716348b306ef47dee877c, type: 2}
+  - {fileID: 11400000, guid: ffe7ca061ab1b7c498c589d9d043b566, type: 2}
+  - {fileID: 11400000, guid: 574afdee2e46ff042a2f5f227aa9f4d3, type: 2}
+  - {fileID: 11400000, guid: e5129936950b0d240828dc4eb78d4a6d, type: 2}
+  - {fileID: 11400000, guid: 6663724533737f44e832f655bc7d968c, type: 2}
+  - {fileID: 11400000, guid: 05f95b47d1aac594993b12a5e294c9df, type: 2}
+  - {fileID: 11400000, guid: 10b84629063716348b306ef47dee877c, type: 2}
+  - {fileID: 11400000, guid: e36b7bda3d3a73c40ae4f2f201b61f07, type: 2}
   - {fileID: 11400000, guid: ffe7ca061ab1b7c498c589d9d043b566, type: 2}

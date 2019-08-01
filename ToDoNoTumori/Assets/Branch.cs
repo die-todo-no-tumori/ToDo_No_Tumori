@@ -37,19 +37,23 @@ public class Branch : MonoBehaviour
         //選択肢画面を表示
         transform.GetChild(0).gameObject.SetActive(true);
 
+        NextMessageList = xMLAnalyzer.SearchNextMessage(sourceID);
+        //メッセージ内容をイエスとノーの選択肢のテキストに流し込み
+        YesText.text = NextMessageList[0].textMessage;
+        NoText.text = NextMessageList[1].textMessage;
+
         /*
         for (int ArrayCount = 0; ArrayCount <=  xMLAnalyzer.SearchNextMessage(talkID).Count ; ArrayCount++)
         {
             
         }
+
+
         */
-        if (sourceID == "first001")
-        {
-            NextMessageList = xMLAnalyzer.SearchNextMessage(sourceID);
-            //メッセージ内容をイエスとノーの選択肢のテキストに流し込み
-            YesText.text = NextMessageList[0].textMessage;
-            NoText.text = NextMessageList[1].textMessage;
-        }
+        //if (sourceID == "first001")
+        //{
+            
+        //}
         
     }
 
@@ -58,10 +62,12 @@ public class Branch : MonoBehaviour
         //選択肢に続くメッセージを表示する
         if(YESorNO == "YES")
         {
+            Debug.Log(NextMessageList[0].id);
             talkScript.CreateTalk(xMLAnalyzer.SearchNextMessage(NextMessageList[0].id));
         }
         else if(YESorNO == "NO")
         {
+            Debug.Log(NextMessageList[1].id);
             talkScript.CreateTalk(xMLAnalyzer.SearchNextMessage(NextMessageList[1].id));
         }
         

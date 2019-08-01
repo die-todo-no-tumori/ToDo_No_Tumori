@@ -38,7 +38,10 @@ public class Talk : MonoBehaviour
 
     public void CreateTalk(List<XMLDataMessage> nextTalkInfo)
     {
+        //string attribute;
         tempTalkInfo = nextTalkInfo;
+        //attribute = tempTalkInfo[0].attributes[0];
+        //Debug.Log(attribute);
         //tempAttribute = nextTalkInfo[0].Attribute;
         //tempSourceID = nextTalkInfo[0].SourceID;
         messageScript.SetMessagePanel(nextTalkInfo[0].textMessage);

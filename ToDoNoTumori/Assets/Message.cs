@@ -31,6 +31,10 @@ public class Message : MonoBehaviour
     //　クリックアイコンの点滅秒数
     [SerializeField]
     private float clickFlashTime = 0.2f;
+    // Tasucoのアニメーター
+    private Animator tasucoAnimator;
+    //一時的な感情の保存
+    private char tempEmote;
     //talkスクリプト
     [SerializeField]
     Talk talkScript;
@@ -46,6 +50,8 @@ public class Message : MonoBehaviour
     private bool isEndMessage = false;
     void Start()
     {
+        tasucoAnimator = GameObject.Find("tascomyu").GetComponent<Animator>();
+
         clickIcon = transform.Find("Panel/Image").GetComponent<Image>();
         clickIcon.enabled = false;
         messageText = GetComponentInChildren<Text>();
@@ -62,6 +68,7 @@ public class Message : MonoBehaviour
         //　1回に表示するメッセージを表示していない	
         if (!isOneMessage)
         {
+            //RefferEmote();
             //　テキスト表示時間を経過したらメッセージを追加
             if (elapsedTime >= textSpeed)
             {
@@ -82,6 +89,7 @@ public class Message : MonoBehaviour
                 messageText.text += splitMessage[messageNum].Substring(nowTextNum);
                 isOneMessage = true;
             }
+            //CloseEmote();
             //　1回に表示するメッセージを表示した
         }
         else
@@ -129,6 +137,57 @@ public class Message : MonoBehaviour
     {
         SetMessage(message);
         transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    void RefferEmote()
+    {
+        //string tempText;
+        string tempText = splitMessage[messageNum];
+        //一時的な感情の保存箇所
+        //tempEmote = tempText.Split(")");
+        //感情の記述を削除
+        splitMessage[messageNum].Remove(0, 3);
+
+        switch (tempEmote)
+        {
+            case 'E'://Enjoy
+                tasucoAnimator.SetBool("Enjoy", true);
+                break;
+            case 'S'://Smile
+                tasucoAnimator.SetBool("Smile", true);
+                break;
+            case 'A'://Angry
+                tasucoAnimator.SetBool("Angry", true);
+                break;
+            case 's'://Sad
+                tasucoAnimator.SetBool("Sad", true);
+                break;
+            case 'n':
+                return;
+        }
+    }
+
+    void CloseEmote()
+    {
+        switch (tempEmote)
+        {
+            case 'E'://Enjoy
+                tasucoAnimator.SetBool("Enjoy", false);
+                break;
+            case 'S'://Smile
+                tasucoAnimator.SetBool("Smile", false);
+                break;
+            case 'A'://Angry
+                tasucoAnimator.SetBool("Angry", false);
+                break;
+            case 's'://Sad
+                tasucoAnimator.SetBool("Sad", false);
+                break;
+            case 'n':
+                return;
+        }
+
+        tempEmote = 'n';
     }
 
     void RefferTempAttribute()
